@@ -1,25 +1,32 @@
 package dmax.words.domain;
 
+import java.util.EnumMap;
+
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 10.12.14 at 11:15
  */
-public class Link {
+public class Link implements Persistable {
 
-    private Word original;
-    private Word translation;
+    private int id = -1;
+    private EnumMap<Language, Word> map = new EnumMap<Language, Word>(Language.class);
 
-    public Link(Word original, Word translation) {
-        this.original = original;
-        this.translation = translation;
+    public Word getWord(Language language) {
+        return map.get(language);
     }
 
-    public Word getOriginal() {
-        return original;
+    public void setWord(Word word) {
+        map.put(word.getLanguage(), word);
     }
 
-    public Word getTranslation() {
-        return translation;
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
@@ -27,18 +34,18 @@ public class Link {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Link link = (Link) o;
+        Link that = (Link) o;
 
-        if (!original.equals(link.original)) return false;
-        if (!translation.equals(link.translation)) return false;
+        if (this.id != -1 && that.id != -1) return this.id == that.id;
+
+        // todo implement
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = original.hashCode();
-        result = 31 * result + translation.hashCode();
-        return result;
+        // todo implement
+        return 0;
     }
 }

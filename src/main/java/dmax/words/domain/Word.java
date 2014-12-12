@@ -4,16 +4,18 @@ package dmax.words.domain;
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 10.12.14 at 11:15
  */
-public class Word {
+public class Word implements Persistable {
 
     private int id = -1;
     private String data;
     private Language language;
 
+    @Override
     public int getId() {
         return id;
     }
 
+    @Override
     public void setId(int id) {
         this.id = id;
     }
