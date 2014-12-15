@@ -9,14 +9,14 @@ import java.util.EnumMap;
 public class Link implements Persistable {
 
     private long id = -1;
-    private EnumMap<Language, Word> map = new EnumMap<Language, Word>(Language.class);
+    private EnumMap<Language, Long> map = new EnumMap<Language, Long>(Language.class);
 
-    public Word getWord(Language language) {
+    public long getWordId(Language language) {
         return map.get(language);
     }
 
     public void setWord(Word word) {
-        map.put(word.getLanguage(), word);
+        map.put(word.getLanguage(), word.getId());
     }
 
     @Override
@@ -36,7 +36,7 @@ public class Link implements Persistable {
 
         Link that = (Link) o;
 
-        if (this.id != -1 && that.id != -1) return this.id == that.id;
+        if (this.id != -1 && that.id != -1 && this.id != that.id) return false;
 
         return map.equals(that.map);
     }

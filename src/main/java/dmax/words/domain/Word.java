@@ -43,9 +43,9 @@ public class Word implements Persistable {
 
         Word that = (Word) o;
 
-        if (this.id != -1 && that.id != -1) return this.id == that.id;
-        if (!data.equals(that.data)) return false;
+        if (this.id != -1 && that.id != -1 && this.id != that.id) return false;
         if (language != that.language) return false;
+        if (!data.equals(that.data)) return false;
 
         return true;
     }
