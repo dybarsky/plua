@@ -15,8 +15,8 @@ public class Link implements Persistable {
         return map.get(language);
     }
 
-    public void setWord(Word word) {
-        map.put(word.getLanguage(), word.getId());
+    public void setWordId(Language language, long id) {
+        map.put(language, id);
     }
 
     @Override
