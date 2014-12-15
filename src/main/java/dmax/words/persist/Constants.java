@@ -20,6 +20,8 @@ interface Constants {
 
     int COLUMN_ID_INDEX = 0;
     int COLUMN_WORD_DATA_INDEX = 1;
+    int COLUMN_LINK_ORIGINAL_INDEX = 1;
+    int COLUMN_LINK_TRANSLATION_INDEX = 2;
 
     String SQL_WORD_TABLE_TEMPLATE = "("
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "

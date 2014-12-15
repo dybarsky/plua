@@ -35,6 +35,15 @@ public abstract class Dao<T extends Persistable> implements Constants {
         persistable = null;
     }
 
+    protected long getId() {
+        long id = -1;
+        if (this.persistable != null) id = this.persistable.getId();
+        if (this.id != -1) id = this.id;
+
+        if (id == -1) throw new IllegalArgumentException("No id set");
+        return id;
+    }
+
     public abstract T save(SQLiteDatabase db);
 
     public abstract T retrieve(SQLiteDatabase db);

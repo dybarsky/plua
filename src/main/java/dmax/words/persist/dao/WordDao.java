@@ -40,11 +40,7 @@ public class WordDao extends Dao<Word> {
         Cursor result = db.rawQuery(SQL_SELECT_BY_ID, args);
         if (result.getCount() == 0) return null;
 
-        Word word = new Word();
-        word.setId(result.getLong(COLUMN_ID_INDEX));
-        word.setData(result.getString(COLUMN_WORD_DATA_INDEX));
-        word.setLanguage(persistable.getLanguage());
-        return word;
+        return createWord(result, persistable.getLanguage());
     }
 
     @Override
@@ -71,13 +67,12 @@ public class WordDao extends Dao<Word> {
         return table;
     }
 
-    private long getId() {
-        long id = -1;
-        if (this.persistable != null) id = this.persistable.getId();
-        if (this.id != -1) id = this.id;
-
-        if (id == -1) throw new IllegalArgumentException("No id set");
-        return id;
+    private static Word createWord(Cursor cursor, Language language) {
+        Word word = new Word();
+        word.setId(cursor.getLong(COLUMN_ID_INDEX));
+        word.setData(cursor.getString(COLUMN_WORD_DATA_INDEX));
+        word.setLanguage(language);
+        return word;
     }
 
     //~
@@ -100,12 +95,7 @@ public class WordDao extends Dao<Word> {
         @Override
         public Word next() {
             cursor.moveToNext();
-
-            Word word = new Word();
-            word.setId(cursor.getLong(COLUMN_ID_INDEX));
-            word.setData(cursor.getString(COLUMN_WORD_DATA_INDEX));
-            word.setLanguage(language);
-            return word;
+            return createWord(cursor, language);
         }
 
         @Override
