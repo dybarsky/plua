@@ -6,8 +6,8 @@ package dmax.words.domain;
  */
 public interface Persistable {
 
-    int getId();
+    long getId();
 
-    void setId(int id);
+    void setId(long id);
 
 }

@@ -8,7 +8,7 @@ import java.util.EnumMap;
  */
 public class Link implements Persistable {
 
-    private int id = -1;
+    private long id = -1;
     private EnumMap<Language, Word> map = new EnumMap<Language, Word>(Language.class);
 
     public Word getWord(Language language) {
@@ -20,12 +20,12 @@ public class Link implements Persistable {
     }
 
     @Override
-    public int getId() {
+    public long getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -38,14 +38,13 @@ public class Link implements Persistable {
 
         if (this.id != -1 && that.id != -1) return this.id == that.id;
 
-        // todo implement
-
-        return true;
+        return map.equals(that.map);
     }
 
     @Override
     public int hashCode() {
-        // todo implement
-        return 0;
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + map.hashCode();
+        return result;
     }
 }

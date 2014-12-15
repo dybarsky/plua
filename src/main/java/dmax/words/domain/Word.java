@@ -6,17 +6,17 @@ package dmax.words.domain;
  */
 public class Word implements Persistable {
 
-    private int id = -1;
+    private long id = -1;
     private String data;
     private Language language;
 
     @Override
-    public int getId() {
+    public long getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -52,7 +52,7 @@ public class Word implements Persistable {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + data.hashCode();
         result = 31 * result + language.hashCode();
         return result;
