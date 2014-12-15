@@ -14,7 +14,7 @@ import dmax.words.persist.Dao;
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 15.12.14 at 11:12
  */
-public class LinkDao extends Dao<Link> {
+class LinkDao extends Dao<Link> {
 
     public LinkDao() {
         super(Link.class);

@@ -14,7 +14,7 @@ import dmax.words.persist.Dao;
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 15.12.14 at 11:14
  */
-public class WordDao extends Dao<Word> {
+class WordDao extends Dao<Word> {
 
     public WordDao() {
         super(Word.class);
