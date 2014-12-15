@@ -18,6 +18,9 @@ interface Constants {
     String COLUMN_LINK_ORIGINAL = "original";
     String COLUMN_LINK_TRANSLATION = "translation";
 
+    int COLUMN_ID_INDEX = 0;
+    int COLUMN_WORD_DATA_INDEX = 1;
+
     String SQL_WORD_TABLE_TEMPLATE = "("
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_WORD_DATA + " TEXT UNIQUE NOT NULL"
@@ -34,4 +37,8 @@ interface Constants {
             + "FOREIGN KEY(original) REFERENCES pl(id), "
             + "FOREIGN KEY(translation) REFERENCES ua(id)"
             + ")";
+
+    String SQL_SELECT_ALL = "SELECT * FROM ?";
+
+    String SQL_SELECT_BY_ID = "SELECT * FROM ? WHERE " + COLUMN_ID + "=?";
 }
