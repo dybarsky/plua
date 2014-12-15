@@ -4,10 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.Iterator;
-import java.util.List;
 
 import dmax.words.domain.Persistable;
-import dmax.words.persist.dao.Dao;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
@@ -33,21 +31,28 @@ public class DataBaseManager {
 
     public <T extends Persistable> T save(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
-        return dao.save(database);
+        T t = dao.save(database);
+        dao.reset();
+        return t;
     }
 
     public <T extends Persistable> void delete(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
         dao.delete(database);
+        dao.reset();
     }
 
     public <T extends Persistable> T retrieve(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
-        return dao.retrieve(database);
+        T t = dao.retrieve(database);
+        dao.reset();
+        return t;
     }
 
     public <T extends Persistable> Iterator<T> retrieveIterator(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
-        return dao.retrieveIterator(database);
+        Iterator<T> it = dao.retrieveIterator(database);
+        dao.reset();
+        return it;
     }
 }
