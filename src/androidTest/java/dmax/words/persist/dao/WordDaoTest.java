@@ -4,6 +4,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 
+import java.util.Iterator;
+
 import dmax.words.domain.Language;
 import dmax.words.domain.Link;
 import dmax.words.domain.Word;
@@ -82,5 +84,30 @@ public class WordDaoTest extends AndroidTestCase {
 
         assertTrue(deleteResult);
         assertNull(retrieved);
+    }
+
+    public void test_shouldRetrieveIterator() {
+        Word w = new Word();
+        w.setLanguage(Language.UKRAINIAN);
+        w.setData("укр");
+
+        Word w2 = new Word();
+        w2.setLanguage(Language.UKRAINIAN);
+        w2.setData("горілка");
+
+        Dao<Word> dao = DaoFactory.createDao(Word.class);
+        assertNotNull(db.save(dao.setPersistable(w)));
+        assertNotNull(db.save(dao.setPersistable(w2)));
+
+        Word w3 = new Word();
+        w3.setLanguage(Language.UKRAINIAN);
+        Iterator<Word> it = db.retrieveIterator(dao.setPersistable(w3));
+
+        assertNotNull(it);
+        assertTrue(it.hasNext()); // first
+        assertNotNull(it.next());
+        assertTrue(it.hasNext()); // second
+        assertNotNull(it.next());
+        assertFalse(it.hasNext()); // no else
     }
 }

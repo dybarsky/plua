@@ -35,6 +35,7 @@ class LinkDao extends Dao<Link> {
     public Link retrieve(SQLiteDatabase db) {
         Cursor result = db.rawQuery(SQL_SELECT_BY_ID_LINK, new String[]{ String.valueOf(getId()) });
         if (result.getCount() == 0) return null;
+        result.moveToFirst();
 
         return createLink(result);
     }
