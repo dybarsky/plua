@@ -36,10 +36,11 @@ public class DataBaseManager {
         return t;
     }
 
-    public <T extends Persistable> void delete(Dao<T> dao) {
+    public <T extends Persistable> boolean delete(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
-        dao.delete(database);
+        boolean res = dao.delete(database);
         dao.reset();
+        return res;
     }
 
     public <T extends Persistable> T retrieve(Dao<T> dao) {
