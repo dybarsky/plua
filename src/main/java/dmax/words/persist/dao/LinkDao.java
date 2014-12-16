@@ -33,12 +33,7 @@ class LinkDao extends Dao<Link> {
 
     @Override
     public Link retrieve(SQLiteDatabase db) {
-        String[] args = new String[] {
-                TABlE_LINK,
-                String.valueOf(getId())
-        };
-
-        Cursor result = db.rawQuery(SQL_SELECT_BY_ID, args);
+        Cursor result = db.rawQuery(SQL_SELECT_BY_ID_LINK, new String[]{ String.valueOf(getId()) });
         if (result.getCount() == 0) return null;
 
         return createLink(result);
@@ -52,7 +47,7 @@ class LinkDao extends Dao<Link> {
 
     @Override
     public Iterator<Link> retrieveIterator(SQLiteDatabase db) {
-        Cursor result = db.rawQuery(SQL_SELECT_ALL, new String[] {TABlE_LINK});
+        Cursor result = db.rawQuery(SQL_SELECT_ALL_LINKS, null);
         return new LinkIterator(result);
     }
 

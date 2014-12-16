@@ -40,7 +40,15 @@ interface Constants {
             + "FOREIGN KEY(translation) REFERENCES ua(id)"
             + ")";
 
-    String SQL_SELECT_ALL = "SELECT * FROM ?";
+    String SQL_SELECT_ALL_LINKS = "SELECT * FROM " + TABlE_LINK;
 
-    String SQL_SELECT_BY_ID = "SELECT * FROM ? WHERE " + COLUMN_ID + "=?";
+    String SQL_SELECT_ALL_POLISH = "SELECT * FROM " + TABLE_POLISH;
+
+    String SQL_SELECT_ALL_UKRAINIAN = "SELECT * FROM " + TABlE_UKRAINIAN;
+
+    String SQL_SELECT_BY_ID_LINK = "SELECT * FROM " + TABlE_LINK + " WHERE " + COLUMN_ID + " = ?";
+
+    String SQL_SELECT_BY_ID_POLISH = "SELECT * FROM " + TABLE_POLISH + " WHERE " + COLUMN_ID + " = ?";
+
+    String SQL_SELECT_BY_ID_UKRAINIAN = "SELECT * FROM " + TABlE_UKRAINIAN + " WHERE " + COLUMN_ID + " = ?";
 }

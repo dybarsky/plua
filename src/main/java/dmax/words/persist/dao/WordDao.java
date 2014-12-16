@@ -22,6 +22,8 @@ class WordDao extends Dao<Word> {
 
     @Override
     public Word save(SQLiteDatabase db) {
+        if (persistable == null) throw new IllegalArgumentException("No data set");
+
         ContentValues values = new ContentValues();
         values.put(COLUMN_WORD_DATA, persistable.getData());
 
@@ -32,15 +34,18 @@ class WordDao extends Dao<Word> {
 
     @Override
     public Word retrieve(SQLiteDatabase db) {
-        String[] args = new String[] {
-                getTable(),
-                String.valueOf(getId())
-        };
-
-        Cursor result = db.rawQuery(SQL_SELECT_BY_ID, args);
+        Language language = getLanguage();
+        String sql;
+        switch (language) {
+            case POLISH: sql = SQL_SELECT_BY_ID_POLISH; break;
+            case UKRAINIAN: sql = SQL_SELECT_BY_ID_UKRAINIAN; break;
+            default: throw new IllegalArgumentException("Language not supported");
+        }
+        Cursor result = db.rawQuery(sql, new String[]{ String.valueOf(getId()) });
         if (result.getCount() == 0) return null;
+        result.moveToFirst();
 
-        return createWord(result, persistable.getLanguage());
+        return createWord(result, language);
     }
 
     @Override
@@ -51,20 +56,34 @@ class WordDao extends Dao<Word> {
 
     @Override
     public Iterator<Word> retrieveIterator(SQLiteDatabase db) {
-        Cursor result = db.rawQuery(SQL_SELECT_ALL, new String[] {getTable()});
+        Language language = getLanguage();
+        String sql;
+        switch (language) {
+            case POLISH: sql = SQL_SELECT_ALL_POLISH; break;
+            case UKRAINIAN: sql = SQL_SELECT_ALL_UKRAINIAN; break;
+            default: throw new IllegalArgumentException("Language not supported");
+        }
+        Cursor result = db.rawQuery(sql, null);
         return new WordIterator(result, persistable.getLanguage());
     }
 
     //~
 
     private String getTable() {
-        String table;
-        Language language = persistable.getLanguage();
-        table = Language.POLISH.equals(language) ? TABLE_POLISH : null;
-        table = Language.UKRAINIAN.equals(language) ? TABlE_UKRAINIAN : null;
+        switch (getLanguage()) {
+            case POLISH: return TABLE_POLISH;
+            case UKRAINIAN: return TABlE_UKRAINIAN;
+            default: throw new IllegalArgumentException("Language not supported");
+        }
+    }
 
-        if (table == null) throw new IllegalArgumentException("Wrong language");
-        return table;
+    private Language getLanguage() {
+        Language language = null;
+        if (persistable != null) {
+            language = persistable.getLanguage();
+        }
+        if (language == null) throw new IllegalArgumentException("No persistable with correct language set");
+        return language;
     }
 
     private static Word createWord(Cursor cursor, Language language) {
