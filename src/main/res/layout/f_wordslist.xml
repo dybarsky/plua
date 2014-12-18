@@ -12,6 +12,7 @@
         android:layout_marginBottom="@dimen/pager_margin_bottom"
         android:padding="@dimen/pager_padding"
         android:clipToPadding="false"
+        android:overScrollMode="never"
         />
 
 </LinearLayout>
