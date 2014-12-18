@@ -75,7 +75,7 @@ public class WordsListPagerAdapter extends PagerAdapter implements View.OnTouchL
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     original.setVisibility(View.INVISIBLE);
-                    ((CardView) v).setCardBackgroundColor(R.color.yellow);
+                    ((CardView) v).setCardBackgroundColor(context.getResources().getColor(R.color.yellow));
                 }
             });
             anim.start();
