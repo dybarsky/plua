@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pager_margin_top">50dp</dimen>
+    <dimen name="pager_margin_bottom">80dp</dimen>
+    <dimen name="pager_padding">50dp</dimen>
+    <dimen name="pager_page_margin">50dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
+</resources>
