@@ -6,7 +6,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
-        card_view:cardCornerRadius="@dimen/card_radius">
+        card_view:cardCornerRadius="@dimen/card_radius"
+        card_view:cardElevation="@dimen/card_elevation">
 
     <RelativeLayout
         android:id="@+id/original"

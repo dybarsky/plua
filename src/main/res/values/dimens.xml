@@ -5,4 +5,5 @@
     <dimen name="pager_padding">50dp</dimen>
     <dimen name="pager_page_margin">50dp</dimen>
     <dimen name="card_radius">8dp</dimen>
+    <dimen name="card_elevation">4dp</dimen>
 </resources>
