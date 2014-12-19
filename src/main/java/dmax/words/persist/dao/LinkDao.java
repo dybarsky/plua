@@ -74,7 +74,7 @@ class LinkDao extends Dao<Link> {
 
         @Override
         public boolean hasNext() {
-            return !cursor.isLast();
+            return !cursor.isLast() && cursor.getCount() != 0;
         }
 
         @Override
