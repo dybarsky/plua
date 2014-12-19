@@ -1,6 +1,5 @@
 package dmax.words.ui;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -9,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import dmax.words.R;
+import dmax.words.domain.Language;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
@@ -22,7 +22,8 @@ public class WordsListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        adapter = new WordsListPagerAdapter(getActivity());
+        MainActivity activity = (MainActivity) getActivity();
+        adapter = new WordsListPagerAdapter(activity, activity.getDataBaseManager(), Language.UKRAINIAN);
     }
 
     @Override

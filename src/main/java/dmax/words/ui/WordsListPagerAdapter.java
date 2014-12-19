@@ -11,10 +11,17 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 import dmax.words.R;
 import dmax.words.domain.Language;
 import dmax.words.domain.Link;
 import dmax.words.domain.Word;
+import dmax.words.persist.Dao;
+import dmax.words.persist.DataBaseManager;
+import dmax.words.persist.dao.DaoFactory;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
@@ -22,22 +29,19 @@ import dmax.words.domain.Word;
  */
 public class WordsListPagerAdapter extends PagerAdapter {
 
-    private String[][] data = new String[][] {
-            {"брехати", "вирішити", "пенсія", "різати"},
-            {"kłamać", "zdecydować", "emerytura", "kroić"},
-    };
-
     private Context context;
     private CardStateSwitcher switcher;
+    private DataSource dataSource;
 
-    public WordsListPagerAdapter(Context context) {
+    public WordsListPagerAdapter(Context context, DataBaseManager db, Language defaultLanguage) {
         this.context = context;
+        this.dataSource = new DataSource(db, defaultLanguage);
         this.switcher = new CardStateSwitcher();
     }
 
     @Override
     public int getCount() {
-        return data[0].length;
+        return dataSource.getLinks().size();
     }
 
     @Override
@@ -57,21 +61,11 @@ public class WordsListPagerAdapter extends PagerAdapter {
 
         holder.originalViewGroup.bringToFront();
 
-        {
-            Word word1 = new Word();
-            word1.setLanguage(Language.UKRAINIAN);
-            word1.setData(data[0][position]);
-
-            Word word2 = new Word();
-            word2.setLanguage(Language.POLISH);
-            word2.setData(data[1][position]);
-
-            holder.originalWord = word1;
-            holder.translationWord = word2;
-            holder.currentLanguage = word1.getLanguage();
-
-            holder.originalTextView.setText(word1.getData());
-        }
+        // TODO reimplement
+        holder.link = dataSource.getLinks().get(position);
+        holder.originalWord = dataSource.loadOriginalWord(holder.link);
+        holder.translationWord = dataSource.loadTranslationWord(holder.link);
+        holder.originalTextView.setText(holder.originalWord.getData());
 
         card.setTag(holder);
         card.setOnTouchListener(switcher);
@@ -95,7 +89,6 @@ public class WordsListPagerAdapter extends PagerAdapter {
         Link link;
         Word originalWord;
         Word translationWord;
-        Language currentLanguage;
 
         View originalViewGroup;
         View translationViewGroup;
@@ -144,6 +137,51 @@ public class WordsListPagerAdapter extends PagerAdapter {
             float radius = (float) Math.sqrt(Math.pow(maxX, 2) + Math.pow(maxY, 2));
 
             return ViewAnimationUtils.createCircularReveal(v, cx, cy, 0, radius);
+        }
+    }
+
+    private static class DataSource {
+
+        private Language defaultLanguage;
+        private DataBaseManager dataBaseManager;
+        private Dao<Word> dao;
+
+        private List<Link> links;
+
+        private DataSource(DataBaseManager dataBaseManager, Language defaultLanguage) {
+            this.dataBaseManager = dataBaseManager;
+            this.defaultLanguage = defaultLanguage;
+            this.dao = DaoFactory.createDao(Word.class);
+        }
+
+        public Word loadOriginalWord(Link link) {
+            return loadWord(link, defaultLanguage);
+        }
+
+        public Word loadTranslationWord(Link link) {
+            return loadWord(link, Language.UKRAINIAN.equals(defaultLanguage)
+                                    ? Language.POLISH
+                                    : Language.UKRAINIAN);
+        }
+
+        private Word loadWord(Link link, Language language) {
+            Word target = new Word();
+            target.setId(link.getWordId(language));
+            target.setLanguage(language);
+            return dataBaseManager.retrieve(dao.setPersistable(target));
+        }
+
+        public List<Link> getLinks() {
+            if (links == null) loadLinks();
+            return links;
+        }
+
+        private void loadLinks() {
+            links = new LinkedList<Link>();
+            Dao<Link> linkDao = DaoFactory.createDao(Link.class);
+            Iterator<Link> it = dataBaseManager.retrieveIterator(linkDao);
+
+            while (it.hasNext()) links.add(it.next());
         }
     }
 }
