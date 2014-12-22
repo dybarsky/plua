@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import dmax.words.R;
 import dmax.words.domain.Language;
@@ -15,7 +16,7 @@ import dmax.words.importer.Importer;
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 18.12.14 at 12:25
  */
-public class WordsListFragment extends Fragment implements Importer.Callback {
+public class WordsListFragment extends Fragment implements Importer.Callback, View.OnClickListener {
 
     private ViewPager pager;
     private WordsListPagerAdapter adapter;
@@ -30,8 +31,12 @@ public class WordsListFragment extends Fragment implements Importer.Callback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.f_wordslist, container, false);
+
         pager = (ViewPager) root.findViewById(R.id.pager);
         pager.setAdapter(adapter);
+
+        ImageButton add = (ImageButton) root.findViewById(R.id.add);
+        add.setOnClickListener(this);
 
         return root;
     }
@@ -39,5 +44,14 @@ public class WordsListFragment extends Fragment implements Importer.Callback {
     @Override
     public void onDatabaseUpdated() {
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View v) {
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.animator.slide_up, 0, 0, R.animator.slide_down)
+                .replace(R.id.container, new AddWordFragment())
+                .addToBackStack(null)
+                .commit();
     }
 }
