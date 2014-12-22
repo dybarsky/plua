@@ -9,4 +9,6 @@
     <dimen name="card_margin_top">20dp</dimen>
     <dimen name="card_margin_bottom">20dp</dimen>
     <dimen name="card_padding">15dp</dimen>
+    <dimen name="add_button_margin">20dp</dimen>
+    <dimen name="add_button_elevation">6dp</dimen>
 </resources>

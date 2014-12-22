@@ -14,15 +14,14 @@
         android:overScrollMode="never"
         />
 
-    <Button
+    <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@android:color/holo_red_dark"
-        android:text="TEST"
-        android:elevation="8dp"/>
+        android:layout_marginRight="@dimen/add_button_margin"
+        android:layout_marginBottom="@dimen/add_button_margin"
+        android:background="@drawable/add_button"
+        android:elevation="@dimen/add_button_elevation"/>
     
 </RelativeLayout>

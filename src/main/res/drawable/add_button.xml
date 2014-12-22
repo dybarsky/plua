@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:colorControlHighlight">
+    <item>
+        <shape
+            android:shape="oval">
+            <solid android:color="?android:colorAccent"/>
+            <size
+                android:height="56dp"
+                android:width="56dp"/>
+        </shape>
+    </item>
+    <item
+        android:right="20dp"
+        android:left="20dp">
+        <shape android:shape="line">
+            <stroke
+                android:color="@android:color/white"
+                android:width="2dp"/>
+        </shape>
+    </item>
+    <item
+        android:right="20dp"
+        android:left="20dp">
+        <rotate
+            android:fromDegrees="90"
+            android:toDegrees="90">
+            <shape
+                android:shape="line">
+                <stroke android:color="@android:color/white"
+                        android:width="2dp"/>
+            </shape>
+        </rotate>
+    </item>
+</ripple>
