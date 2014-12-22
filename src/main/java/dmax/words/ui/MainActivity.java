@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import dmax.words.R;
+import dmax.words.importer.Importer;
 import dmax.words.persist.DataBaseManager;
 
 public class MainActivity extends FragmentActivity {
@@ -16,13 +17,20 @@ public class MainActivity extends FragmentActivity {
 
         setContentView(R.layout.a_main);
 
-        WordsListFragment fragment = new WordsListFragment();
-        getFragmentManager().beginTransaction()
-                            .add(R.id.container, fragment)
-                            .commit();
-
         database = new DataBaseManager(this);
         database.open();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        WordsListFragment fragment = new WordsListFragment();
+        getFragmentManager().beginTransaction()
+                .add(R.id.container, fragment)
+                .commit();
+
+        new Importer(this, database).execute(fragment);
     }
 
     @Override

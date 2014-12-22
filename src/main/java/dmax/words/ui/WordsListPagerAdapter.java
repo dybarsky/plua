@@ -80,6 +80,12 @@ public class WordsListPagerAdapter extends PagerAdapter {
         container.removeView(view);
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        dataSource.reset();
+        super.notifyDataSetChanged();
+    }
+
     //~
 
     private static class CardViewHolder {
@@ -182,6 +188,10 @@ public class WordsListPagerAdapter extends PagerAdapter {
             Iterator<Link> it = dataBaseManager.retrieveIterator(linkDao);
 
             while (it.hasNext()) links.add(it.next());
+        }
+
+        private void reset() {
+            links = null;
         }
     }
 }
