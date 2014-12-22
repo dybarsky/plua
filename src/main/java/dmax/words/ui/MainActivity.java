@@ -17,33 +17,26 @@ public class MainActivity extends FragmentActivity {
 
         setContentView(R.layout.a_main);
 
-        database = new DataBaseManager(this);
-        database.open();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         WordsListFragment fragment = new WordsListFragment();
         getFragmentManager().beginTransaction()
                 .add(R.id.container, fragment)
                 .commit();
+
+        database = new DataBaseManager(this);
+        database.open();
 
         new Importer(this, database).execute(fragment);
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
-
         database.open();
+        super.onResume();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
         database.close();
     }
 
