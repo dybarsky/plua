@@ -2,9 +2,12 @@ package dmax.words.ui;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.ActionBar;
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
@@ -46,13 +49,14 @@ public class WordsListPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view.getTag().equals(object);
+        return view.findViewById(R.id.card).getTag().equals(object);
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        CardView card = (CardView) View.inflate(context, R.layout.v_wordslist_item, null);
+        View root = View.inflate(context, R.layout.v_wordslist_item, null);
 
+        CardView card = (CardView) root.findViewById(R.id.card);
         CardViewHolder holder = new CardViewHolder();
         holder.originalViewGroup = card.findViewById(R.id.original);
         holder.translationViewGroup = card.findViewById(R.id.translation);
@@ -69,7 +73,7 @@ public class WordsListPagerAdapter extends PagerAdapter {
 
         card.setTag(holder);
         card.setOnTouchListener(switcher);
-        container.addView(card);
+        container.addView(root);
 
         return holder;
     }

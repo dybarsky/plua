@@ -31,9 +31,6 @@ public class WordsListFragment extends Fragment implements Importer.Callback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.f_wordslist, container, false);
         pager = (ViewPager) root.findViewById(R.id.pager);
-
-        int pageMargin = getResources().getDimensionPixelSize(R.dimen.pager_page_margin);
-        pager.setPageMargin(pageMargin);
         pager.setAdapter(adapter);
 
         return root;
