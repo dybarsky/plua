@@ -1,22 +1,21 @@
 package dmax.words.ui;
 
 import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.app.ActionBar;
 import android.content.Context;
-import android.content.res.Resources;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
-import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import dmax.words.R;
 import dmax.words.domain.Language;
@@ -192,10 +191,22 @@ public class WordsListPagerAdapter extends PagerAdapter {
             Iterator<Link> it = dataBaseManager.retrieveIterator(linkDao);
 
             while (it.hasNext()) links.add(it.next());
+
+            Collections.sort(links, new Randomizer());
         }
 
         private void reset() {
             links = null;
+        }
+    }
+
+    private static class Randomizer implements Comparator<Link> {
+
+        Random random = new Random(System.currentTimeMillis());
+
+        @Override
+        public int compare(Link lhs, Link rhs) {
+            return (random.nextInt(2) + 1 )* (random.nextBoolean() ? -1 : 1);
         }
     }
 }
