@@ -20,7 +20,7 @@ import dmax.words.importer.Importer;
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 18.12.14 at 12:25
  */
-public class WordsListFragment extends Fragment implements Importer.Callback, View.OnClickListener {
+public class WordsListFragment extends Fragment implements View.OnClickListener {
 
     private ViewPager pager;
     private WordsListPagerAdapter adapter;
@@ -45,8 +45,7 @@ public class WordsListFragment extends Fragment implements Importer.Callback, Vi
         return root;
     }
 
-    @Override
-    public void onDatabaseUpdated() {
+    public void updateList() {
         adapter.notifyDataSetChanged();
     }
 

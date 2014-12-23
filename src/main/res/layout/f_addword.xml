@@ -4,13 +4,55 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="?android:attr/colorBackground">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="40dp">
 
+        <ImageView
+            android:id="@+id/origin_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="DUMMY"/>
+        <ImageView
+            android:id="@+id/switch_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/origin_lang"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_switch"
+            />
+
+        <ImageView
+            android:id="@+id/transl_lang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/switch_lang"
+            />
+
+        <EditText
+            android:id="@+id/origin_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/origin_lang"
+            android:layout_alignTop="@id/origin_lang"
+            android:layout_marginLeft="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+        <EditText
+            android:id="@+id/transl_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/transl_lang"
+            android:layout_alignTop="@id/transl_lang"
+            android:layout_marginLeft="5dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+    </RelativeLayout>
 
 </dmax.words.ui.AnimationLayout>

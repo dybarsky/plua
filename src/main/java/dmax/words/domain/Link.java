@@ -19,6 +19,10 @@ public class Link implements Persistable {
         map.put(language, id);
     }
 
+    public void setWord(Word word) {
+        setWordId(word.getLanguage(), word.getId());
+    }
+
     @Override
     public long getId() {
         return id;
