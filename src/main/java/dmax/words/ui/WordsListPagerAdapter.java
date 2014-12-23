@@ -89,6 +89,11 @@ public class WordsListPagerAdapter extends PagerAdapter {
         super.notifyDataSetChanged();
     }
 
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
+
     //~
 
     private static class CardViewHolder {
