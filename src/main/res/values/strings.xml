@@ -2,4 +2,6 @@
 <resources>
     <string name="app_label">Words</string>
     <string name="importing">Updating database</string>
+    <string name="add_word_title">Add word</string>
+    <string name="save">Save</string>
 </resources>
