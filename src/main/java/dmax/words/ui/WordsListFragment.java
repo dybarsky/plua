@@ -1,13 +1,18 @@
 package dmax.words.ui;
 
 import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -85,7 +90,7 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
     //~
 
-    private static class LanguageSwitcher implements View.OnClickListener {
+    private static class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickListener {
 
         private static final int DURATION = 300;
 
@@ -98,14 +103,17 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
         private ImageView icon;
         private TextView text;
-        private ViewGroup languagesList;
+        private AnimationLayout languagesList;
+        private View ukrainianItem;
+        private View polishItem;
 
         private LanguageSwitcher(Activity activity) {
             this.activity = activity;
         }
 
         private void init(View rootView) {
-//            languagesList = (ViewGroup) rootView.findViewById(R.id.languages);
+            languagesList = (AnimationLayout) rootView.findViewById(R.id.languages);
+            languagesList.setYRatio(-1);
         }
 
         private View createActionBar() {
@@ -132,18 +140,26 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
             if (expanded) {
                 activity.getActionBar().setElevation(elevation);
-//                languagesList.setElevation(0);
                 Animator rotate = ObjectAnimator.ofFloat(icon, "rotation", 180, 360);
-                set.playTogether(rotate);
+                Animator move = ObjectAnimator.ofFloat(languagesList, "yRatio", 0, -1);
+                set.playTogether(rotate, move);
+                set.addListener(this);
             } else {
                 activity.getActionBar().setElevation(0);
-//                languagesList.setElevation(elevation);
+                languagesList.setElevation(elevation);
                 Animator rotate = ObjectAnimator.ofFloat(icon, "rotation", 0, 180);
-                set.playTogether(rotate);
+                Animator move = ObjectAnimator.ofFloat(languagesList, "yRatio", -1, 0);
+                set.playTogether(rotate, move);
             }
             set.start();
 
             expanded = !expanded;
+        }
+
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            languagesList.setElevation(0);
+
         }
 
         public Language getSelectedLanguage() {
