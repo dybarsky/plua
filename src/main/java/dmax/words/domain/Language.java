@@ -5,6 +5,16 @@ package dmax.words.domain;
  * on 10.12.14 at 13:46
  */
 public enum Language {
-    POLISH,
-    UKRAINIAN
+    POLISH("Polish"),
+    UKRAINIAN("Ukrainian");
+
+    private String codeName;
+
+    Language(String codeName) {
+        this.codeName = codeName;
+    }
+
+    public String getCodeName() {
+        return codeName;
+    }
 }
