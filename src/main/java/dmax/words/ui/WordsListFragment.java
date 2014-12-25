@@ -1,5 +1,8 @@
 package dmax.words.ui;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -11,10 +14,11 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import dmax.words.R;
 import dmax.words.domain.Language;
-import dmax.words.importer.Importer;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
@@ -24,12 +28,14 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
     private ViewPager pager;
     private WordsListPagerAdapter adapter;
+    private LanguageSwitcher switcher;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MainActivity activity = (MainActivity) getActivity();
-        adapter = new WordsListPagerAdapter(activity, activity.getDataBaseManager(), Language.UKRAINIAN);
+        this.adapter = new WordsListPagerAdapter(activity, activity.getDataBaseManager(), Language.UKRAINIAN);
+        this.switcher = new LanguageSwitcher(activity);
     }
 
     @Override
@@ -41,6 +47,8 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
         ImageButton add = (ImageButton) root.findViewById(R.id.add);
         add.setOnClickListener(this);
+
+        switcher.init(root);
 
         return root;
     }
@@ -55,7 +63,9 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
         ActionBar actionBar = getActivity().getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle(R.string.app_label);
+        actionBar.setTitle(null);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        actionBar.setCustomView(switcher.createActionBar());
         setHasOptionsMenu(true);
     }
 
@@ -71,5 +81,73 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
                 .replace(R.id.container, new AddWordFragment())
                 .addToBackStack(null)
                 .commit();
+    }
+
+    //~
+
+    private static class LanguageSwitcher implements View.OnClickListener {
+
+        private static final int DURATION = 300;
+
+        private boolean expanded = false;
+        private float elevation = -1;
+
+        private Language selectedLanguage = Language.POLISH;
+
+        private Activity activity;
+
+        private ImageView icon;
+        private TextView text;
+        private ViewGroup languagesList;
+
+        private LanguageSwitcher(Activity activity) {
+            this.activity = activity;
+        }
+
+        private void init(View rootView) {
+//            languagesList = (ViewGroup) rootView.findViewById(R.id.languages);
+        }
+
+        private View createActionBar() {
+            View root = View.inflate(activity, R.layout.v_action_language, null);
+
+            icon = (ImageView) root.findViewById(R.id.ab_icon);
+            text = (TextView) root.findViewById(R.id.ab_lang);
+
+            text.setText(selectedLanguage.getCodeName());
+
+            root.setOnClickListener(this);
+
+            return root;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (elevation == -1) {
+                this.elevation = activity.getActionBar().getElevation();
+            }
+
+            AnimatorSet set = new AnimatorSet();
+            set.setDuration(DURATION);
+
+            if (expanded) {
+                activity.getActionBar().setElevation(elevation);
+//                languagesList.setElevation(0);
+                Animator rotate = ObjectAnimator.ofFloat(icon, "rotation", 180, 360);
+                set.playTogether(rotate);
+            } else {
+                activity.getActionBar().setElevation(0);
+//                languagesList.setElevation(elevation);
+                Animator rotate = ObjectAnimator.ofFloat(icon, "rotation", 0, 180);
+                set.playTogether(rotate);
+            }
+            set.start();
+
+            expanded = !expanded;
+        }
+
+        public Language getSelectedLanguage() {
+            return selectedLanguage;
+        }
     }
 }

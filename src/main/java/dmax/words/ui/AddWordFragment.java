@@ -58,7 +58,7 @@ public class AddWordFragment extends Fragment implements View.OnClickListener {
         super.onStart();
 
         ActionBar actionBar = getActivity().getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE|ActionBar.DISPLAY_HOME_AS_UP);
         actionBar.setTitle(R.string.add_word_title);
         setHasOptionsMenu(true);
 
