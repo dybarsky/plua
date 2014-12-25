@@ -4,15 +4,11 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -101,8 +97,8 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
         private Activity activity;
 
-        private ImageView icon;
-        private TextView text;
+        private ImageView actionBarIcon;
+        private TextView actionBarText;
         private AnimationLayout languagesList;
         private View ukrainianItem;
         private View polishItem;
@@ -119,10 +115,10 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
         private View createActionBar() {
             View root = View.inflate(activity, R.layout.v_action_language, null);
 
-            icon = (ImageView) root.findViewById(R.id.ab_icon);
-            text = (TextView) root.findViewById(R.id.ab_lang);
+            actionBarIcon = (ImageView) root.findViewById(R.id.ab_icon);
+            actionBarText = (TextView) root.findViewById(R.id.ab_lang);
 
-            text.setText(selectedLanguage.getCodeName());
+            actionBarText.setText(selectedLanguage.getCodeName());
 
             root.setOnClickListener(this);
 
@@ -139,15 +135,14 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
             set.setDuration(DURATION);
 
             if (expanded) {
-                activity.getActionBar().setElevation(elevation);
-                Animator rotate = ObjectAnimator.ofFloat(icon, "rotation", 180, 360);
+                Animator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 180, 360);
                 Animator move = ObjectAnimator.ofFloat(languagesList, "yRatio", 0, -1);
                 set.playTogether(rotate, move);
                 set.addListener(this);
             } else {
                 activity.getActionBar().setElevation(0);
                 languagesList.setElevation(elevation);
-                Animator rotate = ObjectAnimator.ofFloat(icon, "rotation", 0, 180);
+                Animator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 0, 180);
                 Animator move = ObjectAnimator.ofFloat(languagesList, "yRatio", -1, 0);
                 set.playTogether(rotate, move);
             }
@@ -159,7 +154,7 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
         @Override
         public void onAnimationEnd(Animator animation) {
             languagesList.setElevation(0);
-
+            activity.getActionBar().setElevation(elevation);
         }
 
         public Language getSelectedLanguage() {
