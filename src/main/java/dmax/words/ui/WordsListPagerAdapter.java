@@ -83,15 +83,8 @@ public class WordsListPagerAdapter extends PagerAdapter {
         container.removeView(view);
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        dataSource.reset();
-        super.notifyDataSetChanged();
-    }
-
-    @Override
-    public int getItemPosition(Object object) {
-        return POSITION_NONE;
+    public void reset() {
+        this.dataSource.reset();
     }
 
     public void setSelectedLanguage(Language selectedLanguage) {

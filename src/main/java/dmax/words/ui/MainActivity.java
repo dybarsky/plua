@@ -17,7 +17,7 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
         public void run() {
             WordsListFragment fragment = (WordsListFragment) getFragmentManager().findFragmentByTag(TAG);
             if (fragment != null) {
-                fragment.updateList();
+                fragment.reloadList();
             }
         }
     };

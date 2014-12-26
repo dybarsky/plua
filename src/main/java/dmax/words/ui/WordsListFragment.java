@@ -60,7 +60,11 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
     public void updateList() {
         adapter.setSelectedLanguage(switcher.getSelectedLanguage());
         pager.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
+    }
+
+    public void reloadList() {
+        adapter.reset();
+        pager.setAdapter(adapter);
     }
 
     @Override
