@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
@@ -14,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -88,7 +91,7 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
     private static class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickListener {
 
-        private static final int DURATION = 300;
+        private static final int DURATION = 250;
 
         private boolean expanded = false;
         private float elevation = -1;
@@ -135,15 +138,17 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
             set.setDuration(DURATION);
 
             if (expanded) {
-                Animator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 180, 360);
-                Animator move = ObjectAnimator.ofFloat(languagesList, "yRatio", 0, -1);
+                ObjectAnimator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 180, 360);
+                ObjectAnimator move = ObjectAnimator.ofFloat(languagesList, "yRatio", 0, -1);
+                move.setInterpolator(new AccelerateInterpolator(1f));
                 set.playTogether(rotate, move);
                 set.addListener(this);
             } else {
                 activity.getActionBar().setElevation(0);
                 languagesList.setElevation(elevation);
-                Animator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 0, 180);
-                Animator move = ObjectAnimator.ofFloat(languagesList, "yRatio", -1, 0);
+                ObjectAnimator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 0, 180);
+                ObjectAnimator move = ObjectAnimator.ofFloat(languagesList, "yRatio", -1, 0);
+                move.setInterpolator(new DecelerateInterpolator(1f));
                 set.playTogether(rotate, move);
             }
             set.start();
