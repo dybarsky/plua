@@ -94,6 +94,10 @@ public class WordsListPagerAdapter extends PagerAdapter {
         return POSITION_NONE;
     }
 
+    public void setSelectedLanguage(Language selectedLanguage) {
+        this.dataSource.setSelectedLanguage(selectedLanguage);
+    }
+
     //~
 
     private static class CardViewHolder {
@@ -156,24 +160,28 @@ public class WordsListPagerAdapter extends PagerAdapter {
 
     private static class DataSource {
 
-        private Language defaultLanguage;
+        private Language language;
         private DataBaseManager dataBaseManager;
         private Dao<Word> dao;
 
         private List<Link> links;
 
-        private DataSource(DataBaseManager dataBaseManager, Language defaultLanguage) {
+        private DataSource(DataBaseManager dataBaseManager, Language language) {
             this.dataBaseManager = dataBaseManager;
-            this.defaultLanguage = defaultLanguage;
+            this.language = language;
             this.dao = DaoFactory.createDao(Word.class);
         }
 
+        public void setSelectedLanguage(Language language) {
+            this.language = language;
+        }
+
         public Word loadOriginalWord(Link link) {
-            return loadWord(link, defaultLanguage);
+            return loadWord(link, language);
         }
 
         public Word loadTranslationWord(Link link) {
-            return loadWord(link, Language.UKRAINIAN.equals(defaultLanguage)
+            return loadWord(link, Language.UKRAINIAN.equals(language)
                                     ? Language.POLISH
                                     : Language.UKRAINIAN);
         }

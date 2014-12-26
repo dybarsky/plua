@@ -38,8 +38,8 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MainActivity activity = (MainActivity) getActivity();
-        this.adapter = new WordsListPagerAdapter(activity, activity.getDataBaseManager(), Language.UKRAINIAN);
-        this.switcher = new LanguageSwitcher(activity);
+        this.switcher = new LanguageSwitcher();
+        this.adapter = new WordsListPagerAdapter(activity, activity.getDataBaseManager(), switcher.getSelectedLanguage());
     }
 
     @Override
@@ -58,6 +58,7 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
     }
 
     public void updateList() {
+        adapter.setSelectedLanguage(switcher.getSelectedLanguage());
         adapter.notifyDataSetChanged();
     }
 
@@ -89,7 +90,7 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
     //~
 
-    private static class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickListener {
+    private class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickListener {
 
         private static final int DURATION = 250;
 
@@ -98,25 +99,19 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
         private Language selectedLanguage = Language.POLISH;
 
-        private Activity activity;
-
         private ImageView actionBarIcon;
         private TextView actionBarText;
         private AnimationLayout languagesList;
-        private View ukrainianItem;
-        private View polishItem;
-
-        private LanguageSwitcher(Activity activity) {
-            this.activity = activity;
-        }
 
         private void init(View rootView) {
             languagesList = (AnimationLayout) rootView.findViewById(R.id.languages);
             languagesList.setYRatio(-1);
+            rootView.findViewById(R.id.ukrainian).setOnClickListener(this);
+            rootView.findViewById(R.id.polish).setOnClickListener(this);
         }
 
         private View createActionBar() {
-            View root = View.inflate(activity, R.layout.v_action_language, null);
+            View root = View.inflate(getActivity(), R.layout.v_action_language, null);
 
             actionBarIcon = (ImageView) root.findViewById(R.id.ab_icon);
             actionBarText = (TextView) root.findViewById(R.id.ab_lang);
@@ -130,8 +125,26 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
         @Override
         public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.actionbar: onActionBarClicked(); break;
+                case R.id.ukrainian: onLanguageItemClicked(Language.UKRAINIAN); break;
+                case R.id.polish:    onLanguageItemClicked(Language.POLISH); break;
+            }
+        }
+
+        private void onLanguageItemClicked(Language language) {
+            if (selectedLanguage.equals(language)) {
+                return;
+            }
+            selectedLanguage = language;
+            actionBarText.setText(selectedLanguage.getCodeName());
+            updateList();
+            onActionBarClicked();
+        }
+
+        private void onActionBarClicked() {
             if (elevation == -1) {
-                this.elevation = activity.getActionBar().getElevation();
+                this.elevation = getActivity().getActionBar().getElevation();
             }
 
             AnimatorSet set = new AnimatorSet();
@@ -144,7 +157,7 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
                 set.playTogether(rotate, move);
                 set.addListener(this);
             } else {
-                activity.getActionBar().setElevation(0);
+                getActivity().getActionBar().setElevation(0);
                 languagesList.setElevation(elevation);
                 ObjectAnimator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 0, 180);
                 ObjectAnimator move = ObjectAnimator.ofFloat(languagesList, "yRatio", -1, 0);
@@ -159,7 +172,7 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
         @Override
         public void onAnimationEnd(Animator animation) {
             languagesList.setElevation(0);
-            activity.getActionBar().setElevation(elevation);
+            getActivity().getActionBar().setElevation(elevation);
         }
 
         public Language getSelectedLanguage() {
