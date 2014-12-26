@@ -59,7 +59,8 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
 
     public void updateList() {
         adapter.setSelectedLanguage(switcher.getSelectedLanguage());
-        adapter.notifyDataSetChanged();
+        pager.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -133,12 +134,11 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
         }
 
         private void onLanguageItemClicked(Language language) {
-            if (selectedLanguage.equals(language)) {
-                return;
+            if (!selectedLanguage.equals(language)) {
+                selectedLanguage = language;
+                actionBarText.setText(selectedLanguage.getCodeName());
+                updateList();
             }
-            selectedLanguage = language;
-            actionBarText.setText(selectedLanguage.getCodeName());
-            updateList();
             onActionBarClicked();
         }
 
