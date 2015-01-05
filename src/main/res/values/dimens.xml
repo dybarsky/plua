@@ -16,4 +16,5 @@
     <dimen name="language_item_text_size">18sp</dimen>
     <dimen name="flag_margin_left">20dp</dimen>
     <dimen name="language_item_padding">5dp</dimen>
+    <dimen name="actionbar_padding">5dp</dimen>
 </resources>
