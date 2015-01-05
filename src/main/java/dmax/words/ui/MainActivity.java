@@ -45,6 +45,11 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
         database.open();
 
         dataSource = new DataSource(database, DEFAULT);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         new Importer(this, database).execute(this);
     }
