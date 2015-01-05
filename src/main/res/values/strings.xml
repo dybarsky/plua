@@ -7,4 +7,6 @@
     <string name="type_error">Can\'t be empty</string>
     <string name="polish">Polish</string>
     <string name="ukrainian">Ukrainian</string>
+    <string name="delete">Remove</string>
+    <string name="edit">Edit</string>
 </resources>
