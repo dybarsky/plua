@@ -113,11 +113,11 @@ public class AddWordFragment extends Fragment implements View.OnClickListener {
         if (check(originalText) || check(translationText)) return;
 
         Word word1 = new Word();
-        word1.setLanguage(current.equals(Language.UKRAINIAN) ? Language.POLISH : Language.UKRAINIAN);
+        word1.setLanguage(current);
         word1.setData(originalText.getText().toString());
 
         Word word2 = new Word();
-        word2.setLanguage(current.equals(Language.UKRAINIAN) ? Language.UKRAINIAN : Language.POLISH);
+        word2.setLanguage(current.equals(Language.UKRAINIAN) ? Language.POLISH : Language.UKRAINIAN);
         word2.setData(translationText.getText().toString());
 
         getCastedActivity().getDataSource().addWords(word1, word2);
