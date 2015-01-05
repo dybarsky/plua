@@ -55,7 +55,6 @@ public class WordsListPagerAdapter extends PagerAdapter {
 
         holder.originalViewGroup.bringToFront();
 
-        // TODO reimplement
         holder.link = dataSource.getLinks().get(position);
         holder.originalWord = dataSource.loadOriginalWord(holder.link);
         holder.translationWord = dataSource.loadTranslationWord(holder.link);
@@ -80,6 +79,11 @@ public class WordsListPagerAdapter extends PagerAdapter {
             CardView cardView = (CardView) container.getChildAt(i).findViewById(R.id.card);
             if (cardView != null) {
                 CardViewHolder holder = (CardViewHolder) cardView.getTag();
+
+                if (holder.isTranslationState) {
+                    holder.isTranslationState = false;
+                    holder.originalViewGroup.bringToFront();
+                }
 
                 Word word1 = holder.originalWord;
                 Word word2 = holder.translationWord;
