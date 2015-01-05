@@ -36,8 +36,7 @@ public class AddWordFragment extends Fragment implements View.OnClickListener {
     private EditText originalText;
     private EditText translationText;
 
-    private boolean updateList = false;
-    private Language current = Language.UKRAINIAN;
+    private Language current;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,13 +55,17 @@ public class AddWordFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
 
-        ActionBar actionBar = getActivity().getActionBar();
+        MainActivity activity = getCastedActivity();
+
+        ActionBar actionBar = activity.getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE|ActionBar.DISPLAY_HOME_AS_UP);
         actionBar.setTitle(R.string.add_word_title);
         setHasOptionsMenu(true);
 
         this.switchFlag.bringToFront();
         this.switchFlag.setOnClickListener(this);
+
+        current = activity.getDataSource().getSelectedLanguage();
 
         this.originalFlag.setImageResource(current.equals(Language.UKRAINIAN)
                 ? R.drawable.ic_ukrainian
@@ -94,15 +97,6 @@ public class AddWordFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        if (updateList) {
-            getCastedActivity().onDatabaseUpdated();
-        }
-    }
-
-    @Override
     public void onClick(View v) {
         this.current = current.equals(Language.UKRAINIAN) ? Language.POLISH : Language.UKRAINIAN;
 
@@ -126,10 +120,7 @@ public class AddWordFragment extends Fragment implements View.OnClickListener {
         word2.setLanguage(current.equals(Language.UKRAINIAN) ? Language.UKRAINIAN : Language.POLISH);
         word2.setData(translationText.getText().toString());
 
-        DataSource dataSource = getCastedActivity().getDataSource();
-        dataSource.addWords(word1, word2);
-
-        updateList = true;
+        getCastedActivity().getDataSource().addWords(word1, word2);
 
         closeSelf();
     }
