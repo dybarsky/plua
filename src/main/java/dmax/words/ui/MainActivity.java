@@ -4,14 +4,21 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 
+import dmax.words.DataSource;
 import dmax.words.R;
+import dmax.words.domain.Language;
 import dmax.words.importer.Importer;
 import dmax.words.persist.DataBaseManager;
+import dmax.words.ui.list.WordsListFragment;
 
 public class MainActivity extends FragmentActivity implements Importer.Callback {
 
     private static String TAG = "list";
+
+    private static Language DEFAULT = Language.POLISH;
+
     private DataBaseManager database;
+    private DataSource dataSource;
     private Handler uiHandler;
     private Runnable updater = new Runnable() {
         public void run() {
@@ -37,6 +44,8 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
         database = new DataBaseManager(this);
         database.open();
 
+        dataSource = new DataSource(database, DEFAULT);
+
         new Importer(this, database).execute(this);
     }
 
@@ -52,8 +61,8 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
         database.close();
     }
 
-    public DataBaseManager getDataBaseManager() {
-        return database;
+    public DataSource getDataSource() {
+        return dataSource;
     }
 
     @Override

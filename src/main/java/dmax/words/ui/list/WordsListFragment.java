@@ -1,12 +1,10 @@
-package dmax.words.ui;
+package dmax.words.ui.list;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -21,8 +19,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import dmax.words.DataSource;
 import dmax.words.R;
 import dmax.words.domain.Language;
+import dmax.words.ui.add.AddWordFragment;
+import dmax.words.ui.AnimationLayout;
+import dmax.words.ui.MainActivity;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
@@ -38,8 +40,9 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         MainActivity activity = (MainActivity) getActivity();
-        this.switcher = new LanguageSwitcher();
-        this.adapter = new WordsListPagerAdapter(activity, activity.getDataBaseManager(), switcher.getSelectedLanguage());
+        DataSource dataSource = activity.getDataSource();
+        this.switcher = new LanguageSwitcher(dataSource.getSelectedLanguage());
+        this.adapter = new WordsListPagerAdapter(activity, activity.getDataSource());
     }
 
     @Override
@@ -102,11 +105,15 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
         private boolean expanded = false;
         private float elevation = -1;
 
-        private Language selectedLanguage = Language.POLISH;
+        private Language selectedLanguage;
 
         private ImageView actionBarIcon;
         private TextView actionBarText;
         private AnimationLayout languagesList;
+
+        private LanguageSwitcher(Language selectedLanguage) {
+            this.selectedLanguage = selectedLanguage;
+        }
 
         private void init(View rootView) {
             languagesList = (AnimationLayout) rootView.findViewById(R.id.languages);

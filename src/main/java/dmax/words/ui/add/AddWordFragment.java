@@ -1,4 +1,4 @@
-package dmax.words.ui;
+package dmax.words.ui.add;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -16,13 +16,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import dmax.words.DataSource;
 import dmax.words.R;
 import dmax.words.domain.Language;
 import dmax.words.domain.Link;
 import dmax.words.domain.Word;
-import dmax.words.persist.Dao;
-import dmax.words.persist.DataBaseManager;
-import dmax.words.persist.dao.DaoFactory;
+import dmax.words.ui.MainActivity;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
@@ -127,15 +126,8 @@ public class AddWordFragment extends Fragment implements View.OnClickListener {
         word2.setLanguage(current.equals(Language.UKRAINIAN) ? Language.UKRAINIAN : Language.POLISH);
         word2.setData(translationText.getText().toString());
 
-        Link link = new Link();
-
-        DataBaseManager dataBaseManager = getCastedActivity().getDataBaseManager();
-        Dao<Word> wordDao = DaoFactory.createDao(Word.class);
-        Dao<Link> linkDao = DaoFactory.createDao(Link.class);
-
-        link.setWord(dataBaseManager.save(wordDao.setPersistable(word1)));
-        link.setWord(dataBaseManager.save(wordDao.setPersistable(word2)));
-        dataBaseManager.save(linkDao.setPersistable(link));
+        DataSource dataSource = getCastedActivity().getDataSource();
+        dataSource.addWords(word1, word2);
 
         updateList = true;
 

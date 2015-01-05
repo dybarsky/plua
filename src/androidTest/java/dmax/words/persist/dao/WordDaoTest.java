@@ -1,16 +1,13 @@
 package dmax.words.persist.dao;
 
-import android.database.sqlite.SQLiteDatabase;
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 
 import java.util.Iterator;
 
 import dmax.words.domain.Language;
-import dmax.words.domain.Link;
 import dmax.words.domain.Word;
 import dmax.words.persist.Dao;
-import dmax.words.persist.DataBaseHelper;
 import dmax.words.persist.DataBaseManager;
 
 /**
