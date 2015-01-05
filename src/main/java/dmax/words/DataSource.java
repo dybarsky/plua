@@ -15,8 +15,8 @@ import dmax.words.persist.dao.DaoFactory;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
-* on 05.01.15 at 11:21
-*/
+ * on 05.01.15 at 11:21
+ */
 public class DataSource {
 
     private Language language;
