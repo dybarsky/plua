@@ -22,6 +22,7 @@ public class WordsListPagerAdapter extends PagerAdapter {
     private Context context;
     private CardStateSwitcher switcher;
     private DataSource dataSource;
+    private ViewGroup container;
 
     public WordsListPagerAdapter(Context context, DataSource dataSource) {
         this.context = context;
@@ -36,11 +37,13 @@ public class WordsListPagerAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return view.findViewById(R.id.card).getTag().equals(object);
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
+        if (this.container == null) this.container = container;
+
         View root = View.inflate(context, R.layout.v_wordslist_item, null);
 
         CardView card = (CardView) root.findViewById(R.id.card);
@@ -58,30 +61,41 @@ public class WordsListPagerAdapter extends PagerAdapter {
         holder.translationWord = dataSource.loadTranslationWord(holder.link);
         holder.originalTextView.setText(holder.originalWord.getData());
 
-        card.setTag(holder);
         card.setOnTouchListener(switcher);
+        card.setTag(holder);
         container.addView(root);
 
-        return holder;
+        return root;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        View view = container.findViewWithTag(object);
-        container.removeView(view);
+        container.removeView((View) object);
     }
 
-    public void reset() {
-        this.dataSource.reset();
-    }
+    public void onLanguageChanged() {
+        Language current = dataSource.getSelectedLanguage();
 
-    public void setSelectedLanguage(Language selectedLanguage) {
-        this.dataSource.setSelectedLanguage(selectedLanguage);
+        for (int i = 0; i < container.getChildCount(); i++) {
+            CardView cardView = (CardView) container.getChildAt(i).findViewById(R.id.card);
+            if (cardView != null) {
+                CardViewHolder holder = (CardViewHolder) cardView.getTag();
+
+                Word word1 = holder.originalWord;
+                Word word2 = holder.translationWord;
+
+                boolean translation = word2.getLanguage().equals(current);
+                holder.originalWord = translation ? word2 : word1;
+                holder.translationWord = translation ? word1 : word2;
+
+                holder.originalTextView.setText(holder.originalWord.getData());
+            }
+        }
     }
 
     //~
 
-    public static class CardViewHolder {
+    static class CardViewHolder {
 
         boolean isTranslationState;
 
