@@ -1,4 +1,4 @@
-package dmax.words.ui.list;
+package dmax.words.ui.cards;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
@@ -17,14 +17,14 @@ import dmax.words.domain.Word;
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 18.12.14 at 12:38
  */
-public class WordsListPagerAdapter extends PagerAdapter {
+public class CardsPagerAdapter extends PagerAdapter {
 
     private Context context;
     private CardStateSwitcher switcher;
     private DataSource dataSource;
     private ViewGroup container;
 
-    public WordsListPagerAdapter(Context context, DataSource dataSource) {
+    public CardsPagerAdapter(Context context, DataSource dataSource) {
         this.context = context;
         this.dataSource = dataSource;
         this.switcher = new CardStateSwitcher();

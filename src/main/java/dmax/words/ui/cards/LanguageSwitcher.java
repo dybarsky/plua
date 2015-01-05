@@ -1,4 +1,4 @@
-package dmax.words.ui.list;
+package dmax.words.ui.cards;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -22,7 +22,7 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
 
     private static final int DURATION = 250;
 
-    private WordsListFragment wordsListFragment;
+    private CardsFragment cardsFragment;
     private boolean expanded = false;
     private float elevation = -1;
 
@@ -32,8 +32,8 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
     private TextView actionBarText;
     private AnimationLayout languagesList;
 
-    LanguageSwitcher(WordsListFragment wordsListFragment, Language selectedLanguage) {
-        this.wordsListFragment = wordsListFragment;
+    LanguageSwitcher(CardsFragment cardsFragment, Language selectedLanguage) {
+        this.cardsFragment = cardsFragment;
         this.selectedLanguage = selectedLanguage;
     }
 
@@ -45,7 +45,7 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
     }
 
     public View createActionBar() {
-        View root = View.inflate(wordsListFragment.getActivity(), R.layout.v_action_language, null);
+        View root = View.inflate(cardsFragment.getActivity(), R.layout.v_action_language, null);
 
         actionBarIcon = (ImageView) root.findViewById(R.id.ab_icon);
         actionBarText = (TextView) root.findViewById(R.id.ab_lang);
@@ -76,14 +76,14 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
         if (!selectedLanguage.equals(language)) {
             selectedLanguage = language;
             actionBarText.setText(selectedLanguage.getCodeName());
-            wordsListFragment.updateLanguage(selectedLanguage);
+            cardsFragment.updateLanguage(selectedLanguage);
         }
         onActionBarClicked();
     }
 
     public void onActionBarClicked() {
         if (elevation == -1) {
-            this.elevation = wordsListFragment.getActivity().getActionBar().getElevation();
+            this.elevation = cardsFragment.getActivity().getActionBar().getElevation();
         }
 
         AnimatorSet set = new AnimatorSet();
@@ -96,7 +96,7 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
             set.playTogether(rotate, move);
             set.addListener(this);
         } else {
-            wordsListFragment.getActivity().getActionBar().setElevation(0);
+            cardsFragment.getActivity().getActionBar().setElevation(0);
             languagesList.setElevation(elevation);
             ObjectAnimator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 0, 180);
             ObjectAnimator move = ObjectAnimator.ofFloat(languagesList, "yRatio", -1, 0);
@@ -111,6 +111,6 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
     @Override
     public void onAnimationEnd(Animator animation) {
         languagesList.setElevation(0);
-        wordsListFragment.getActivity().getActionBar().setElevation(elevation);
+        cardsFragment.getActivity().getActionBar().setElevation(elevation);
     }
 }

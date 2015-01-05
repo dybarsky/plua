@@ -1,4 +1,4 @@
-package dmax.words.ui.list;
+package dmax.words.ui.cards;
 
 import android.animation.Animator;
 import android.view.MotionEvent;
@@ -15,7 +15,7 @@ class CardStateSwitcher implements View.OnTouchListener {
     @Override
     public boolean onTouch(final View v, MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            final WordsListPagerAdapter.CardViewHolder holder = (WordsListPagerAdapter.CardViewHolder) v.getTag();
+            final CardsPagerAdapter.CardViewHolder holder = (CardsPagerAdapter.CardViewHolder) v.getTag();
 
             View viewGroup;
             TextView textView;

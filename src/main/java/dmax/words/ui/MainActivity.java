@@ -9,7 +9,7 @@ import dmax.words.R;
 import dmax.words.domain.Language;
 import dmax.words.importer.Importer;
 import dmax.words.persist.DataBaseManager;
-import dmax.words.ui.list.WordsListFragment;
+import dmax.words.ui.cards.CardsFragment;
 
 public class MainActivity extends FragmentActivity implements Importer.Callback {
 
@@ -22,7 +22,7 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
     private Handler uiHandler;
     private Runnable updater = new Runnable() {
         public void run() {
-            WordsListFragment fragment = (WordsListFragment) getFragmentManager().findFragmentByTag(TAG);
+            CardsFragment fragment = (CardsFragment) getFragmentManager().findFragmentByTag(TAG);
             if (fragment != null) {
                 fragment.reloadList();
             }
@@ -38,7 +38,7 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
         setContentView(R.layout.a_main);
 
         getFragmentManager().beginTransaction()
-                .add(R.id.container, new WordsListFragment(), TAG)
+                .add(R.id.container, new CardsFragment(), TAG)
                 .commit();
 
         database = new DataBaseManager(this);

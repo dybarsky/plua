@@ -1,4 +1,4 @@
-package dmax.words.ui.list;
+package dmax.words.ui.cards;
 
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -14,17 +14,17 @@ import android.widget.ImageButton;
 import dmax.words.DataSource;
 import dmax.words.R;
 import dmax.words.domain.Language;
-import dmax.words.ui.add.AddWordFragment;
+import dmax.words.ui.detail.LinkDetailFragment;
 import dmax.words.ui.MainActivity;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 18.12.14 at 12:25
  */
-public class WordsListFragment extends Fragment implements View.OnClickListener {
+public class CardsFragment extends Fragment implements View.OnClickListener {
 
     private ViewPager pager;
-    private WordsListPagerAdapter adapter;
+    private CardsPagerAdapter adapter;
     private LanguageSwitcher switcher;
 
     @Override
@@ -33,7 +33,7 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
         MainActivity activity = getCastedActivity();
         DataSource dataSource = activity.getDataSource();
         this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
-        this.adapter = new WordsListPagerAdapter(activity, dataSource);
+        this.adapter = new CardsPagerAdapter(activity, dataSource);
     }
 
     private MainActivity getCastedActivity() {
@@ -85,11 +85,8 @@ public class WordsListFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.animator.slide_up, 0, 0, R.animator.slide_down)
-                .replace(R.id.container, new AddWordFragment())
+                .replace(R.id.container, new LinkDetailFragment())
                 .addToBackStack(null)
                 .commit();
     }
-
-    //~
-
 }

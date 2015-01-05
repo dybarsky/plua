@@ -1,4 +1,4 @@
-package dmax.words.ui.add;
+package dmax.words.ui.detail;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
@@ -16,10 +16,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import dmax.words.DataSource;
 import dmax.words.R;
 import dmax.words.domain.Language;
-import dmax.words.domain.Link;
 import dmax.words.domain.Word;
 import dmax.words.ui.MainActivity;
 
@@ -27,7 +25,7 @@ import dmax.words.ui.MainActivity;
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 22.12.14 at 17:01
  */
-public class AddWordFragment extends Fragment implements View.OnClickListener {
+public class LinkDetailFragment extends Fragment implements View.OnClickListener {
 
     public static final int DURATION = 250;
     private ImageView originalFlag;
