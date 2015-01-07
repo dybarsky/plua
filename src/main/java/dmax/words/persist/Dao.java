@@ -51,4 +51,6 @@ public abstract class Dao<T extends Persistable> implements Constants {
     public abstract boolean delete(SQLiteDatabase db);
 
     public abstract Iterator<T> retrieveIterator(SQLiteDatabase db);
+
+    public abstract T update(SQLiteDatabase db);
 }

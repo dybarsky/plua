@@ -33,6 +33,17 @@ class WordDao extends Dao<Word> {
     }
 
     @Override
+    public Word update(SQLiteDatabase db) {
+        if (persistable == null) throw new IllegalArgumentException("No data set");
+
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_WORD_DATA, persistable.getData());
+
+        int count = db.update(getTable(), values, COLUMN_ID + "=?", new String[]{ String.valueOf(getId()) });
+        return count > 0 ? persistable : null;
+    }
+
+    @Override
     public Word retrieve(SQLiteDatabase db) {
         Language language = getLanguage();
         String sql;

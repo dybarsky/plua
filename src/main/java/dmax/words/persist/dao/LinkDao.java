@@ -32,6 +32,16 @@ class LinkDao extends Dao<Link> {
     }
 
     @Override
+    public Link update(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_LINK_ORIGINAL, persistable.getWordId(Language.UKRAINIAN));
+        values.put(COLUMN_LINK_TRANSLATION, persistable.getWordId(Language.POLISH));
+
+        int count = db.update(TABlE_LINK, values, COLUMN_ID + "=?", new String[]{ String.valueOf(getId()) });
+        return count > 0 ? persistable : null;
+    }
+
+    @Override
     public Link retrieve(SQLiteDatabase db) {
         Cursor result = db.rawQuery(SQL_SELECT_BY_ID_LINK, new String[]{ String.valueOf(getId()) });
         if (result.getCount() == 0) return null;

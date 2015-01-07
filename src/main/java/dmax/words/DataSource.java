@@ -50,6 +50,15 @@ public class DataSource {
         links.add(link);
     }
 
+    public void updateWords(Link link, Word word1, Word word2) {
+        if (word1.getId() != -1) {
+            dataBaseManager.update(dao.setPersistable(word1));
+        }
+        if (word2.getId() != -1) {
+            dataBaseManager.update(dao.setPersistable(word2));
+        }
+    }
+
     public Word loadOriginalWord(Link link) {
         return loadWord(link, language);
     }

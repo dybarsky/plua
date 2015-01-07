@@ -56,4 +56,11 @@ public class DataBaseManager {
         dao.reset();
         return it;
     }
+
+    public <T extends Persistable> T update(Dao<T> dao) {
+        if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
+        T t = dao.update(database);
+        dao.reset();
+        return t;
+    }
 }
