@@ -10,10 +10,12 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import dmax.words.DataSource;
 import dmax.words.R;
 import dmax.words.domain.Language;
+import dmax.words.ui.Util;
 import dmax.words.ui.detail.LinkDetailFragment;
 import dmax.words.ui.MainActivity;
 
@@ -42,7 +44,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.f_wordslist, container, false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.f_wordslist, container, false);
 
         pager = (ViewPager) root.findViewById(R.id.pager);
         pager.setAdapter(adapter);
@@ -50,7 +52,10 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         ImageButton add = (ImageButton) root.findViewById(R.id.add);
         add.setOnClickListener(this);
 
-        switcher.init(root);
+        View panel = Util.createDarkThemedView(getActivity(), R.layout.v_languages_panel);
+        root.addView(panel, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        switcher.init(panel);
 
         return root;
     }

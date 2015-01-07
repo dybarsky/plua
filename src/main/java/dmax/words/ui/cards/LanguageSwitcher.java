@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.ContextWrapper;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import dmax.words.R;
 import dmax.words.domain.Language;
 import dmax.words.ui.AnimationLayout;
+import dmax.words.ui.Util;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
@@ -45,7 +48,7 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
     }
 
     public View createActionBar() {
-        View root = View.inflate(cardsFragment.getActivity(), R.layout.v_action_language, null);
+        View root = Util.createDarkThemedView(cardsFragment.getActivity(), R.layout.v_action_language);
 
         actionBarIcon = (ImageView) root.findViewById(R.id.ab_icon);
         actionBarText = (TextView) root.findViewById(R.id.ab_lang);
