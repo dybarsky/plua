@@ -18,6 +18,7 @@ import android.widget.ImageView;
 
 import dmax.words.R;
 import dmax.words.domain.Language;
+import dmax.words.domain.Link;
 import dmax.words.domain.Word;
 import dmax.words.ui.MainActivity;
 
@@ -27,7 +28,12 @@ import dmax.words.ui.MainActivity;
  */
 public class LinkDetailFragment extends Fragment implements View.OnClickListener {
 
-    public static final int DURATION = 250;
+    public static final String KEY_ORIGINAL = "original";
+    public static final String KEY_TRANSLATION = "translation";
+    public static final String KEY_LINK = "link";
+
+    private static final int DURATION = 250;
+
     private ImageView originalFlag;
     private ImageView translationFlag;
     private ImageView switchFlag;
@@ -35,6 +41,11 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
     private EditText translationText;
 
     private Language current;
+
+    private Word originalWord;
+    private Word translationWord;
+    private Link link;
+    private boolean edit = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,6 +82,19 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         this.translationFlag.setImageResource(current.equals(Language.UKRAINIAN)
                 ? R.drawable.ic_polish
                 : R.drawable.ic_ukrainian);
+
+        Bundle args = getArguments();
+        if (args != null && args.containsKey(KEY_ORIGINAL) && args.containsKey(KEY_TRANSLATION)) {
+            originalWord = (Word) args.getSerializable(KEY_ORIGINAL);
+            translationWord = (Word) args.getSerializable(KEY_TRANSLATION);
+            link = (Link) args.getSerializable(KEY_LINK);
+
+            originalText.setText(originalWord.getData());
+            translationText.setText(translationWord.getData());
+
+            edit = true;
+            actionBar.setTitle(R.string.edit_word_title);
+        }
     }
 
     @Override
@@ -97,6 +121,9 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View v) {
         this.current = current.equals(Language.UKRAINIAN) ? Language.POLISH : Language.UKRAINIAN;
+        Word tmp = originalWord;
+        originalWord = translationWord;
+        translationWord = tmp;
 
         ObjectAnimator rotate = ObjectAnimator.ofFloat(switchFlag, "rotation", 0, 180);
         ObjectAnimator moveOriginal = ObjectAnimator.ofFloat(originalFlag, "y", originalFlag.getY(), translationFlag.getY());
@@ -118,7 +145,14 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         word2.setLanguage(current.equals(Language.UKRAINIAN) ? Language.POLISH : Language.UKRAINIAN);
         word2.setData(translationText.getText().toString());
 
-        getCastedActivity().getDataSource().addWords(word1, word2);
+        if (edit) {
+            word1.setId(word1.getData().equals(originalWord.getData()) ? -1 : originalWord.getId());
+            word2.setId(word2.getData().equals(translationWord.getData()) ? -1 : translationWord.getId());
+
+            getCastedActivity().getDataSource().updateWords(link, word1, word2);
+        } else {
+            getCastedActivity().getDataSource().addWords(word1, word2);
+        }
 
         closeSelf();
     }

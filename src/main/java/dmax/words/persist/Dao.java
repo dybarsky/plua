@@ -44,7 +44,7 @@ public abstract class Dao<T extends Persistable> implements Constants {
         return id;
     }
 
-    public abstract T save(SQLiteDatabase db);
+    public abstract T insert(SQLiteDatabase db);
 
     public abstract T retrieve(SQLiteDatabase db);
 

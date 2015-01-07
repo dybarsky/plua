@@ -131,12 +131,12 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
     }
 
     private void save(Word word1, Word word2) {
-        Word w1 = db.save(wordDao.setPersistable(word1));
-        Word w2 = db.save(wordDao.setPersistable(word2));
+        Word w1 = db.insert(wordDao.setPersistable(word1));
+        Word w2 = db.insert(wordDao.setPersistable(word2));
         Link link = new Link();
         link.setWordId(w1.getLanguage(), w1.getId());
         link.setWordId(w2.getLanguage(), w2.getId());
-        db.save(linkDao.setPersistable(link));
+        db.insert(linkDao.setPersistable(link));
     }
 
     private void showDialog() {

@@ -21,7 +21,7 @@ class LinkDao extends Dao<Link> {
     }
 
     @Override
-    public Link save(SQLiteDatabase db) {
+    public Link insert(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_LINK_ORIGINAL, persistable.getWordId(Language.UKRAINIAN));
         values.put(COLUMN_LINK_TRANSLATION, persistable.getWordId(Language.POLISH));

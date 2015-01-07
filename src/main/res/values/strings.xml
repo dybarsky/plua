@@ -9,4 +9,5 @@
     <string name="ukrainian">Ukrainian</string>
     <string name="delete">Remove</string>
     <string name="edit">Edit</string>
+    <string name="edit_word_title">Edit word</string>
 </resources>

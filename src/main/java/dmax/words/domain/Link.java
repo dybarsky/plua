@@ -1,12 +1,13 @@
 package dmax.words.domain;
 
+import java.io.Serializable;
 import java.util.EnumMap;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 10.12.14 at 11:15
  */
-public class Link implements Persistable {
+public class Link implements Persistable, Serializable {
 
     private long id = -1;
     private EnumMap<Language, Long> map = new EnumMap<Language, Long>(Language.class);

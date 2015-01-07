@@ -29,9 +29,9 @@ public class DataBaseManager {
     }
 
 
-    public <T extends Persistable> T save(Dao<T> dao) {
+    public <T extends Persistable> T insert(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
-        T t = dao.save(database);
+        T t = dao.insert(database);
         dao.reset();
         return t;
     }

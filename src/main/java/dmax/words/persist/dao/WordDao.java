@@ -21,7 +21,7 @@ class WordDao extends Dao<Word> {
     }
 
     @Override
-    public Word save(SQLiteDatabase db) {
+    public Word insert(SQLiteDatabase db) {
         if (persistable == null) throw new IllegalArgumentException("No data set");
 
         ContentValues values = new ContentValues();

@@ -43,9 +43,9 @@ public class DataSource {
         Link link = new Link();
         Dao<Link> linkDao = DaoFactory.createDao(Link.class);
 
-        link.setWord(dataBaseManager.save(dao.setPersistable(word1)));
-        link.setWord(dataBaseManager.save(dao.setPersistable(word2)));
-        link = dataBaseManager.save(linkDao.setPersistable(link));
+        link.setWord(dataBaseManager.insert(dao.setPersistable(word1)));
+        link.setWord(dataBaseManager.insert(dao.setPersistable(word2)));
+        link = dataBaseManager.insert(linkDao.setPersistable(link));
 
         links.add(link);
     }

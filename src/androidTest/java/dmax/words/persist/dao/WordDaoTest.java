@@ -33,16 +33,35 @@ public class WordDaoTest extends AndroidTestCase {
         assertEquals(WordDao.class, dao.getClass());
     }
 
-    public void test_shouldSave() {
+    public void test_shouldInsert() {
         Word w = new Word();
         w.setLanguage(Language.UKRAINIAN);
         w.setData("укр");
 
         Dao<Word> dao = DaoFactory.createDao(Word.class);
-        Word saved = db.save(dao.setPersistable(w));
+        Word saved = db.insert(dao.setPersistable(w));
 
         assertFalse(saved.getId() == -1);
         assertTrue(w.equals(saved));
+    }
+
+    public void test_shouldUpdate() {
+        Word w = new Word();
+        w.setLanguage(Language.UKRAINIAN);
+        w.setData("укр");
+
+        Dao<Word> dao = DaoFactory.createDao(Word.class);
+        Word saved = db.insert(dao.setPersistable(w));
+
+        saved.setData("чм");
+        Word updated = db.update(dao.setPersistable(saved));
+
+        Word retrieved = db.retrieve(dao.setPersistable(w));
+
+        assertNotNull(retrieved);
+        assertTrue(retrieved.getId() == updated.getId());
+        assertTrue(retrieved.getLanguage() == updated.getLanguage());
+        assertTrue(retrieved.getData().equals(updated.getData()));
     }
 
     public void test_shouldRetrieve() {
@@ -51,7 +70,7 @@ public class WordDaoTest extends AndroidTestCase {
         w.setData("укр");
 
         Dao<Word> dao = DaoFactory.createDao(Word.class);
-        Word saved = db.save(dao.setPersistable(w));
+        Word saved = db.insert(dao.setPersistable(w));
         long id = saved.getId();
 
         w = new Word();
@@ -71,7 +90,7 @@ public class WordDaoTest extends AndroidTestCase {
         w.setData("укр");
 
         Dao<Word> dao = DaoFactory.createDao(Word.class);
-        Word saved = db.save(dao.setPersistable(w));
+        Word saved = db.insert(dao.setPersistable(w));
 
         w = new Word();
         w.setId(saved.getId());
@@ -93,8 +112,8 @@ public class WordDaoTest extends AndroidTestCase {
         w2.setData("горілка");
 
         Dao<Word> dao = DaoFactory.createDao(Word.class);
-        assertNotNull(db.save(dao.setPersistable(w)));
-        assertNotNull(db.save(dao.setPersistable(w2)));
+        assertNotNull(db.insert(dao.setPersistable(w)));
+        assertNotNull(db.insert(dao.setPersistable(w2)));
 
         Word w3 = new Word();
         w3.setLanguage(Language.UKRAINIAN);

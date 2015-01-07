@@ -4,13 +4,16 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import dmax.words.DataSource;
 import dmax.words.R;
@@ -87,10 +90,48 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.delete:
+                removeCurrentCard();
+                return true;
+            case R.id.edit:
+                editCurrentCard();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void editCurrentCard() {
+        int pagesCount = pager.getOffscreenPageLimit() * 2 + 1;
+        int index = pager.getCurrentItem() % pagesCount;
+
+        CardView cardView = (CardView) pager.getChildAt(index).findViewById(R.id.card);
+        CardsPagerAdapter.CardViewHolder holder = (CardsPagerAdapter.CardViewHolder) cardView.getTag();
+
+        Bundle params = new Bundle();
+        params.putSerializable(LinkDetailFragment.KEY_ORIGINAL, holder.originalWord);
+        params.putSerializable(LinkDetailFragment.KEY_TRANSLATION, holder.translationWord);
+        params.putSerializable(LinkDetailFragment.KEY_LINK, holder.link);
+
+        openDetailedFragment(params);
+    }
+
+    private void removeCurrentCard() {
+        //TODO implement
+    }
+
+    @Override
     public void onClick(View v) {
+        openDetailedFragment(null);
+    }
+
+    private void openDetailedFragment(Bundle params) {
+        LinkDetailFragment fragment = new LinkDetailFragment();
+        fragment.setArguments(params);
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.animator.slide_up, 0, 0, R.animator.slide_down)
-                .replace(R.id.container, new LinkDetailFragment())
+                .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit();
     }
