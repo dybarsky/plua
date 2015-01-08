@@ -108,6 +108,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     }
 
     public void reloadList() {
+        getDataSource().reset();
         pager.setAdapter(adapter);
     }
 
