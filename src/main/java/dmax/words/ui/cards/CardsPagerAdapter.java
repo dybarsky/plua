@@ -73,6 +73,11 @@ public class CardsPagerAdapter extends PagerAdapter {
         container.removeView((View) object);
     }
 
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
+
     public void onLanguageChanged() {
         Language currentLanguage = dataSource.getSelectedLanguage();
 

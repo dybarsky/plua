@@ -59,6 +59,17 @@ public class DataSource {
         }
     }
 
+    public void removeWords(Link link, Word word1, Word word2) {
+        links.remove(link);
+
+        Dao<Link> linkDao = DaoFactory.createDao(Link.class);
+        Dao<Word> wordDao = DaoFactory.createDao(Word.class);
+
+        dataBaseManager.delete(linkDao.setPersistable(link));
+        dataBaseManager.delete(wordDao.setPersistable(word1));
+        dataBaseManager.delete(wordDao.setPersistable(word2));
+    }
+
     public Word loadOriginalWord(Link link) {
         return loadWord(link, language);
     }
