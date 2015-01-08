@@ -42,7 +42,7 @@ public class CardsPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        if (this.container == null) this.container = container;
+        this.container = container;
 
         View root = View.inflate(context, R.layout.v_wordslist_item, null);
         root.setId(position);
@@ -74,7 +74,7 @@ public class CardsPagerAdapter extends PagerAdapter {
     }
 
     public void onLanguageChanged() {
-        Language current = dataSource.getSelectedLanguage();
+        Language currentLanguage = dataSource.getSelectedLanguage();
 
         for (int i = 0; i < container.getChildCount(); i++) {
             CardView cardView = (CardView) container.getChildAt(i).findViewById(R.id.card);
@@ -86,12 +86,12 @@ public class CardsPagerAdapter extends PagerAdapter {
                     holder.originalViewGroup.bringToFront();
                 }
 
-                Word word1 = holder.originalWord;
-                Word word2 = holder.translationWord;
+                Word original = holder.originalWord;
+                Word translation = holder.translationWord;
 
-                boolean translation = word2.getLanguage().equals(current);
-                holder.originalWord = translation ? word2 : word1;
-                holder.translationWord = translation ? word1 : word2;
+                boolean needToSwitch = translation.getLanguage().equals(currentLanguage);
+                holder.originalWord = needToSwitch ? translation : original;
+                holder.translationWord = needToSwitch ? original : translation;
 
                 holder.originalTextView.setText(holder.originalWord.getData());
             }
