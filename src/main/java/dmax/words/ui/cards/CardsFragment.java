@@ -103,10 +103,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void editCurrentCard() {
-        int pagesCount = pager.getOffscreenPageLimit() * 2 + 1;
-        int index = pager.getCurrentItem() % pagesCount;
-
-        CardView cardView = (CardView) pager.getChildAt(index).findViewById(R.id.card);
+        int id = pager.getCurrentItem();
+        CardView cardView = (CardView) pager.findViewById(id).findViewById(R.id.card);
         CardsPagerAdapter.CardViewHolder holder = (CardsPagerAdapter.CardViewHolder) cardView.getTag();
 
         Bundle params = new Bundle();

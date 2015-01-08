@@ -45,6 +45,7 @@ public class CardsPagerAdapter extends PagerAdapter {
         if (this.container == null) this.container = container;
 
         View root = View.inflate(context, R.layout.v_wordslist_item, null);
+        root.setId(position);
 
         CardView card = (CardView) root.findViewById(R.id.card);
         CardViewHolder holder = new CardViewHolder();
