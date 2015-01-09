@@ -34,6 +34,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
     private static final int DURATION = 250;
 
+    private View emptyView;
     private ViewPager pager;
     private CardsPagerAdapter adapter;
     private LanguageSwitcher switcher;
@@ -51,8 +52,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.f_wordslist, container, false);
 
+        emptyView = root.findViewById(R.id.empty_view);
         pager = (ViewPager) root.findViewById(R.id.pager);
-        pager.setAdapter(adapter);
 
         ImageButton add = (ImageButton) root.findViewById(R.id.add);
         add.setOnClickListener(this);
@@ -61,6 +62,10 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         root.addView(panel, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         switcher.init(panel);
+
+        if (adapter.getCount() > 0) {
+            showCards();
+        }
 
         return root;
     }
@@ -107,8 +112,10 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         adapter.onLanguageChanged();
     }
 
-    public void reloadList() {
+    public void showCards() {
         getDataSource().reset();
+        emptyView.setVisibility(View.GONE);
+        pager.setVisibility(View.VISIBLE);
         pager.setAdapter(adapter);
     }
 
@@ -204,6 +211,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         private void hidePager() {
             pager.setVisibility(View.INVISIBLE);
+            emptyView.setVisibility(View.VISIBLE);
         }
 
         private void removeItem() {

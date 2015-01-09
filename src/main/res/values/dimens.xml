@@ -17,4 +17,5 @@
     <dimen name="flag_margin_left">20dp</dimen>
     <dimen name="language_item_padding">5dp</dimen>
     <dimen name="actionbar_padding">5dp</dimen>
+    <dimen name="placeholder_size">64dp</dimen>
 </resources>
