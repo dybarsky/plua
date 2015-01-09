@@ -1,6 +1,6 @@
 package dmax.words.importer;
 
-import android.app.ProgressDialog;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -9,13 +9,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import dmax.words.R;
 import dmax.words.domain.Language;
 import dmax.words.domain.Link;
 import dmax.words.domain.Word;
 import dmax.words.persist.Dao;
 import dmax.words.persist.DataBaseManager;
 import dmax.words.persist.dao.DaoFactory;
+import dmax.words.ui.UpdateDialog;
 
 public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callback> {
 
@@ -30,7 +30,7 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
 
     private Context context;
     private BufferedReader reader;
-    private ProgressDialog dialog;
+    private AlertDialog dialog;
 
     public Importer(Context context, DataBaseManager db) {
         this.context = context;
@@ -140,10 +140,7 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
     }
 
     private void showDialog() {
-        dialog = new ProgressDialog(context);
-        dialog.setMessage(context.getString(R.string.importing));
-        dialog.setIndeterminate(true);
-        dialog.setCanceledOnTouchOutside(false);
+        dialog = new UpdateDialog(context);
         dialog.show();
     }
 }
