@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
  */
 public class AnimationLayout extends FrameLayout {
 
+    private int target;
+
     public AnimationLayout(Context context) {
         super(context);
     }
@@ -25,6 +27,8 @@ public class AnimationLayout extends FrameLayout {
     public AnimationLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
+
+    //~
 
     public float getYRatio() {
         int height = getHeight();
@@ -42,7 +46,33 @@ public class AnimationLayout extends FrameLayout {
     }
 
     public void setXRatio(float xRatio) {
-//        int width = getWidth();
-        setX(xRatio * 500);
+        int width = getWidth();
+        setX(width > 0 ? xRatio * width : -9999);
+    }
+
+    //~
+
+    public float getXFactor() {
+        return getX() / target;
+    }
+
+    public void setXFactor(float xFactor) {
+        setX(target * xFactor);
+    }
+
+    public float getYFactor() {
+        return getY() / target;
+    }
+
+    public void setYFactor(float yFactor) {
+        setY(target * yFactor);
+    }
+
+    public void setTarget(int target) {
+        this.target = target;
+    }
+
+    public int getTarget() {
+        return target;
     }
 }
