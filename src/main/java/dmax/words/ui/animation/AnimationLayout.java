@@ -1,4 +1,4 @@
-package dmax.words.ui;
+package dmax.words.ui.animation;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,8 +9,6 @@ import android.widget.FrameLayout;
  * on 22.12.14 at 18:23
  */
 public class AnimationLayout extends FrameLayout {
-
-    private float yRatio;
 
     public AnimationLayout(Context context) {
         super(context);
@@ -36,5 +34,15 @@ public class AnimationLayout extends FrameLayout {
     public void setYRatio(float yRatio) {
         int height = getHeight();
         setY(height > 0 ? yRatio * height : -9999);
+    }
+
+    public float getXRatio() {
+        int width = getWidth();
+        return width != 0 ? getX() / width : -1;
+    }
+
+    public void setXRatio(float xRatio) {
+//        int width = getWidth();
+        setX(xRatio * 500);
     }
 }

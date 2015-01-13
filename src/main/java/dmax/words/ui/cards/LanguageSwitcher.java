@@ -4,8 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.content.ContextWrapper;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
@@ -14,7 +12,7 @@ import android.widget.TextView;
 
 import dmax.words.R;
 import dmax.words.domain.Language;
-import dmax.words.ui.AnimationLayout;
+import dmax.words.ui.animation.AnimationLayout;
 import dmax.words.ui.Util;
 
 /**
