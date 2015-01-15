@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import dmax.words.R;
 import dmax.words.domain.Language;
-import dmax.words.ui.animation.AnimationLayout;
+import dmax.words.ui.AnimationLayout;
 import dmax.words.ui.Util;
 
 /**
