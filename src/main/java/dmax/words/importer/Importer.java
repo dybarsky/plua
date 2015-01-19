@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import dmax.dialog.SpotsDialog;
+import dmax.words.R;
 import dmax.words.domain.Language;
 import dmax.words.domain.Link;
 import dmax.words.domain.Word;
@@ -140,7 +141,7 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
     }
 
     private void showDialog() {
-        dialog = new SpotsDialog(context);
+        dialog = new SpotsDialog(context, R.style.Dialog);
         dialog.show();
     }
 }
