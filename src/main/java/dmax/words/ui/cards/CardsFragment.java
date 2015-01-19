@@ -39,6 +39,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     private CardsPagerAdapter adapter;
     private LanguageSwitcher switcher;
 
+    private boolean removing;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,6 +144,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void removeCurrentCard() {
+        if (removing) return;
+
         final int id = pager.getCurrentItem();
         CardView cardView = (CardView) pager.findViewById(id).findViewById(R.id.card);
         CardViewHolder holder = (CardViewHolder) cardView.getTag();
@@ -149,6 +153,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         Animator transition = prepareCollapseTransition(cardView);
         transition.addListener(new PageRemover(id, holder));
         transition.start();
+        removing = true;
     }
 
     private Animator prepareCollapseTransition(View v) {
@@ -225,6 +230,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                 pager.setOnPageChangeListener(null);
                 removeItem();
                 pager.setCurrentItem(pageToShowAfterRemoving, false);
+                removing = false;
             }
         }
 
