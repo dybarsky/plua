@@ -4,6 +4,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import dmax.words.DataSource;
+import dmax.words.domain.Link;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
@@ -19,8 +20,12 @@ public class CardPriorityManager {
         this.dataSource = dataSource;
     }
 
-    public void onRisePriorityEvent() {
-        // todo save new priority of link into database
+    public void onChangePriority(CardsPagerAdapter.CardViewHolder holder, boolean increment) {
+        Link link = holder.link;
+        link.setPriority(increment ? link.getPriority() + 1 : link.getPriority() - 1);
+        link.setUpdated(System.currentTimeMillis());
+//        dataSource.updateLink(link);
+
         showNextCard();
     }
 

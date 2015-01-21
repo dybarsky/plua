@@ -22,6 +22,5 @@
     <dimen name="spot_padding">24dp</dimen>
     <dimen name="dialog_title_margin">10dp</dimen>
     <dimen name="progress_width">250dp</dimen>
-    <dimen name="show_later_icon_margin">5dp</dimen>
-    <dimen name="show_later_button_padding">11dp</dimen>
+    <dimen name="card_actions_panel_padding">3dp</dimen>
 </resources>

@@ -1,9 +1,9 @@
 package dmax.words.ui.cards;
 
-import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 
+import dmax.words.R;
 import dmax.words.ui.cards.CardsPagerAdapter.CardViewHolder;
 
 /**
@@ -24,7 +24,7 @@ public class CardInteractionListener implements View.OnTouchListener, View.OnCli
     public void onClick(View v) {
         CardViewHolder holder = (CardViewHolder) v.getTag();
         if (holder.isTranslationState) {
-            priorityManager.onRisePriorityEvent();
+            priorityManager.onChangePriority(holder, v.getId() == R.id.forgot);
         }
     }
 

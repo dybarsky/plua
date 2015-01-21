@@ -10,6 +10,7 @@
     <string name="delete">Remove</string>
     <string name="edit">Edit</string>
     <string name="edit_word_title">Edit word</string>
-    <string name="show_again">Show again</string>
+    <string name="forgot">Forgot</string>
     <string name="reload">Reload</string>
+    <string name="remember">Remember</string>
 </resources>

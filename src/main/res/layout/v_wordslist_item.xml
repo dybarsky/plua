@@ -50,35 +50,36 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
             <LinearLayout
-                android:id="@+id/show_again"
+                android:id="@+id/actions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:orientation="horizontal"
-                android:padding="@dimen/show_later_button_padding"
-                android:gravity="center_vertical"
-                android:clickable="true"
-                android:background="?android:attr/selectableItemBackground">
+                android:padding="@dimen/card_actions_panel_padding"
+                android:gravity="center_vertical|left">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_later"
-                    android:layout_marginRight="@dimen/show_later_icon_margin"/>
-
-                <TextView
+                <Button
+                    android:id="@+id/remember"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:textAllCaps="true"
-                    android:text="@string/show_again"/>
+                    android:text="@string/remember"
+                    style="?android:attr/borderlessButtonStyle"/>
 
+                <Button
+                    android:id="@+id/forgot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/forgot"
+                    android:textColor="@color/pink"
+                    style="?android:attr/borderlessButtonStyle"/>
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_above="@id/show_again"
+                android:layout_above="@id/actions"
                 android:background="@drawable/line"/>
 
         </RelativeLayout>
