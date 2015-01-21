@@ -42,15 +42,6 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     private boolean removing;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MainActivity activity = getCastedActivity();
-        DataSource dataSource = activity.getDataSource();
-        this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
-        this.adapter = new CardsPagerAdapter(activity, dataSource);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.f_wordslist, container, false);
 
@@ -63,13 +54,24 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         View panel = Util.createDarkThemedView(getActivity(), R.layout.v_languages_panel);
         root.addView(panel, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        switcher.init(panel);
+        return root;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        MainActivity activity = getCastedActivity();
+        DataSource dataSource = activity.getDataSource();
+        CardInteractionListener listener = new CardInteractionListener(new CardStateSwitcher(), new CardPriorityManager(pager, dataSource));
+        this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
+        this.adapter = new CardsPagerAdapter(activity, dataSource, listener);
+
+        switcher.init(getView());
 
         if (adapter.getCount() > 0) {
             showCards();
         }
-
-        return root;
     }
 
     @Override
@@ -146,7 +148,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     private void removeCurrentCard() {
         if (removing) return;
 
-        final int id = pager.getCurrentItem();
+        int id = pager.getCurrentItem();
         CardView cardView = (CardView) pager.findViewById(id).findViewById(R.id.card);
         CardViewHolder holder = (CardViewHolder) cardView.getTag();
 

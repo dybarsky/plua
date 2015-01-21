@@ -20,14 +20,14 @@ import dmax.words.domain.Word;
 public class CardsPagerAdapter extends PagerAdapter {
 
     private Context context;
-    private CardStateSwitcher switcher;
     private DataSource dataSource;
     private ViewGroup container;
+    private CardInteractionListener listener;
 
-    public CardsPagerAdapter(Context context, DataSource dataSource) {
+    public CardsPagerAdapter(Context context, DataSource dataSource, CardInteractionListener listener) {
         this.context = context;
         this.dataSource = dataSource;
-        this.switcher = new CardStateSwitcher();
+        this.listener = listener;
     }
 
     @Override
@@ -47,6 +47,8 @@ public class CardsPagerAdapter extends PagerAdapter {
         View root = View.inflate(context, R.layout.v_wordslist_item, null);
         root.setId(position);
 
+        View showAgainButton = root.findViewById(R.id.show_again);
+
         CardView card = (CardView) root.findViewById(R.id.card);
         CardViewHolder holder = new CardViewHolder();
         holder.originalViewGroup = card.findViewById(R.id.original);
@@ -61,7 +63,10 @@ public class CardsPagerAdapter extends PagerAdapter {
         holder.translationWord = dataSource.loadTranslationWord(holder.link);
         holder.originalTextView.setText(holder.originalWord.getData());
 
-        card.setOnTouchListener(switcher);
+        showAgainButton.setTag(holder);
+        showAgainButton.setOnClickListener(listener);
+
+        card.setOnTouchListener(listener);
         card.setTag(holder);
         container.addView(root);
 
