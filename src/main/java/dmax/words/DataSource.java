@@ -50,7 +50,7 @@ public class DataSource {
         links.add(link);
     }
 
-    public void updateWords(Link link, Word word1, Word word2) {
+    public void updateWords(Word word1, Word word2) {
         if (word1.getId() != -1) {
             dataBaseManager.update(dao.setPersistable(word1));
         }

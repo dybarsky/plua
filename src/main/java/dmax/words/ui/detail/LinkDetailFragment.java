@@ -18,7 +18,6 @@ import android.widget.ImageView;
 
 import dmax.words.R;
 import dmax.words.domain.Language;
-import dmax.words.domain.Link;
 import dmax.words.domain.Word;
 import dmax.words.ui.MainActivity;
 
@@ -30,7 +29,6 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
 
     public static final String KEY_ORIGINAL = "original";
     public static final String KEY_TRANSLATION = "translation";
-    public static final String KEY_LINK = "link";
 
     private static final int DURATION = 250;
 
@@ -44,7 +42,6 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
 
     private Word originalWord;
     private Word translationWord;
-    private Link link;
     private boolean edit = false;
 
     @Override
@@ -87,7 +84,6 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         if (args != null && args.containsKey(KEY_ORIGINAL) && args.containsKey(KEY_TRANSLATION)) {
             originalWord = (Word) args.getSerializable(KEY_ORIGINAL);
             translationWord = (Word) args.getSerializable(KEY_TRANSLATION);
-            link = (Link) args.getSerializable(KEY_LINK);
 
             originalText.setText(originalWord.getData());
             translationText.setText(translationWord.getData());
@@ -149,7 +145,7 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
             word1.setId(word1.getData().equals(originalWord.getData()) ? -1 : originalWord.getId());
             word2.setId(word2.getData().equals(translationWord.getData()) ? -1 : translationWord.getId());
 
-            getCastedActivity().getDataSource().updateWords(link, word1, word2);
+            getCastedActivity().getDataSource().updateWords(word1, word2);
         } else {
             getCastedActivity().getDataSource().addWords(word1, word2);
         }

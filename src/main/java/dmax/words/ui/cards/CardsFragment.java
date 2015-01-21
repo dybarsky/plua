@@ -143,7 +143,6 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         Bundle params = new Bundle();
         params.putSerializable(LinkDetailFragment.KEY_ORIGINAL, holder.originalWord);
         params.putSerializable(LinkDetailFragment.KEY_TRANSLATION, holder.translationWord);
-        params.putSerializable(LinkDetailFragment.KEY_LINK, holder.link);
 
         openDetailedFragment(params);
     }
