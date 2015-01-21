@@ -100,6 +100,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
             case R.id.edit:
                 editCurrentCard();
                 return true;
+            case R.id.reload:
+                showCards();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }

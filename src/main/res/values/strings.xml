@@ -11,4 +11,5 @@
     <string name="edit">Edit</string>
     <string name="edit_word_title">Edit word</string>
     <string name="show_again">Show again</string>
+    <string name="reload">Reload</string>
 </resources>
