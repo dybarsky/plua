@@ -104,7 +104,7 @@ public class DataSource {
 
         while (it.hasNext()) links.add(it.next());
 
-        Collections.sort(links, new Randomizer());
+        Collections.sort(links, new PrioritySorter());
     }
 
     public void reset() {
@@ -113,11 +113,14 @@ public class DataSource {
 
     //~
 
-    private static class Randomizer implements Comparator<Link> {
+    static class PrioritySorter implements Comparator<Link> {
 
         @Override
         public int compare(Link lhs, Link rhs) {
-            return lhs.hashCode() - rhs.hashCode();
+            int priorityDiff = rhs.getPriority() - lhs.getPriority();
+            return priorityDiff != 0
+                    ? priorityDiff
+                    : (int) (lhs.getUpdated() - rhs.getUpdated());
         }
     }
 }
