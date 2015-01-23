@@ -10,6 +10,8 @@ import java.util.EnumMap;
 public class Link implements Persistable, Serializable {
 
     private long id = -1;
+    private int priority;
+    private long updated;
     private EnumMap<Language, Long> map = new EnumMap<Language, Long>(Language.class);
 
     public long getWordId(Language language) {
@@ -32,6 +34,22 @@ public class Link implements Persistable, Serializable {
     @Override
     public void setId(long id) {
         this.id = id;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public long getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(long updated) {
+        this.updated = updated;
     }
 
     @Override

@@ -17,11 +17,15 @@ interface Constants {
     String COLUMN_WORD_DATA = "data";
     String COLUMN_LINK_ORIGINAL = "original";
     String COLUMN_LINK_TRANSLATION = "translation";
+    String COLUMN_LINK_PRIORITY = "priority";
+    String COLUMN_LINK_UPDATED = "updated";
 
     int COLUMN_ID_INDEX = 0;
     int COLUMN_WORD_DATA_INDEX = 1;
     int COLUMN_LINK_ORIGINAL_INDEX = 1;
     int COLUMN_LINK_TRANSLATION_INDEX = 2;
+    int COLUMN_LINK_PRIORITY_INDEX = 3;
+    int COLUMN_LINK_UPDATED_INDEX = 4;
 
     String SQL_WORD_TABLE_TEMPLATE = "("
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -35,7 +39,9 @@ interface Constants {
     String SQL_CREATE_LINK_TABLE = "CREATE TABLE " + TABlE_LINK + "("
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COLUMN_LINK_ORIGINAL + " INTEGER, "
-            + COLUMN_LINK_TRANSLATION + " INTEGER,"
+            + COLUMN_LINK_TRANSLATION + " INTEGER, "
+            + COLUMN_LINK_PRIORITY + " INTEGER, "
+            + COLUMN_LINK_UPDATED + " INTEGER "
             + "FOREIGN KEY(original) REFERENCES pl(id), "
             + "FOREIGN KEY(translation) REFERENCES ua(id)"
             + ")";

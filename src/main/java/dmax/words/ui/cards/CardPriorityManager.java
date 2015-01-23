@@ -22,9 +22,11 @@ public class CardPriorityManager {
 
     public void onChangePriority(CardsPagerAdapter.CardViewHolder holder, boolean increment) {
         Link link = holder.link;
-        link.setPriority(increment ? link.getPriority() + 1 : link.getPriority() - 1);
+        link.setPriority(increment
+                ? link.getPriority() + 1
+                : link.getPriority() - 1);
         link.setUpdated(System.currentTimeMillis());
-//        dataSource.updateLink(link);
+        dataSource.updateLink(link);
 
         showNextCard();
     }

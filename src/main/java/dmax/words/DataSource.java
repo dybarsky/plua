@@ -59,6 +59,11 @@ public class DataSource {
         }
     }
 
+    public void updateLink(Link link) {
+        Dao<Link> linkDao = DaoFactory.createDao(Link.class);
+        dataBaseManager.update(linkDao.setPersistable(link));
+    }
+
     public void removeWords(Link link, Word word1, Word word2) {
         links.remove(link);
 
