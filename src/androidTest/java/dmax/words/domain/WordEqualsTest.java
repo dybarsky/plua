@@ -8,7 +8,7 @@ import android.test.AndroidTestCase;
  */
 public class WordEqualsTest extends AndroidTestCase {
 
-    public void test_shouldBeNotEqualIfIdsDifferent() {
+    public void test_shouldBeNotEqual_IfIdsDifferent() {
         Word w1 = new Word();
         w1.setId(1);
         Word w2 = new Word();
@@ -17,7 +17,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertFalse(w1.equals(w2));
     }
 
-    public void test_shouldBeNotEqualIfIdsSameAndDataDifferent() {
+    public void test_shouldBeNotEqual_IfIdsSameAndDataDifferent() {
         Word w1 = new Word();
         w1.setId(1);
         w1.setData("укр");
@@ -29,7 +29,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertFalse(w1.equals(w2));
     }
 
-    public void test_shouldBeNotEqualIfIdsNotSetAndDataDifferent() {
+    public void test_shouldBeNotEqual_IfIdsNotSetAndDataDifferent() {
         Word w1 = new Word();
         w1.setData("укр");
         w1.setLanguage(Language.UKRAINIAN);
@@ -39,7 +39,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertFalse(w1.equals(w2));
     }
 
-    public void test_shouldBeNotEqualIfOneIdNotSetAndDataDifferent() {
+    public void test_shouldBeNotEqual_IfOneIdNotSetAndDataDifferent() {
         Word w1 = new Word();
         w1.setId(1);
         w1.setData("укр");
@@ -50,7 +50,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertFalse(w1.equals(w2));
     }
 
-    public void test_shouldBeEqualIfOneIdNotSetAndDataSame() {
+    public void test_shouldBeEqual_IfOneIdNotSetAndDataSame() {
         Word w1 = new Word();
         w1.setId(1);
         w1.setData("укр");
@@ -62,7 +62,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertTrue(w1.equals(w2));
     }
 
-    public void test_shouldBeEqualIfIdsNotSetAndDataSame() {
+    public void test_shouldBeEqual_IfIdsNotSetAndDataSame() {
         Word w1 = new Word();
         w1.setData("укр");
         w1.setLanguage(Language.UKRAINIAN);
@@ -73,7 +73,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertTrue(w1.equals(w2));
     }
 
-    public void test_shouldBeEqualIfIdsSameAndDataSame() {
+    public void test_shouldBeEqual_IfIdsSameAndDataSame() {
         Word w1 = new Word();
         w1.setId(1);
         w1.setData("укр");

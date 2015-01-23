@@ -8,7 +8,7 @@ import android.test.AndroidTestCase;
  */
 public class LinkEqualsTest extends AndroidTestCase {
 
-    public void test_shouldBeNotEqualIfIdsDifferent() {
+    public void test_shouldBeNotEqual_IfIdsDifferent() {
         Link l1 = new Link();
         l1.setId(1);
         Link l2 = new Link();
@@ -17,7 +17,7 @@ public class LinkEqualsTest extends AndroidTestCase {
         assertFalse(l1.equals(l2));
     }
 
-    public void test_shouldBeNotEqualIfIdsSameAndDataDifferent() {
+    public void test_shouldBeNotEqual_IfIdsSameAndDataDifferent() {
         Link l1 = new Link();
         l1.setId(1);
         l1.setWordId(Language.POLISH, 1);
@@ -30,7 +30,7 @@ public class LinkEqualsTest extends AndroidTestCase {
         assertFalse(l1.equals(l2));
     }
 
-    public void test_shouldBeNotEqualIfIdsNotSetAndDataDifferent() {
+    public void test_shouldBeNotEqual_IfIdsNotSetAndDataDifferent() {
         Link l1 = new Link();
         l1.setWordId(Language.POLISH, 1);
         l1.setWordId(Language.UKRAINIAN, 2);
@@ -41,7 +41,7 @@ public class LinkEqualsTest extends AndroidTestCase {
         assertFalse(l1.equals(l2));
     }
 
-    public void test_shouldBeNotEqualIfOneIdNotSetAndDataDifferent() {
+    public void test_shouldBeNotEqual_IfOneIdNotSetAndDataDifferent() {
         Link l1 = new Link();
         l1.setId(1);
         l1.setWordId(Language.POLISH, 1);
@@ -53,7 +53,7 @@ public class LinkEqualsTest extends AndroidTestCase {
         assertFalse(l1.equals(l2));
     }
 
-    public void test_shouldBeEqualIfOneIdNotSetAndDataSame() {
+    public void test_shouldBeEqual_IfOneIdNotSetAndDataSame() {
         Link l1 = new Link();
         l1.setId(9);
         l1.setWordId(Language.POLISH, 1);
@@ -65,7 +65,7 @@ public class LinkEqualsTest extends AndroidTestCase {
         assertTrue(l1.equals(l2));
     }
 
-    public void test_shouldBeEqualIfIdsNotSetAndDataSame() {
+    public void test_shouldBeEqual_IfIdsNotSetAndDataSame() {
         Link l1 = new Link();
         l1.setWordId(Language.POLISH, 1);
         l1.setWordId(Language.UKRAINIAN, 2);
@@ -76,7 +76,7 @@ public class LinkEqualsTest extends AndroidTestCase {
         assertTrue(l1.equals(l2));
     }
 
-    public void test_shouldBeEqualIfIdsSameAndDataSame() {
+    public void test_shouldBeEqual_IfIdsSameAndDataSame() {
         Link l1 = new Link();
         l1.setId(1);
         l1.setWordId(Language.POLISH, 1);
