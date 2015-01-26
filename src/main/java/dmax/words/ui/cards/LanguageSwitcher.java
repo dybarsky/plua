@@ -2,11 +2,7 @@ package dmax.words.ui.cards;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,8 +16,6 @@ import dmax.words.ui.Util;
  * on 05.01.15 at 12:30
  */
 class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickListener {
-
-    private static final int DURATION = 250;
 
     private CardsFragment cardsFragment;
     private boolean expanded = false;
@@ -87,24 +81,16 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
             this.elevation = cardsFragment.getActivity().getActionBar().getElevation();
         }
 
-        AnimatorSet set = new AnimatorSet();
-        set.setDuration(DURATION);
-
+        Animator transition;
         if (expanded) {
-            ObjectAnimator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 180, 360);
-            ObjectAnimator move = ObjectAnimator.ofFloat(languagesList, "yRatio", 0, -1);
-            move.setInterpolator(new AccelerateInterpolator(1f));
-            set.playTogether(rotate, move);
-            set.addListener(this);
+            transition = Util.prepareCollapseTransition(actionBarIcon, languagesList);
+            transition.addListener(this);
         } else {
             cardsFragment.getActivity().getActionBar().setElevation(0);
             languagesList.setElevation(elevation);
-            ObjectAnimator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 0, 180);
-            ObjectAnimator move = ObjectAnimator.ofFloat(languagesList, "yRatio", -1, 0);
-            move.setInterpolator(new DecelerateInterpolator(1f));
-            set.playTogether(rotate, move);
+            transition = Util.prepareExpandTransition(actionBarIcon, languagesList);
         }
-        set.start();
+        transition.start();
 
         expanded = !expanded;
     }

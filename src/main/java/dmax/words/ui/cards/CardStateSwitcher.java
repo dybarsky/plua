@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.widget.TextView;
 
+import dmax.words.ui.Util;
 import dmax.words.ui.cards.CardsPagerAdapter.CardViewHolder;
 
 /**
@@ -30,19 +31,8 @@ class CardStateSwitcher {
 
         textView.setText(text);
         viewGroup.bringToFront();
-        prepareTransition(viewGroup, event).start();
+        Util.prepareCircularRevealTransition(viewGroup, event).start();
 
         holder.isTranslationState = !holder.isTranslationState;
-    }
-
-    private Animator prepareTransition(View v, MotionEvent event) {
-        int cx = (int) event.getX();
-        int cy = (int) event.getY();
-
-        float maxX = Math.max(cx, v.getWidth() - cx);
-        float maxY = Math.max(cy, v.getHeight() - cy);
-        float radius = (float) Math.sqrt(Math.pow(maxX, 2) + Math.pow(maxY, 2));
-
-        return ViewAnimationUtils.createCircularReveal(v, cx, cy, 0, radius);
     }
 }

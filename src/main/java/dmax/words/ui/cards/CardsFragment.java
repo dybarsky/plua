@@ -2,8 +2,6 @@ package dmax.words.ui.cards;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -31,8 +29,6 @@ import dmax.words.ui.cards.CardsPagerAdapter.CardViewHolder;
  * on 18.12.14 at 12:25
  */
 public class CardsFragment extends Fragment implements View.OnClickListener {
-
-    private static final int DURATION = 250;
 
     private View emptyView;
     private ViewPager pager;
@@ -154,21 +150,10 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         CardView cardView = (CardView) pager.findViewById(id).findViewById(R.id.card);
         CardViewHolder holder = (CardViewHolder) cardView.getTag();
 
-        Animator transition = prepareCollapseTransition(cardView);
+        Animator transition = Util.prepareCardCollapseTransition(cardView);
         transition.addListener(new PageRemover(id, holder));
         transition.start();
         removing = true;
-    }
-
-    private Animator prepareCollapseTransition(View v) {
-        Animator vertical = ObjectAnimator.ofFloat(v, "scaleY", 1f, 0);
-        Animator horizontal = ObjectAnimator.ofFloat(v, "scaleX", 1f, 0);
-
-        AnimatorSet set = new AnimatorSet();
-        set.playTogether(vertical, horizontal);
-        set.setDuration(DURATION);
-
-        return set;
     }
 
     private void openDetailedFragment(Bundle params) {

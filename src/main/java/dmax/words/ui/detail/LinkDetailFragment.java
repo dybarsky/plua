@@ -1,7 +1,5 @@
 package dmax.words.ui.detail;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Context;
@@ -20,6 +18,7 @@ import dmax.words.R;
 import dmax.words.domain.Language;
 import dmax.words.domain.Word;
 import dmax.words.ui.MainActivity;
+import dmax.words.ui.Util;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
@@ -29,8 +28,6 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
 
     public static final String KEY_ORIGINAL = "original";
     public static final String KEY_TRANSLATION = "translation";
-
-    private static final int DURATION = 250;
 
     private ImageView originalFlag;
     private ImageView translationFlag;
@@ -120,14 +117,7 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         Word tmp = originalWord;
         originalWord = translationWord;
         translationWord = tmp;
-
-        ObjectAnimator rotate = ObjectAnimator.ofFloat(switchFlag, "rotation", 0, 180);
-        ObjectAnimator moveOriginal = ObjectAnimator.ofFloat(originalFlag, "y", originalFlag.getY(), translationFlag.getY());
-        ObjectAnimator moveTranslation = ObjectAnimator.ofFloat(translationFlag, "y", translationFlag.getY(), originalFlag.getY());
-        AnimatorSet set = new AnimatorSet();
-        set.playTogether(rotate, moveOriginal, moveTranslation);
-        set.setDuration(DURATION);
-        set.start();
+        Util.prepareSwitchTransition(switchFlag, originalFlag, translationFlag).start();
     }
 
     private void save() {
