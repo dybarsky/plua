@@ -29,13 +29,10 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/helpIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginRight="@dimen/icons_margin"
-                    android:layout_marginTop="@dimen/icons_margin_top"
                     android:src="@drawable/ic_help"/>
 
                 <TextView
@@ -43,8 +40,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@id/helpIcon"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="@dimen/about_items_text_padding_right"
+                    android:textAppearance="?android:attr/textAppearanceListItem"
                     android:text="@string/help_title"/>
 
                 <TextView
@@ -74,13 +72,10 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/rateIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginRight="@dimen/icons_margin"
-                    android:layout_marginTop="@dimen/icons_margin_top"
                     android:src="@drawable/ic_rate"/>
 
                 <TextView
@@ -88,8 +83,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@id/rateIcon"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="@dimen/about_items_text_padding_right"
+                    android:textAppearance="?android:attr/textAppearanceListItem"
                     android:text="@string/rate_title"/>
 
                 <TextView
@@ -119,13 +115,10 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/feedbackIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginRight="@dimen/icons_margin"
-                    android:layout_marginTop="@dimen/icons_margin_top"
                     android:src="@drawable/ic_feedback"/>
 
                 <TextView
@@ -133,8 +126,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@id/feedbackIcon"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="@dimen/about_items_text_padding_right"
+                    android:textAppearance="?android:attr/textAppearanceListItem"
                     android:text="@string/feedback_title"/>
 
                 <TextView
@@ -164,13 +158,10 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/aboutIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:layout_marginRight="@dimen/icons_margin"
-                    android:layout_marginTop="@dimen/icons_margin_top"
                     android:src="@drawable/ic_about"/>
 
                 <TextView
@@ -178,8 +169,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_toRightOf="@id/aboutIcon"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="@dimen/about_items_text_padding_right"
+                    android:textAppearance="?android:attr/textAppearanceListItem"
                     android:text="@string/about_title"/>
 
                 <TextView
