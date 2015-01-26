@@ -6,7 +6,14 @@
     android:gravity="center"
     android:background="?android:attr/colorBackground">
 
+    <WebView
+        android:id="@+id/web"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"/>
+
     <LinearLayout
+        android:id="@+id/about_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
