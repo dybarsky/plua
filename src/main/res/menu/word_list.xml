@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/reload"
-        android:icon="@drawable/ic_refresh"
-        android:title="@string/reload"
-        android:showAsAction="ifRoom"/>
-
     <item android:id="@+id/edit"
         android:icon="@drawable/ic_edit"
         android:title="@string/edit"
-        android:showAsAction="ifRoom"/>
+        android:showAsAction="ifRoom"
+        android:orderInCategory="1"/>
 
     <item android:id="@+id/delete"
         android:icon="@drawable/ic_delete"
         android:title="@string/delete"
-        android:showAsAction="ifRoom"/>
+        android:showAsAction="ifRoom"
+        android:orderInCategory="2"/>
+
+    <item android:id="@+id/reload"
+        android:icon="@drawable/ic_refresh"
+        android:title="@string/reload"
+        android:showAsAction="ifRoom"
+        android:orderInCategory="3"/>
+
+    <item android:id="@+id/about"
+        android:title="@string/help"
+        android:showAsAction="never"
+        android:orderInCategory="4"/>
 
 </menu>

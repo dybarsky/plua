@@ -24,4 +24,10 @@
     <dimen name="progress_width">250dp</dimen>
     <dimen name="detail_layout_padding">40dp</dimen>
     <dimen name="card_actions_panel_padding">3dp</dimen>
+    <dimen name="about_layout_padding">40dp</dimen>
+    <dimen name="about_items_padding">15dp</dimen>
+    <dimen name="about_items_padding_left">50dp</dimen>
+    <dimen name="about_items_padding_right">30dp</dimen>
+    <dimen name="icons_margin_top">2dp</dimen>
+    <dimen name="icons_margin">10dp</dimen>
 </resources>

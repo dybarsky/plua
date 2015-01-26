@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dmax.words.ui.AnimationLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="?android:attr/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/about_layout_padding">
+
+        <dmax.words.ui.AnimationLayout
+            android:id="@+id/help"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/about_items_padding"
+            android:paddingBottom="@dimen/about_items_padding"
+            android:paddingLeft="@dimen/about_items_padding_left"
+            android:paddingRight="@dimen/about_items_padding_right"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/helpIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/icons_margin"
+                    android:layout_marginTop="@dimen/icons_margin_top"
+                    android:src="@drawable/ic_help"/>
+
+                <TextView
+                    android:id="@+id/helpTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/helpIcon"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/help_title"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/helpTitle"
+                    android:layout_alignLeft="@id/helpTitle"
+                    android:text="@string/help_description"/>
+
+            </RelativeLayout>
+
+        </dmax.words.ui.AnimationLayout>
+
+        <dmax.words.ui.AnimationLayout
+            android:id="@+id/rate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/about_items_padding"
+            android:paddingBottom="@dimen/about_items_padding"
+            android:paddingLeft="@dimen/about_items_padding_left"
+            android:paddingRight="@dimen/about_items_padding_right"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/rateIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/icons_margin"
+                    android:layout_marginTop="@dimen/icons_margin_top"
+                    android:src="@drawable/ic_rate"/>
+
+                <TextView
+                    android:id="@+id/rateTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/rateIcon"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/rate_title"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rateTitle"
+                    android:layout_alignLeft="@id/rateTitle"
+                    android:text="@string/rate_description"/>
+
+            </RelativeLayout>
+
+        </dmax.words.ui.AnimationLayout>
+
+        <dmax.words.ui.AnimationLayout
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/about_items_padding"
+            android:paddingBottom="@dimen/about_items_padding"
+            android:paddingLeft="@dimen/about_items_padding_left"
+            android:paddingRight="@dimen/about_items_padding_right"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/feedbackIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/icons_margin"
+                    android:layout_marginTop="@dimen/icons_margin_top"
+                    android:src="@drawable/ic_feedback"/>
+
+                <TextView
+                    android:id="@+id/feedbackTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/feedbackIcon"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/feedback_title"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/feedbackTitle"
+                    android:layout_alignLeft="@id/feedbackTitle"
+                    android:text="@string/feedback_description"/>
+
+            </RelativeLayout>
+
+        </dmax.words.ui.AnimationLayout>
+
+        <dmax.words.ui.AnimationLayout
+            android:id="@+id/about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/about_items_padding"
+            android:paddingBottom="@dimen/about_items_padding"
+            android:paddingLeft="@dimen/about_items_padding_left"
+            android:paddingRight="@dimen/about_items_padding_right"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/aboutIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/icons_margin"
+                    android:layout_marginTop="@dimen/icons_margin_top"
+                    android:src="@drawable/ic_about"/>
+
+                <TextView
+                    android:id="@+id/aboutTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/aboutIcon"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/about_title"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/aboutTitle"
+                    android:layout_alignLeft="@id/aboutTitle"
+                    android:text="@string/about_description"/>
+
+            </RelativeLayout>
+
+        </dmax.words.ui.AnimationLayout>
+
+    </LinearLayout>
+
+</dmax.words.ui.AnimationLayout>

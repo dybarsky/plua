@@ -13,4 +13,13 @@
     <string name="forgot">Forgot</string>
     <string name="reload">Reload</string>
     <string name="remember">Remember</string>
+    <string name="help"><![CDATA[Help & feedback]]></string>
+    <string name="help_title">Help</string>
+    <string name="help_description">Read how to use application</string>
+    <string name="rate_title">Rate</string>
+    <string name="rate_description">Rate application and leave comment on Play store.</string>
+    <string name="feedback_title">Send feedback</string>
+    <string name="feedback_description">Found problem or have a suggestion? Send email.</string>
+    <string name="about_title">About</string>
+    <string name="about_description">Read more information about application.</string>
 </resources>

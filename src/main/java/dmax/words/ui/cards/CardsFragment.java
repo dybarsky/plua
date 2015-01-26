@@ -20,6 +20,7 @@ import dmax.words.DataSource;
 import dmax.words.R;
 import dmax.words.domain.Language;
 import dmax.words.ui.Util;
+import dmax.words.ui.about.AboutFragment;
 import dmax.words.ui.detail.LinkDetailFragment;
 import dmax.words.ui.MainActivity;
 import dmax.words.ui.cards.CardsPagerAdapter.CardViewHolder;
@@ -99,6 +100,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
             case R.id.reload:
                 showCards();
                 return true;
+            case R.id.about:
+                showAboutFragment();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -159,6 +163,15 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     private void openDetailedFragment(Bundle params) {
         LinkDetailFragment fragment = new LinkDetailFragment();
         fragment.setArguments(params);
+        getFragmentManager().beginTransaction()
+                .setCustomAnimations(R.animator.slide_up, 0, 0, R.animator.slide_down)
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    private void showAboutFragment() {
+        AboutFragment fragment = new AboutFragment();
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.animator.slide_up, 0, 0, R.animator.slide_down)
                 .replace(R.id.container, fragment)
