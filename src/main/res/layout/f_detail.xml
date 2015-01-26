@@ -26,6 +26,7 @@
             android:layout_below="@id/origin_lang"
             android:layout_margin="10dp"
             android:src="@drawable/ic_switch"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
             />
 
         <ImageView
