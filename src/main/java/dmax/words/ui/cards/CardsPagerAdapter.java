@@ -44,7 +44,7 @@ public class CardsPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         this.container = container;
 
-        View root = View.inflate(context, R.layout.v_wordslist_item, null);
+        View root = View.inflate(context, R.layout.v_word_card, null);
         root.setId(position);
 
         View forgotButton = root.findViewById(R.id.forgot);

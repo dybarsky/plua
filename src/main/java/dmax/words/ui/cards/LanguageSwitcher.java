@@ -46,7 +46,7 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
     }
 
     public View createActionBar() {
-        View root = Util.createDarkThemedView(cardsFragment.getActivity(), R.layout.v_action_language);
+        View root = Util.createDarkThemedView(cardsFragment.getActivity(), R.layout.v_actionbar_item_language);
 
         actionBarIcon = (ImageView) root.findViewById(R.id.ab_icon);
         actionBarText = (TextView) root.findViewById(R.id.ab_lang);

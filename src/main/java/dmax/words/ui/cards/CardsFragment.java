@@ -43,7 +43,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.f_wordslist, container, false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.f_cards, container, false);
 
         emptyView = root.findViewById(R.id.empty_view);
         pager = (ViewPager) root.findViewById(R.id.pager);

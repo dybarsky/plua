@@ -46,7 +46,7 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.f_addword, container, false);
+        View root = inflater.inflate(R.layout.f_detail, container, false);
 
         this.switchFlag = (ImageView) root.findViewById(R.id.switch_lang);
         this.originalFlag = (ImageView) root.findViewById(R.id.origin_lang);
