@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <dmax.words.ui.AnimationLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -10,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="40dp">
+        android:padding="@dimen/detail_layout_padding">
 
         <ImageView
             android:id="@+id/origin_lang"
