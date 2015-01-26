@@ -11,6 +11,10 @@ import dmax.words.importer.Importer;
 import dmax.words.persist.DataBaseManager;
 import dmax.words.ui.cards.CardsFragment;
 
+/**
+ * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
+ * on 12.12.14 at 14:20
+ */
 public class MainActivity extends FragmentActivity implements Importer.Callback {
 
     private static String TAG = "list";

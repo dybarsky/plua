@@ -1,7 +1,6 @@
 package dmax.words.ui.cards;
 
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import dmax.words.DataSource;
 import dmax.words.domain.Link;
