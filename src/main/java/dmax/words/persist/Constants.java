@@ -41,7 +41,7 @@ interface Constants {
             + COLUMN_LINK_ORIGINAL + " INTEGER, "
             + COLUMN_LINK_TRANSLATION + " INTEGER, "
             + COLUMN_LINK_PRIORITY + " INTEGER, "
-            + COLUMN_LINK_UPDATED + " INTEGER "
+            + COLUMN_LINK_UPDATED + " INTEGER, "
             + "FOREIGN KEY(original) REFERENCES pl(id), "
             + "FOREIGN KEY(translation) REFERENCES ua(id)"
             + ")";
