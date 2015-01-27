@@ -29,4 +29,6 @@
     <dimen name="about_items_padding_left">16dp</dimen>
     <dimen name="about_items_padding_right">24dp</dimen>
     <dimen name="about_items_text_padding_right">56dp</dimen>
+    <dimen name="undo_margin">24dp</dimen>
+    <dimen name="undo_padding">36dp</dimen>
 </resources>

@@ -25,4 +25,5 @@
     <string name="send_feedback">mailto:maxim.dybarskyy@gmail.com?subject=Words : Feedback</string>
     <string name="rate">market://details?id=</string>
     <string name="rate_web">http://play.google.com/store/apps/details?id=</string>
+    <string name="deleted">Deleted</string>
 </resources>

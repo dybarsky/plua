@@ -5,6 +5,8 @@ import android.animation.AnimatorListenerAdapter;
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -15,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+
+import com.cocosw.undobar.UndoBarController;
 
 import dmax.words.DataSource;
 import dmax.words.R;
@@ -181,7 +185,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
     //~
 
-    private class PageRemover extends AnimatorListenerAdapter implements ViewPager.OnPageChangeListener {
+    private class PageRemover extends AnimatorListenerAdapter implements ViewPager.OnPageChangeListener, UndoBarController.UndoListener {
 
         private int pageToRemove;
         private int pageToShowBeforeRemoving;
@@ -233,7 +237,18 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                 removeItem();
                 pager.setCurrentItem(pageToShowAfterRemoving, false);
                 removing = false;
+
+                new UndoBarController.UndoBar(getActivity())
+                        .message(R.string.deleted)
+                        .listener(this)
+                        .show();
             }
+        }
+
+        @Override
+        public void onUndo(Parcelable parcelable) {
+            getDataSource().addWords(holder.originalWord, holder.translationWord);
+            adapter.notifyDataSetChanged();
         }
 
         @Override
