@@ -88,4 +88,43 @@ public class LinkEqualsTest extends AndroidTestCase {
 
         assertTrue(l1.equals(l2));
     }
+
+    public void test_shouldBeEqual_IfNoWordsAndPriorityUpdateSame() {
+        Link l1 = new Link();
+        l1.setId(1);
+        l1.setPriority(1);
+        l1.setUpdated(2);
+        Link l2 = new Link();
+        l2.setId(1);
+        l2.setPriority(1);
+        l2.setUpdated(2);
+
+        assertTrue(l1.equals(l2));
+    }
+
+    public void test_shouldBeNotEqual_IfNoWordsAndPriorityDifferent() {
+        Link l1 = new Link();
+        l1.setId(1);
+        l1.setPriority(1);
+        l1.setUpdated(2);
+        Link l2 = new Link();
+        l2.setId(1);
+        l2.setPriority(3);
+        l2.setUpdated(2);
+
+        assertFalse(l1.equals(l2));
+    }
+
+    public void test_shouldBeNotEqual_IfNoWordsAndUpdatedDifferent() {
+        Link l1 = new Link();
+        l1.setId(1);
+        l1.setPriority(1);
+        l1.setUpdated(2);
+        Link l2 = new Link();
+        l2.setId(1);
+        l2.setPriority(1);
+        l2.setUpdated(4);
+
+        assertFalse(l1.equals(l2));
+    }
 }

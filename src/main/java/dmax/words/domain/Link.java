@@ -61,12 +61,18 @@ public class Link implements Persistable, Serializable {
 
         if (this.id != -1 && that.id != -1 && this.id != that.id) return false;
 
-        return map.equals(that.map);
+        if (priority != that.priority) return false;
+        if (updated != that.updated) return false;
+        if (!map.equals(that.map)) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + priority;
+        result = 31 * result + (int) (updated ^ (updated >>> 32));
         result = 31 * result + map.hashCode();
         return result;
     }
