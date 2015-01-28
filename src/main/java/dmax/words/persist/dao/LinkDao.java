@@ -22,10 +22,7 @@ class LinkDao extends Dao<Link> {
 
     @Override
     public Link insert(SQLiteDatabase db) {
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_LINK_ORIGINAL, persistable.getWordId(Language.UKRAINIAN));
-        values.put(COLUMN_LINK_TRANSLATION, persistable.getWordId(Language.POLISH));
-
+        ContentValues values = prepareContentValues();
         long id = db.insert(TABlE_LINK, null, values);
         persistable.setId(id);
         return persistable;
@@ -33,10 +30,7 @@ class LinkDao extends Dao<Link> {
 
     @Override
     public Link update(SQLiteDatabase db) {
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_LINK_ORIGINAL, persistable.getWordId(Language.UKRAINIAN));
-        values.put(COLUMN_LINK_TRANSLATION, persistable.getWordId(Language.POLISH));
-
+        ContentValues values = prepareContentValues();
         int count = db.update(TABlE_LINK, values, COLUMN_ID + "=?", new String[]{ String.valueOf(getId()) });
         return count > 0 ? persistable : null;
     }
@@ -64,11 +58,22 @@ class LinkDao extends Dao<Link> {
 
     //~
 
+    private ContentValues prepareContentValues() {
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_LINK_ORIGINAL, persistable.getWordId(Language.UKRAINIAN));
+        values.put(COLUMN_LINK_TRANSLATION, persistable.getWordId(Language.POLISH));
+        values.put(COLUMN_LINK_PRIORITY, persistable.getPriority());
+        values.put(COLUMN_LINK_UPDATED, persistable.getUpdated());
+        return values;
+    }
+
     private static Link createLink(Cursor cursor) {
         Link link = new Link();
         link.setId(cursor.getLong(COLUMN_ID_INDEX));
         link.setWordId(Language.UKRAINIAN, cursor.getLong(COLUMN_LINK_ORIGINAL_INDEX));
         link.setWordId(Language.POLISH, cursor.getLong(COLUMN_LINK_TRANSLATION_INDEX));
+        link.setPriority(cursor.getInt(COLUMN_LINK_PRIORITY_INDEX));
+        link.setUpdated(cursor.getLong(COLUMN_LINK_UPDATED_INDEX));
         return link;
     }
 
