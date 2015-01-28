@@ -41,9 +41,11 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
 
         setContentView(R.layout.a_main);
 
-        getFragmentManager().beginTransaction()
-                .add(R.id.container, new CardsFragment(), TAG)
-                .commit();
+        if (savedInstanceState == null) {
+            getFragmentManager().beginTransaction()
+                    .add(R.id.container, new CardsFragment(), TAG)
+                    .commit();
+        }
 
         database = new DataBaseManager(this);
         database.open();
