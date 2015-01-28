@@ -50,6 +50,8 @@ public class LinkDaoTest extends AndroidTestCase {
         Link link = new Link();
         link.setWordId(Language.UKRAINIAN, saved.getId());
         link.setWordId(Language.POLISH, saved2.getId());
+        link.setPriority(1);
+        link.setUpdated(24);
 
         Dao<Link> dao1 = DaoFactory.createDao(Link.class);
         Link saved3 = db.insert(dao1.setPersistable(link));
@@ -82,6 +84,8 @@ public class LinkDaoTest extends AndroidTestCase {
         Link link = new Link();
         link.setWordId(Language.UKRAINIAN, saved.getId());
         link.setWordId(Language.POLISH, saved2.getId());
+        link.setPriority(2);
+        link.setUpdated(12);
 
         Dao<Link> dao1 = DaoFactory.createDao(Link.class);
         Link saved3 = db.insert(dao1.setPersistable(link));
@@ -89,6 +93,7 @@ public class LinkDaoTest extends AndroidTestCase {
 
         saved3.setWord(w1);
         saved3.setWord(w3);
+        saved3.setPriority(4);
 
         Link updated = db.update(dao1.setPersistable(saved3));
 
@@ -115,6 +120,8 @@ public class LinkDaoTest extends AndroidTestCase {
         Link link = new Link();
         link.setWordId(Language.UKRAINIAN, saved.getId());
         link.setWordId(Language.POLISH, saved2.getId());
+        link.setPriority(2);
+        link.setUpdated(45);
 
         Dao<Link> dao1 = DaoFactory.createDao(Link.class);
         Link saved3 = db.insert(dao1.setPersistable(link));
@@ -122,8 +129,10 @@ public class LinkDaoTest extends AndroidTestCase {
 
         Link retrieved = db.retrieve(dao1.setRetrieveId(id));
 
+        saved3.setId(-1);
+
         assertNotNull(retrieved);
-        assertTrue(retrieved.getId() == saved.getId());
+        assertTrue(retrieved.getId() == id);
         assertTrue(retrieved.equals(saved3));
     }
 
