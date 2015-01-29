@@ -39,9 +39,19 @@ android {
             keyPassword keystorePassword
         }
     }
+
     buildTypes {
         release {
             signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFile getDefaultProguardFile('proguard-android.txt')
         }
+    }
+
+    lintOptions {
+        abortOnError false
+        xmlReport false
+        htmlReport true
+        checkReleaseBuilds true
     }
 }
