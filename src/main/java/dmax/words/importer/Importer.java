@@ -142,6 +142,7 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
 
     private void showDialog() {
         dialog = new SpotsDialog(context, R.style.Dialog);
+        dialog.setCancelable(false);
         dialog.show();
     }
 }
