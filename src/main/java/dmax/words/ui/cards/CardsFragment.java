@@ -260,6 +260,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onUndo(Parcelable parcelable) {
             getDataSource().addWords(holder.originalWord, holder.translationWord);
+            getActivity().invalidateOptionsMenu();
             if (adapter.getCount() > 1) {
                 adapter.notifyDataSetChanged();
             } else {
