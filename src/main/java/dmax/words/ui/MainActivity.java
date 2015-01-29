@@ -29,6 +29,7 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
             CardsFragment fragment = (CardsFragment) getFragmentManager().findFragmentByTag(TAG);
             if (fragment != null) {
                 fragment.showCards();
+                invalidateOptionsMenu();
             }
         }
     };

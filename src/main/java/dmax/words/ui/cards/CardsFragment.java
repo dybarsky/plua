@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -89,7 +90,10 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.word_list, menu);
+        inflater.inflate(adapter.getCount() > 0
+                ? R.menu.word_list
+                : R.menu.word_list_empty
+                , menu);
     }
 
     @Override
@@ -154,6 +158,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     private void removeCurrentCard() {
         if (removing) return;
 
+        UndoBarController.clear(getActivity());
+
         int id = pager.getCurrentItem();
         CardView cardView = (CardView) pager.findViewById(id).findViewById(R.id.card);
         CardViewHolder holder = (CardViewHolder) cardView.getTag();
@@ -197,16 +203,6 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
             this.holder = holder;
         }
 
-        @Override
-        public void onAnimationEnd(Animator animation) {
-            if (adapter.getCount() > 1) {
-                showNextPage();
-            } else {
-                hidePager();
-                removeItem();
-            }
-        }
-
         private void showNextPage() {
             boolean pageOnRightExist = pageToRemove != adapter.getCount() - 1;
             pageToShowBeforeRemoving = pageOnRightExist
@@ -230,25 +226,45 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
             adapter.notifyDataSetChanged();
         }
 
+        private void showUndo() {
+            new UndoBarController.UndoBar(getActivity())
+                    .message(R.string.deleted)
+                    .listener(this)
+                    .show();
+        }
+
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            if (adapter.getCount() > 1) {
+                showNextPage();
+            } else {
+                hidePager();
+                removeItem();
+                showUndo();
+                getActivity().invalidateOptionsMenu();
+                removing = false;
+            }
+        }
+
         @Override
         public void onPageScrollStateChanged(int state) {
             if (state == ViewPager.SCROLL_STATE_IDLE && pager.getCurrentItem() == pageToShowBeforeRemoving) {
                 pager.setOnPageChangeListener(null);
                 removeItem();
+                showUndo();
                 pager.setCurrentItem(pageToShowAfterRemoving, false);
                 removing = false;
-
-                new UndoBarController.UndoBar(getActivity())
-                        .message(R.string.deleted)
-                        .listener(this)
-                        .show();
             }
         }
 
         @Override
         public void onUndo(Parcelable parcelable) {
             getDataSource().addWords(holder.originalWord, holder.translationWord);
-            adapter.notifyDataSetChanged();
+            if (adapter.getCount() > 1) {
+                adapter.notifyDataSetChanged();
+            } else {
+                showCards();
+            }
         }
 
         @Override
