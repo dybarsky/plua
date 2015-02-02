@@ -31,4 +31,5 @@
     <dimen name="about_items_text_padding_right">56dp</dimen>
     <dimen name="undo_margin">24dp</dimen>
     <dimen name="undo_padding">36dp</dimen>
+    <dimen name="undo_button_padding">8dp</dimen>
 </resources>
