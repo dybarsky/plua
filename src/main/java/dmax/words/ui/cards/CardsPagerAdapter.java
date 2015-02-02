@@ -1,5 +1,6 @@
 package dmax.words.ui.cards;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
@@ -12,6 +13,7 @@ import dmax.words.R;
 import dmax.words.domain.Language;
 import dmax.words.domain.Link;
 import dmax.words.domain.Word;
+import dmax.words.ui.Util;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
@@ -94,17 +96,20 @@ public class CardsPagerAdapter extends PagerAdapter {
             if (cardView != null) {
                 CardViewHolder holder = (CardViewHolder) cardView.getTag();
 
+                if (holder.originalWord.getLanguage().equals(currentLanguage)) {
+                    return;
+                }
+
                 if (holder.isTranslationState) {
                     holder.isTranslationState = false;
+                    holder.originalViewGroup.setVisibility(View.VISIBLE);
+                    holder.translationViewGroup.setVisibility(View.INVISIBLE);
                     holder.originalViewGroup.bringToFront();
                 }
 
-                Word original = holder.originalWord;
-                Word translation = holder.translationWord;
-
-                boolean needToSwitch = translation.getLanguage().equals(currentLanguage);
-                holder.originalWord = needToSwitch ? translation : original;
-                holder.translationWord = needToSwitch ? original : translation;
+                Word tmp = holder.originalWord;
+                holder.originalWord = holder.translationWord;
+                holder.translationWord = tmp;
 
                 holder.originalTextView.setText(holder.originalWord.getData());
             }
