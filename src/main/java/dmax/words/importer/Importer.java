@@ -77,7 +77,7 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
             if (languages == null) return false;
 
             String line;
-            while((line = reader.readLine()) != null) {
+            while(!isCancelled() && (line = reader.readLine()) != null) {
                 String[] data = line.split(SEPARATOR);
                 if (data.length == 2) {
                     Word w1 = new Word();

@@ -24,12 +24,14 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
     private DataBaseManager database;
     private DataSource dataSource;
     private Handler uiHandler;
+    private Importer importer;
     private Runnable updater = new Runnable() {
         public void run() {
             CardsFragment fragment = (CardsFragment) getFragmentManager().findFragmentByTag(TAG);
             if (fragment != null) {
                 fragment.showCards();
                 invalidateOptionsMenu();
+                importer = null;
             }
         }
     };
@@ -52,13 +54,9 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
         database.open();
 
         dataSource = new DataSource(database, DEFAULT);
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        new Importer(this, database).execute(this);
+        importer = new Importer(this, database);
+        importer.execute(this);
     }
 
     @Override
@@ -70,6 +68,9 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
     @Override
     protected void onPause() {
         super.onPause();
+        if (importer != null) {
+            importer.cancel(true);
+        }
         database.close();
     }
 
