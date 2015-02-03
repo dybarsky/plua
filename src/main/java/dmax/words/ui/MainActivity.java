@@ -34,7 +34,7 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
         public void run() {
             CardsFragment fragment = (CardsFragment) getFragmentManager().findFragmentByTag(TAG);
             if (fragment != null) {
-                fragment.showCards();
+                fragment.reload();
                 invalidateOptionsMenu();
                 importer = null;
             }

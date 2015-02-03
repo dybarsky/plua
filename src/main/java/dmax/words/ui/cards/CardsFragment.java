@@ -29,6 +29,9 @@ import dmax.words.ui.MainActivity;
 import dmax.words.ui.cards.CardsPagerAdapter.CardViewHolder;
 
 /**
+ * Fragment with cards. Main user UI component.
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 18.12.14 at 12:25
  */
@@ -51,6 +54,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         ImageButton add = (ImageButton) root.findViewById(R.id.add);
         add.setOnClickListener(this);
 
+        // add languages panel
         View panel = Util.createDarkThemedView(getActivity(), R.layout.v_languages_panel);
         root.addView(panel, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
@@ -69,6 +73,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         switcher.init(getView());
 
+        // if datasource is not empty - show pager with cards
         if (adapter.getCount() > 0) {
             showCards();
         }
@@ -104,7 +109,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                 editCurrentCard();
                 return true;
             case R.id.reload:
-                showCards();
+                reload();
                 return true;
             case R.id.about:
                 showAboutFragment();
@@ -113,6 +118,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Add word button clicked
+     */
     @Override
     public void onClick(View v) {
         openDetailedFragment(null);
@@ -120,18 +128,33 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
     //~
 
+    /**
+     * Reacts on language switching
+     * @param language selected language
+     */
     public void updateLanguage(Language language) {
         getDataSource().setSelectedLanguage(language);
         adapter.onLanguageChanged();
     }
 
-    public void showCards() {
+    /**
+     * Clear datasource cache, load links and show cards pager
+     */
+    public void reload() {
         getDataSource().reset();
+        showCards();
+    }
+
+    //~
+
+    /**
+     * Hide empty view and show cards pager
+     */
+    private void showCards() {
         emptyView.setVisibility(View.GONE);
         pager.setVisibility(View.VISIBLE);
         pager.setAdapter(adapter);
     }
-
 
     private MainActivity getCastedActivity() {
         return (MainActivity) getActivity();
@@ -141,6 +164,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         return getCastedActivity().getDataSource();
     }
 
+    /**
+     * Open details fragment for current pager item editing
+     */
     private void editCurrentCard() {
         int id = pager.getCurrentItem();
         CardView cardView = (CardView) pager.findViewById(id).findViewById(R.id.card);
@@ -153,15 +179,21 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         openDetailedFragment(params);
     }
 
+    /**
+     * Remove current pager item
+     */
     private void removeCurrentCard() {
+        // avoid removing while previous is still working (animation)
         if (removing) return;
 
+        // hide undo bar for previous deletion operation (if exists)
         UndoBarController.clear(getActivity());
 
         int id = pager.getCurrentItem();
         CardView cardView = (CardView) pager.findViewById(id).findViewById(R.id.card);
         CardViewHolder holder = (CardViewHolder) cardView.getTag();
 
+        // play collapsing animation and do actual removing in PageRemover instance
         Animator transition = Util.prepareCardCollapseTransition(cardView);
         transition.addListener(new PageRemover(id, holder));
         transition.start();
@@ -189,11 +221,21 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
     //~
 
+    /**
+     * Class for encapsulation removing words pair logic
+     */
     private class PageRemover extends AnimatorListenerAdapter implements ViewPager.OnPageChangeListener, UndoBarController.UndoListener {
 
+        // pager item number to be removed
         private int pageToRemove;
+
+        // pager item number to be showed when collapsing animation finished
         private int pageToShowBeforeRemoving;
+
+        // pager item number to be showed when removing finished and adapter updated
         private int pageToShowAfterRemoving;
+
+        // removing item data holder
         private CardViewHolder holder;
 
         private PageRemover(int pageToRemove, CardViewHolder holder) {
@@ -202,10 +244,16 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         }
 
         private void showNextPage() {
+            // is there any items on the right in pager?
             boolean pageOnRightExist = pageToRemove != adapter.getCount() - 1;
+            // calculate pager item to be shown before actual removing
             pageToShowBeforeRemoving = pageOnRightExist
                     ? pageToRemove + 1
                     : pageToRemove - 1;
+            // calculate pager item to be shown after actual removing.
+            // should be the same page, but different index cause after removing adapter will be updated
+            // if there is some item at the right - item at the left from shown will be removed, index decrease to 1
+            // if there is no items at the right - item at the right from shown will be removed, index the same
             pageToShowAfterRemoving = pageOnRightExist
                     ? pageToShowBeforeRemoving - 1
                     : pageToShowBeforeRemoving;
@@ -219,6 +267,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
             emptyView.setVisibility(View.VISIBLE);
         }
 
+        /**
+         * Remove current item data from datasource AND update adapter
+         */
         private void removeItem() {
             getDataSource().removeWords(holder.link, holder.originalWord, holder.translationWord);
             adapter.notifyDataSetChanged();
@@ -231,21 +282,31 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                     .show();
         }
 
+        /**
+         * Collapsing animation finish callback -  entry point of actual removing procedure
+         */
         @Override
         public void onAnimationEnd(Animator animation) {
             if (adapter.getCount() > 1) {
+                // if not last item will be removed - show next page and remove item after next page appears
                 showNextPage();
             } else {
+                // if last item will be removed - hide pager, remove item, etc.
                 hidePager();
                 removeItem();
                 showUndo();
                 getActivity().invalidateOptionsMenu();
+                // removing procedure finished
                 removing = false;
             }
         }
 
+        /**
+         * Next page appears callback. See {@link #showNextPage()}
+         */
         @Override
         public void onPageScrollStateChanged(int state) {
+            // if next page appears - do actual removing and update pager with new adapter
             if (state == ViewPager.SCROLL_STATE_IDLE && pager.getCurrentItem() == pageToShowBeforeRemoving) {
                 pager.setOnPageChangeListener(null);
                 removeItem();
@@ -255,10 +316,15 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
             }
         }
 
+        /**
+         * Reacts on undo bar button click
+         */
         @Override
         public void onUndo(Parcelable parcelable) {
+            // restore item data into datasource
             getDataSource().addWords(holder.originalWord, holder.translationWord);
             getActivity().invalidateOptionsMenu();
+            // in last item restored - show pager, if not last - just update adapter
             if (adapter.getCount() > 1) {
                 adapter.notifyDataSetChanged();
             } else {
@@ -267,8 +333,12 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         }
 
         @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {/* */}
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            /* nothing to do */
+        }
         @Override
-        public void onPageSelected(int position) {/* */}
+        public void onPageSelected(int position) {
+            /* nothing to do */
+        }
     }
 }

@@ -1,6 +1,5 @@
 package dmax.words.ui.cards;
 
-import android.animation.Animator;
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.CardView;
@@ -13,9 +12,11 @@ import dmax.words.R;
 import dmax.words.domain.Language;
 import dmax.words.domain.Link;
 import dmax.words.domain.Word;
-import dmax.words.ui.Util;
 
 /**
+ * Cards view pager adapter.
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 18.12.14 at 12:38
  */
@@ -53,6 +54,8 @@ public class CardsPagerAdapter extends PagerAdapter {
         View rememberButton = root.findViewById(R.id.remember);
 
         CardView card = (CardView) root.findViewById(R.id.card);
+
+        // init card data holder
         CardViewHolder holder = new CardViewHolder();
         holder.originalViewGroup = card.findViewById(R.id.original);
         holder.translationViewGroup = card.findViewById(R.id.translation);
@@ -61,6 +64,7 @@ public class CardsPagerAdapter extends PagerAdapter {
 
         holder.originalViewGroup.bringToFront();
 
+        // fill out data holder with actual data from datasource
         holder.link = dataSource.getLinks().get(position);
         holder.originalWord = dataSource.loadOriginalWord(holder.link);
         holder.translationWord = dataSource.loadTranslationWord(holder.link);
@@ -88,6 +92,9 @@ public class CardsPagerAdapter extends PagerAdapter {
         return POSITION_NONE;
     }
 
+    /**
+     * Update all cards using new language
+     */
     public void onLanguageChanged() {
         Language currentLanguage = dataSource.getSelectedLanguage();
 
@@ -96,10 +103,12 @@ public class CardsPagerAdapter extends PagerAdapter {
             if (cardView != null) {
                 CardViewHolder holder = (CardViewHolder) cardView.getTag();
 
+                // if language not changed - stop
                 if (holder.originalWord.getLanguage().equals(currentLanguage)) {
                     return;
                 }
 
+                // switch from translation to original mode
                 if (holder.isTranslationState) {
                     holder.isTranslationState = false;
                     holder.originalViewGroup.setVisibility(View.VISIBLE);
@@ -107,6 +116,7 @@ public class CardsPagerAdapter extends PagerAdapter {
                     holder.originalViewGroup.bringToFront();
                 }
 
+                // update data of card
                 Word tmp = holder.originalWord;
                 holder.originalWord = holder.translationWord;
                 holder.translationWord = tmp;
@@ -118,6 +128,9 @@ public class CardsPagerAdapter extends PagerAdapter {
 
     //~
 
+    /**
+     * Class for hold card data
+     */
     static class CardViewHolder {
 
         boolean isTranslationState;
