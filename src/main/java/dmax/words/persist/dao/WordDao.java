@@ -11,6 +11,9 @@ import dmax.words.domain.Word;
 import dmax.words.persist.Dao;
 
 /**
+ * Dao class for encapsulate database operations with {@link dmax.words.domain.Word} instances.
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 15.12.14 at 11:14
  */

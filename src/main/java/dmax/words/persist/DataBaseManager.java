@@ -8,6 +8,9 @@ import java.util.Iterator;
 import dmax.words.domain.Persistable;
 
 /**
+ * Database operations entry point. Manages database lifecycle. Uses dao classes to do database job.
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 12.12.14 at 17:46
  */
@@ -20,15 +23,24 @@ public class DataBaseManager {
         helper = new DataBaseHelper(context);
     }
 
+    /**
+     * Obtain database access
+     */
     public void open() {
         database = helper.getWritableDatabase();
     }
 
+    /**
+     * Close database access
+     */
     public void close() {
         helper.close();
     }
 
-
+    /**
+     * Inserts into database new record with operation based on dao instance.
+     * @return inserted entity with correct id.
+     */
     public <T extends Persistable> T insert(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
         T t = dao.insert(database);
@@ -36,6 +48,10 @@ public class DataBaseManager {
         return t;
     }
 
+    /**
+     * Removes from database record with operation based on dao instance.
+     * @return true if removed, false otherwise
+     */
     public <T extends Persistable> boolean delete(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
         boolean res = dao.delete(database);
@@ -43,6 +59,10 @@ public class DataBaseManager {
         return res;
     }
 
+    /**
+     * Loads from database entity with operation based on dao instance.
+     * @return loaded entity with correct id.
+     */
     public <T extends Persistable> T retrieve(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
         T t = dao.retrieve(database);
@@ -50,6 +70,10 @@ public class DataBaseManager {
         return t;
     }
 
+    /**
+     * Load all data from database table with operation based on dao instance.
+     * @return iterator based on {@link android.database.Cursor}.
+     */
     public <T extends Persistable> Iterator<T> retrieveIterator(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
         Iterator<T> it = dao.retrieveIterator(database);
@@ -57,6 +81,10 @@ public class DataBaseManager {
         return it;
     }
 
+    /**
+     * Updates in database record with operation based on dao instance.
+     * @return updated entity with correct id if updated or null if nothing updated.
+     */
     public <T extends Persistable> T update(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
         T t = dao.update(database);
