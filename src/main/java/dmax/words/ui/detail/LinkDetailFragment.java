@@ -21,6 +21,9 @@ import dmax.words.ui.MainActivity;
 import dmax.words.ui.Util;
 
 /**
+ * Fragment for show words pair for add/edit operation.
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 22.12.14 at 17:01
  */
@@ -78,6 +81,7 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
                 : R.drawable.ic_ukrainian);
 
         Bundle args = getArguments();
+        // if some args - use edit mode
         if (args != null && args.containsKey(KEY_ORIGINAL) && args.containsKey(KEY_TRANSLATION)) {
             originalWord = (Word) args.getSerializable(KEY_ORIGINAL);
             translationWord = (Word) args.getSerializable(KEY_TRANSLATION);
@@ -132,6 +136,7 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         word2.setData(translationText.getText().toString());
 
         if (edit) {
+            // in not changed, use -1 as id. in this case word won't be updated in database
             word1.setId(word1.getData().equals(originalWord.getData()) ? -1 : originalWord.getId());
             word2.setId(word2.getData().equals(translationWord.getData()) ? -1 : translationWord.getId());
 

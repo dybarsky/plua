@@ -15,6 +15,9 @@ import android.webkit.WebView;
 import dmax.words.R;
 
 /**
+ * Fragment for about page.
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 26.01.15 at 14:06
  */
@@ -83,12 +86,6 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void openAbout() {
-        webView.loadUrl(ABOUT_URL);
-        items.setVisibility(View.GONE);
-        webView.setVisibility(View.VISIBLE);
-    }
-
     private void sendFeedback() {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SENDTO);
@@ -108,8 +105,16 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void openAbout() {
+        openWebView(ABOUT_URL);
+    }
+
     private void showHelp() {
-        webView.loadUrl(HELP_URL);
+        openWebView(HELP_URL);
+    }
+
+    private void openWebView(String url) {
+        webView.loadUrl(url);
         items.setVisibility(View.GONE);
         webView.setVisibility(View.VISIBLE);
     }
