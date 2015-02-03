@@ -6,6 +6,9 @@ import dmax.words.DataSource;
 import dmax.words.domain.Link;
 
 /**
+ * Reacts on rise card priority button click action
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 21.01.15 at 13:19
  */
@@ -19,7 +22,11 @@ public class CardPriorityManager {
         this.dataSource = dataSource;
     }
 
+    /**
+     * Updates priority of link associated with card
+     */
     public void onChangePriority(CardsPagerAdapter.CardViewHolder holder, boolean increment) {
+        // update link priority values in database
         Link link = holder.link;
         link.setPriority(increment
                 ? link.getPriority() + 1
@@ -32,6 +39,7 @@ public class CardPriorityManager {
 
     private void showNextCard() {
         int currentPage = pager.getCurrentItem();
+        // flip pager to left if current card is last OR to right if there are some items
         int pageToShow = currentPage != pager.getAdapter().getCount() - 1
                 ? currentPage + 1
                 : currentPage - 1;

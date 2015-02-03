@@ -7,6 +7,9 @@ import dmax.words.R;
 import dmax.words.ui.cards.CardsPagerAdapter.CardViewHolder;
 
 /**
+ * Reacts on user interaction with card (click on card, click on buttons)
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 21.01.15 at 15:33
  */
@@ -23,9 +26,8 @@ public class CardInteractionListener implements View.OnTouchListener, View.OnCli
     @Override
     public void onClick(View v) {
         CardViewHolder holder = (CardViewHolder) v.getTag();
-        if (holder.isTranslationState) {
-            priorityManager.onChangePriority(holder, v.getId() == R.id.forgot);
-        }
+        // increase priority is 'forgot' button clicked OR decrease if 'recalled' button clicked
+        priorityManager.onChangePriority(holder, v.getId() == R.id.forgot);
     }
 
     @Override

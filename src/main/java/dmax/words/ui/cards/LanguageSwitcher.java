@@ -12,6 +12,7 @@ import dmax.words.ui.AnimationLayout;
 import dmax.words.ui.Util;
 
 /**
+ // switch elevation
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 05.01.15 at 12:30
  */
@@ -32,13 +33,21 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
         this.selectedLanguage = selectedLanguage;
     }
 
+    /**
+     * Initialize switcher internal state and set initial settings for languages panel
+     * @param rootView layout root view
+     */
     public void init(View rootView) {
         languagesList = (AnimationLayout) rootView.findViewById(R.id.languages);
+        // hide languages panel
         languagesList.setYRatio(-1);
         rootView.findViewById(R.id.ukrainian).setOnClickListener(this);
         rootView.findViewById(R.id.polish).setOnClickListener(this);
     }
 
+    /**
+     * Creates and inits custom actionbar item view for hide/show languages panel.
+     */
     public View createActionBar() {
         View root = Util.createDarkThemedView(cardsFragment.getActivity(), R.layout.v_actionbar_item_language);
 
@@ -67,18 +76,27 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
         }
     }
 
+    /**
+     * Reacts on languages selection
+     * @param language
+     */
     private void onLanguageItemClicked(Language language) {
         if (!selectedLanguage.equals(language)) {
             selectedLanguage = language;
             actionBarText.setText(selectedLanguage.getCodeName());
             cardsFragment.updateLanguage(selectedLanguage);
         }
+        // hide panel
         onActionBarClicked();
     }
 
-    public void onActionBarClicked() {
+    /**
+     * Reacts on actionbar item click
+     */
+    private void onActionBarClicked() {
+        // init default elevation
         if (elevation == -1) {
-            this.elevation = cardsFragment.getActivity().getActionBar().getElevation();
+            elevation = cardsFragment.getActivity().getActionBar().getElevation();
         }
 
         Animator transition;
@@ -86,6 +104,7 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
             transition = Util.prepareCollapseTransition(actionBarIcon, languagesList);
             transition.addListener(this);
         } else {
+            // switch elevation
             cardsFragment.getActivity().getActionBar().setElevation(0);
             languagesList.setElevation(elevation);
             transition = Util.prepareExpandTransition(actionBarIcon, languagesList);
@@ -97,6 +116,7 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
 
     @Override
     public void onAnimationEnd(Animator animation) {
+        // switch elevation
         languagesList.setElevation(0);
         cardsFragment.getActivity().getActionBar().setElevation(elevation);
     }

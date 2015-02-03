@@ -10,6 +10,9 @@ import dmax.words.ui.Util;
 import dmax.words.ui.cards.CardsPagerAdapter.CardViewHolder;
 
 /**
+ * Switches card to original/translation states.
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 05.01.15 at 11:44
  */
@@ -19,6 +22,7 @@ class CardStateSwitcher extends AnimatorListenerAdapter {
     private boolean animate;
 
     public void switchCardState(CardViewHolder holder, MotionEvent event) {
+        // avoid switching while previous is still playing (animation)
         if (animate) return;
 
         View groupToShow;
