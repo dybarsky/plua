@@ -18,6 +18,27 @@ import dmax.words.persist.Dao;
 import dmax.words.persist.DataBaseManager;
 import dmax.words.persist.dao.DaoFactory;
 
+/**
+ * Reads words data line by line from 'data' asset file and stores into database in the background thread.
+ * Stores data file version into shared preferences and checks is this file already imported.
+ * <br/>
+ * <b>Asset file format:</b><br/>
+ * <ul>
+ * <li>All data items are separated with '|' character.<br/>
+ * <li>First line must contain version description header in format 'version|int'<br/>
+ * <li>Second line must contain languages description header in format 'language1|language2'<br/>
+ * <li>Words data stored in same format as headers. Position of items corresponds to position of languages<br/>
+ * </ul>
+ * For example:<br/>
+ * version|1<br/>
+ * UKRAINIAN|POLISH<br/>
+ * Брехати|kłamać<br/>
+ * Брехун|kłamca<br/>
+ *
+ * <br/><br/>
+ * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
+ * on 22.12.14 at 12:57
+ */
 public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callback> {
 
     private static final String FILE_NAME = "data";
@@ -67,12 +88,15 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
     private boolean importData() {
         try {
             reader = new BufferedReader(new InputStreamReader(context.getAssets().open(FILE_NAME)));
+            // check if can read asset file version
             int assetVersion = getVersion();
             if (assetVersion == -1) return false;
 
+            // check if asset file with this version is already imported
             SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_APPEND);
             if (assetVersion == prefs.getInt(VERSION, -1)) return false;
 
+            // check if can read asset file languages header
             Language[] languages = getLanguages();
             if (languages == null) return false;
 
@@ -92,6 +116,7 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
                 }
             }
 
+            // save asset file version
             prefs.edit().putInt(VERSION, assetVersion).apply();
 
             return true;
