@@ -12,6 +12,9 @@ import dmax.words.persist.DataBaseManager;
 import dmax.words.ui.cards.CardsFragment;
 
 /**
+ * Main UI class. Hosts fragments.
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 12.12.14 at 14:20
  */
@@ -25,6 +28,8 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
     private DataSource dataSource;
     private Handler uiHandler;
     private Importer importer;
+
+    // after import update cards fragment
     private Runnable updater = new Runnable() {
         public void run() {
             CardsFragment fragment = (CardsFragment) getFragmentManager().findFragmentByTag(TAG);
@@ -44,6 +49,8 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
 
         setContentView(R.layout.a_main);
 
+        // do not add fragment when activity restored (not created freshly)
+        // because old fragment will be restored as well.
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new CardsFragment(), TAG)

@@ -13,6 +13,9 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 
 /**
+ * Class for creating animations and other UI utils methods.
+ *
+ * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 07.01.15 at 13:01
  */
@@ -40,6 +43,7 @@ public class Util {
         int cx = (int) event.getX();
         int cy = (int) event.getY();
 
+        // radius is the longest distance from event point to view corners
         float maxX = Math.max(cx, v.getWidth() - cx);
         float maxY = Math.max(cy, v.getHeight() - cy);
         float radius = (float) Math.sqrt(Math.pow(maxX, 2) + Math.pow(maxY, 2));
