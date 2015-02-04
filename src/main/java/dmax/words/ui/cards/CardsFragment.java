@@ -4,6 +4,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.view.ViewPager;
@@ -124,6 +126,18 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         openDetailedFragment(null);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+
+        // change margin in dependency from orientation
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) pager.getLayoutParams();
+        Resources resources = getResources();
+        lp.setMargins(0, resources.getDimensionPixelSize(R.dimen.pager_margin_top),
+                      0, resources.getDimensionPixelSize(R.dimen.pager_margin_bottom));
+        pager.setLayoutParams(lp);
     }
 
     //~
