@@ -7,16 +7,16 @@ import java.io.Serializable;
  * on 10.12.14 at 13:46
  */
 public enum Language implements Serializable {
-    POLISH("Polish"),
-    UKRAINIAN("Ukrainian");
+    POLISH,
+    UKRAINIAN;
 
     private String codeName;
 
-    Language(String codeName) {
-        this.codeName = codeName;
-    }
-
     public String getCodeName() {
         return codeName;
+    }
+
+    public void setCodeName(String codeName) {
+        this.codeName = codeName;
     }
 }

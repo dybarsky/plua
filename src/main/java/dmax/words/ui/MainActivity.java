@@ -45,6 +45,8 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        initLanguageCodeNames();
+
         this.uiHandler = new Handler();
 
         setContentView(R.layout.a_main);
@@ -97,5 +99,13 @@ public class MainActivity extends FragmentActivity implements Importer.Callback 
     @Override
     public void onDatabaseUpdated() {
         uiHandler.post(updater);
+    }
+
+    /**
+     * Set localized names of languages to enums items
+     */
+    private void initLanguageCodeNames() {
+        Language.UKRAINIAN.setCodeName(getString(R.string.ukrainian));
+        Language.POLISH.setCodeName(getString(R.string.polish));
     }
 }
