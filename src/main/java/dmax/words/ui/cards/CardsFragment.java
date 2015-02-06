@@ -155,6 +155,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
      * Clear datasource cache, load links and show cards pager
      */
     public void reload() {
+        // hide undo bar for previous deletion operation (if exists)
+        UndoBarController.clear(getActivity());
+
         getDataSource().reset();
         showCards();
     }
@@ -215,6 +218,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void openDetailedFragment(Bundle params) {
+        // hide undo bar for previous deletion operation (if exists)
+        UndoBarController.clear(getActivity());
+
         LinkDetailFragment fragment = new LinkDetailFragment();
         fragment.setArguments(params);
         getFragmentManager().beginTransaction()
@@ -225,6 +231,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void showAboutFragment() {
+        // hide undo bar for previous deletion operation (if exists)
+        UndoBarController.clear(getActivity());
+
         AboutFragment fragment = new AboutFragment();
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.animator.slide_up, 0, 0, R.animator.slide_down)

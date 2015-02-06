@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="importing">Оновлення бази данних</string>
+    <string name="add_word_title">Додати слово</string>
+    <string name="save">Зберігти</string>
+    <string name="type_error">Не може бути пустим</string>
+    <string name="polish">Polski</string>
+    <string name="ukrainian">Ukrainski</string>
+    <string name="delete">Видалити</string>
+    <string name="edit">Редагувати</string>
+    <string name="edit_word_title">Редагувати слово</string>
+    <string name="forgot">Zapomnił</string>
+    <string name="reload">Оновити</string>
+    <string name="remember">Згадав</string>
+    <string name="help"><![CDATA[Допомога і відгук]]></string>
+    <string name="help_title">Допомога</string>
+    <string name="help_description">Як користуватися додатком.</string>
+    <string name="rate_title">Оцініти</string>
+    <string name="rate_description">Оцінити додаток і залишити коментарі на Play store.</string>
+    <string name="feedback_title">Відправити відгук</string>
+    <string name="feedback_description">Є зауваження чи пропозиції? Відправ листа.</string>
+    <string name="about_title">Про додаток</string>
+    <string name="about_description">Читати більше про додаток.</string>
+    <string name="send_feedback">mailto:maxim.dybarskyy@gmail.com?subject=Words : Feedback</string>
+    <string name="rate">market://details?id=</string>
+    <string name="rate_web">http://play.google.com/store/apps/details?id=</string>
+    <string name="deleted">Видалено</string>
+    <string name="undo">Повернути</string>
+</resources>
