@@ -9,9 +9,9 @@
     <string name="delete">Usunąć</string>
     <string name="edit">Edytować</string>
     <string name="edit_word_title">Edytować słowo</string>
-    <string name="forgot">Zapomnił</string>
+    <string name="forgot">Zapomniałem</string>
     <string name="reload">Odświeżyć</string>
-    <string name="remember">Pamiętał</string>
+    <string name="remember">Pamiętam</string>
     <string name="help"><![CDATA[Pomoc i sprzężenie zwrotne]]></string>
     <string name="help_title">Pomoc</string>
     <string name="help_description">Jak używać aplikację</string>
