@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_label">Words</string>
+    <string name="app_label">PLUA Cards</string>
     <string name="importing">Updating database</string>
     <string name="add_word_title">Add word</string>
     <string name="save">Save</string>

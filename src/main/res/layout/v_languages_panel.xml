@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<dmax.words.ui.AnimationLayout
+<dmax.plua.ui.AnimationLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/languages"
     android:layout_width="match_parent"
@@ -67,4 +67,4 @@
 
     </LinearLayout>
 
-</dmax.words.ui.AnimationLayout>
+</dmax.plua.ui.AnimationLayout>
