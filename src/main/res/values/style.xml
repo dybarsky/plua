@@ -7,7 +7,7 @@
         <item name="undoBarStyle">@style/UndoBarCustomStyle</item>
     </style>
 
-    <style name="Dialog" parent="Default">
+    <style name="Dialog" parent="SpotsDialogDefault">
         <item name="DialogSpotColor">@color/indigo</item>
         <item name="DialogTitleText">@string/importing</item>
     </style>
