@@ -16,7 +16,7 @@ Tapping on card shows word translation. Also there are two mark buttons on the t
 
 ###Developed By
 
-Maxim Dybarsky - http://d-max.info
+Maksym Dybarskyi - http://d-max.info
 
 ===========
 
