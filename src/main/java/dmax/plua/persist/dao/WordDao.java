@@ -42,7 +42,7 @@ class WordDao extends Dao<Word> {
         ContentValues values = new ContentValues();
         values.put(COLUMN_WORD_DATA, persistable.getData());
 
-        int count = db.update(getTable(), values, COLUMN_ID + "=?", new String[]{ String.valueOf(getId()) });
+        int count = db.updateWithOnConflict(getTable(), values, COLUMN_ID + "=?", new String[]{ String.valueOf(getId()) }, SQLiteDatabase.CONFLICT_IGNORE);
         return count > 0 ? persistable : null;
     }
 

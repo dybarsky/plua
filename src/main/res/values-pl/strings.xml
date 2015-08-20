@@ -26,4 +26,5 @@
     <string name="rate_web">http://play.google.com/store/apps/details?id=</string>
     <string name="deleted">Usunięte</string>
     <string name="undo">Powrót</string>
+    <string name="saving_error">Słowo istnieje</string>
 </resources>

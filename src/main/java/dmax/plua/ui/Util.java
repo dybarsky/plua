@@ -11,6 +11,9 @@ import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import dmax.plua.R;
 
 /**
  * Class for creating animations and other UI utils methods.
@@ -79,5 +82,9 @@ public class Util {
         set.playTogether(rotate, moveOriginal, moveTranslation);
         set.setDuration(DURATION);
         return set;
+    }
+
+    public static void toast(Context context, int string) {
+        Toast.makeText(context, string, Toast.LENGTH_SHORT).show();
     }
 }

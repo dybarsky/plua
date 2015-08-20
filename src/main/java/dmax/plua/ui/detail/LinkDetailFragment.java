@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import dmax.plua.R;
 import dmax.plua.domain.Language;
@@ -135,15 +136,17 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         word2.setLanguage(current.equals(Language.UKRAINIAN) ? Language.POLISH : Language.UKRAINIAN);
         word2.setData(translationText.getText().toString());
 
+        boolean saved;
         if (edit) {
-            // in not changed, use -1 as id. in this case word won't be updated in database
+            // if not changed, use -1 as id. in this case word won't be updated in database
             word1.setId(word1.getData().equals(originalWord.getData()) ? -1 : originalWord.getId());
             word2.setId(word2.getData().equals(translationWord.getData()) ? -1 : translationWord.getId());
 
-            getCastedActivity().getDataSource().updateWords(word1, word2);
+            saved = getCastedActivity().getDataSource().updateWords(word1, word2);
         } else {
-            getCastedActivity().getDataSource().addWords(word1, word2);
+            saved = getCastedActivity().getDataSource().addWords(word1, word2);
         }
+        if (!saved) Util.toast(getActivity(), R.string.saving_error);
 
         closeSelf();
     }

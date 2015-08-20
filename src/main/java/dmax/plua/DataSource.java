@@ -1,5 +1,7 @@
 package dmax.plua;
 
+import android.widget.Toast;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -8,6 +10,7 @@ import java.util.List;
 
 import dmax.plua.domain.Language;
 import dmax.plua.domain.Link;
+import dmax.plua.domain.Persistable;
 import dmax.plua.domain.Word;
 import dmax.plua.persist.Dao;
 import dmax.plua.persist.DataBaseManager;
@@ -59,28 +62,36 @@ public class DataSource {
     /**
      * Save new words into database. Words should contain different language.
      * Link will be created and saved into database and cache.
+     * @return false if error during saving occurred
      */
-    public void addWords(Word word1, Word word2) {
+    public boolean addWords(Word word1, Word word2) {
         Link link = new Link();
         Dao<Link> linkDao = DaoFactory.createDao(Link.class);
 
-        link.setWord(dataBaseManager.insert(dao.setPersistable(word1)));
-        link.setWord(dataBaseManager.insert(dao.setPersistable(word2)));
+        for (Word word : new Word[]{ word1, word2 }) {
+            Word saved = dataBaseManager.insert(dao.setPersistable(word));
+            if (!verifySaved(saved)) return false;
+            link.setWord(saved);
+        }
         link = dataBaseManager.insert(linkDao.setPersistable(link));
+        if (!verifySaved(link)) return false;
 
-        links.add(link);
+        return links.add(link);
     }
 
     /**
      * Save words into database. This words should be loaded from database before (should contain id).
+     * @return false if error during saving occurred
      */
-    public void updateWords(Word word1, Word word2) {
-        if (word1.getId() != -1) {
-            dataBaseManager.update(dao.setPersistable(word1));
+    public boolean updateWords(Word word1, Word word2) {
+        Word saved;
+
+        for (Word word : new Word[]{ word1, word2 }) {
+            if (word.getId() == -1) continue;
+            saved = dataBaseManager.update(dao.setPersistable(word));
+            if (saved == null) return false;
         }
-        if (word2.getId() != -1) {
-            dataBaseManager.update(dao.setPersistable(word2));
-        }
+        return true;
     }
 
     /**
@@ -160,6 +171,11 @@ public class DataSource {
      */
     public void reset() {
         links = null;
+    }
+
+
+    private boolean verifySaved(Persistable persistable) {
+        return persistable.getId() != -1;
     }
 
     //~
