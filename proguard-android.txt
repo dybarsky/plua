@@ -60,3 +60,6 @@
 -keep class dmax.dialog.** {
     *;
 }
+
+# Disable obfuscation
+-dontobfuscate
