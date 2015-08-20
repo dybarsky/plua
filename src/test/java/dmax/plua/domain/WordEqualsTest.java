@@ -1,13 +1,16 @@
 package dmax.plua.domain;
 
-import android.test.AndroidTestCase;
+import static org.junit.Assert.*;
+
+import org.junit.Test;
 
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 15.12.14 at 15:55
  */
-public class WordEqualsTest extends AndroidTestCase {
+public class WordEqualsTest {
 
+    @Test
     public void test_shouldBeNotEqual_IfIdsDifferent() {
         Word w1 = new Word();
         w1.setId(1);
@@ -17,6 +20,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertFalse(w1.equals(w2));
     }
 
+    @Test
     public void test_shouldBeNotEqual_IfIdsSameAndDataDifferent() {
         Word w1 = new Word();
         w1.setId(1);
@@ -29,6 +33,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertFalse(w1.equals(w2));
     }
 
+    @Test
     public void test_shouldBeNotEqual_IfIdsNotSetAndDataDifferent() {
         Word w1 = new Word();
         w1.setData("укр");
@@ -39,6 +44,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertFalse(w1.equals(w2));
     }
 
+    @Test
     public void test_shouldBeNotEqual_IfOneIdNotSetAndDataDifferent() {
         Word w1 = new Word();
         w1.setId(1);
@@ -50,6 +56,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertFalse(w1.equals(w2));
     }
 
+    @Test
     public void test_shouldBeEqual_IfOneIdNotSetAndDataSame() {
         Word w1 = new Word();
         w1.setId(1);
@@ -62,6 +69,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertTrue(w1.equals(w2));
     }
 
+    @Test
     public void test_shouldBeEqual_IfIdsNotSetAndDataSame() {
         Word w1 = new Word();
         w1.setData("укр");
@@ -73,6 +81,7 @@ public class WordEqualsTest extends AndroidTestCase {
         assertTrue(w1.equals(w2));
     }
 
+    @Test
     public void test_shouldBeEqual_IfIdsSameAndDataSame() {
         Word w1 = new Word();
         w1.setId(1);

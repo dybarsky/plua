@@ -1,27 +1,29 @@
 package dmax.plua;
 
-import android.test.AndroidTestCase;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 import dmax.plua.domain.Link;
 
+import static org.junit.Assert.*;
+
 /**
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 23.01.15 at 18:00
  */
-public class SorterTest extends AndroidTestCase {
+public class SorterTest {
 
     DataSource.PrioritySorter instance;
 
-    @Override
+    @Before
     public void setUp() throws Exception {
-        super.setUp();
-
         instance = new DataSource.PrioritySorter();
     }
 
+    @Test
     public void test_shouldReturnPositive_IfPriorityRightMoreLeft() {
         Link left = new Link();
         Link right = new Link();
@@ -34,6 +36,7 @@ public class SorterTest extends AndroidTestCase {
         assertTrue(result > 0);
     }
 
+    @Test
     public void test_shouldReturnNegative_IfPriorityRightLessLeft() {
         Link left = new Link();
         Link right = new Link();
@@ -46,6 +49,7 @@ public class SorterTest extends AndroidTestCase {
         assertTrue(result < 0);
     }
 
+    @Test
     public void test_shouldReturnNegative_IfPrioritySameAndUpdatedRightMoreLeft() {
         Link left = new Link();
         Link right = new Link();
@@ -60,6 +64,7 @@ public class SorterTest extends AndroidTestCase {
         assertTrue(result < 0);
     }
 
+    @Test
     public void test_shouldReturnPositive_IfPrioritySameAndUpdatedRightLessLeft() {
         Link left = new Link();
         Link right = new Link();
@@ -74,6 +79,7 @@ public class SorterTest extends AndroidTestCase {
         assertTrue(result > 0);
     }
 
+    @Test
     public void test_shouldReturnZero_IfPrioritySameAndUpdatedSame() {
         Link left = new Link();
         Link right = new Link();
@@ -88,6 +94,7 @@ public class SorterTest extends AndroidTestCase {
         assertTrue(result == 0);
     }
 
+    @Test
     public void test_shouldSortCollectionPriorityDescendingAndUpdatedAscending() {
         Link[] links = new Link[5];
         for (int i = 0; i < 5; i++) {
