@@ -3,6 +3,7 @@ package dmax.plua.ui;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import dmax.plua.DataSource;
 import dmax.plua.R;
@@ -18,7 +19,7 @@ import dmax.plua.ui.cards.CardsFragment;
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 12.12.14 at 14:20
  */
-public class MainActivity extends FragmentActivity implements Importer.Callback {
+public class MainActivity extends AppCompatActivity implements Importer.Callback {
 
     private static String TAG = "list";
 

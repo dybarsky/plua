@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="window_background">#FFF5F5F5</color>
     <color name="indigo">#3F51B5</color>
     <color name="indigo_dark">#303F9F</color>
     <color name="yellow">#FFECB3</color>
     <color name="pink">#FF4081</color>
+    <color name="pink_light">#FF60A1</color>
     <color name="separator">#22000000</color>
+    <color name="spots_dialog_color">@color/indigo</color>
 </resources>

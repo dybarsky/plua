@@ -2,12 +2,12 @@ package dmax.plua.ui.cards;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
@@ -16,10 +16,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
-
-import com.cocosw.undobar.UndoBarController;
 
 import dmax.plua.DataSource;
 import dmax.plua.R;
@@ -53,7 +50,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         emptyView = root.findViewById(R.id.empty_view);
         pager = (ViewPager) root.findViewById(R.id.pager);
 
-        ImageButton add = (ImageButton) root.findViewById(R.id.add);
+        FloatingActionButton add = (FloatingActionButton) root.findViewById(R.id.add);
         add.setOnClickListener(this);
 
         // add languages panel
@@ -85,11 +82,11 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
 
-        ActionBar actionBar = getActivity().getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setTitle(null);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-        actionBar.setCustomView(switcher.createActionBar());
+//        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(false);
+//        actionBar.setTitle(null);
+//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+//        actionBar.setCustomView(switcher.createActionBar());
         setHasOptionsMenu(true);
     }
 
@@ -156,7 +153,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
      */
     public void reload() {
         // hide undo bar for previous deletion operation (if exists)
-        UndoBarController.clear(getActivity());
+        //TODO
 
         getDataSource().reset();
         showCards();
@@ -204,7 +201,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         if (removing) return;
 
         // hide undo bar for previous deletion operation (if exists)
-        UndoBarController.clear(getActivity());
+        //TODO
 
         int id = pager.getCurrentItem();
         CardView cardView = (CardView) pager.findViewById(id).findViewById(R.id.card);
@@ -219,7 +216,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
     private void openDetailedFragment(Bundle params) {
         // hide undo bar for previous deletion operation (if exists)
-        UndoBarController.clear(getActivity());
+        //TODO
 
         LinkDetailFragment fragment = new LinkDetailFragment();
         fragment.setArguments(params);
@@ -232,7 +229,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
     private void showAboutFragment() {
         // hide undo bar for previous deletion operation (if exists)
-        UndoBarController.clear(getActivity());
+        //TODO
 
         AboutFragment fragment = new AboutFragment();
         getFragmentManager().beginTransaction()
@@ -247,7 +244,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     /**
      * Class for encapsulation removing words pair logic
      */
-    private class PageRemover extends AnimatorListenerAdapter implements ViewPager.OnPageChangeListener, UndoBarController.UndoListener {
+    private class PageRemover extends AnimatorListenerAdapter implements ViewPager.OnPageChangeListener {
 
         // pager item number to be removed
         private int pageToRemove;
@@ -299,10 +296,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         }
 
         private void showUndo() {
-            new UndoBarController.UndoBar(getActivity())
-                    .message(R.string.deleted)
-                    .listener(this)
-                    .show();
+            // TODO
         }
 
         /**
@@ -342,7 +336,6 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         /**
          * Reacts on undo bar button click
          */
-        @Override
         public void onUndo(Parcelable parcelable) {
             // restore item data into datasource
             getDataSource().addWords(holder.originalWord, holder.translationWord);
