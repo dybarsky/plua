@@ -40,26 +40,18 @@ class LanguageSwitcher extends AnimatorListenerAdapter implements View.OnClickLi
     public void init(View rootView) {
         languagesList = (AnimationLayout) rootView.findViewById(R.id.languages);
         // hide languages panel
-        languagesList.setYRatio(-1);
-        rootView.findViewById(R.id.ukrainian).setOnClickListener(this);
-        rootView.findViewById(R.id.polish).setOnClickListener(this);
-    }
+        //languagesList.setYRatio(-1);
+        //rootView.findViewById(R.id.ukrainian).setOnClickListener(this);
+        //rootView.findViewById(R.id.polish).setOnClickListener(this);
 
-    /**
-     * Creates and inits custom actionbar item view for hide/show languages panel.
-     */
-    public View createActionBar() {
-        View root = Util.createDarkThemedView(cardsFragment.getActivity(), R.layout.v_actionbar_item_language);
-
-        actionBarIcon = (ImageView) root.findViewById(R.id.ab_icon);
-        actionBarText = (TextView) root.findViewById(R.id.ab_lang);
+        actionBarIcon = (ImageView) rootView.findViewById(R.id.ab_icon);
+        actionBarText = (TextView) rootView.findViewById(R.id.ab_lang);
 
         actionBarText.setText(selectedLanguage.getCodeName());
 
-        root.setOnClickListener(this);
-
-        return root;
+        actionBarText.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {

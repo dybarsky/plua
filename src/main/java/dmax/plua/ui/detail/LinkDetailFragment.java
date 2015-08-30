@@ -1,9 +1,10 @@
 package dmax.plua.ui.detail;
 
-import android.app.ActionBar;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import dmax.plua.R;
 import dmax.plua.domain.Language;
@@ -64,7 +64,7 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
 
         MainActivity activity = getCastedActivity();
 
-        ActionBar actionBar = activity.getActionBar();
+        ActionBar actionBar = activity.getSupportActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE|ActionBar.DISPLAY_HOME_AS_UP);
         actionBar.setTitle(R.string.add_word_title);
         setHasOptionsMenu(true);

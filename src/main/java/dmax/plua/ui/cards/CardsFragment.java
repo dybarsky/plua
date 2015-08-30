@@ -9,7 +9,10 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -53,10 +56,6 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         FloatingActionButton add = (FloatingActionButton) root.findViewById(R.id.add);
         add.setOnClickListener(this);
 
-        // add languages panel
-        View panel = Util.createDarkThemedView(getActivity(), R.layout.v_languages_panel);
-        root.addView(panel, new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-
         return root;
     }
 
@@ -70,7 +69,11 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
         this.adapter = new CardsPagerAdapter(activity, dataSource, listener);
 
-        switcher.init(getView());
+        Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
+        activity.setSupportActionBar(toolbar);
+        setHasOptionsMenu(true);
+
+        //switcher.init(getView());
 
         // if datasource is not empty - show pager with cards
         if (adapter.getCount() > 0) {
@@ -82,11 +85,10 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     public void onStart() {
         super.onStart();
 
-//        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-//        actionBar.setDisplayHomeAsUpEnabled(false);
-//        actionBar.setTitle(null);
-//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
-//        actionBar.setCustomView(switcher.createActionBar());
+        ActionBar actionBar = getCastedActivity().getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setTitle(null);
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         setHasOptionsMenu(true);
     }
 
