@@ -5,9 +5,8 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
-    <style name="Dialog" parent="SpotsDialogDefault">
+    <style name="Dialog" parent="BaseDialog">
         <item name="DialogSpotColor">@color/indigo</item>
-        <item name="DialogTitleText">@string/importing</item>
     </style>
 
 </resources>

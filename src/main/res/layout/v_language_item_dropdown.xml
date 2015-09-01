@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dropdown_width"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/dropdown_padding"
+    android:paddingBottom="@dimen/dropdown_padding">
+
+    <TextView
+        android:id="@android:id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/dropdown_item_text_size"
+        android:textColor="@color/dropdown_text_color"
+        android:layout_marginLeft="@dimen/dropdown_item_text_margin_left"
+        android:layout_marginStart="@dimen/dropdown_item_text_margin_left"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        />
+
+    <ImageView
+        android:id="@android:id/icon1"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dropdown_item_flag_height"
+        android:layout_marginRight="@dimen/dropdown_item_flag_margin_right"
+        android:layout_marginEnd="@dimen/dropdown_item_flag_margin_right"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        />
+
+</RelativeLayout>

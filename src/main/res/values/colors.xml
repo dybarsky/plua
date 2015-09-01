@@ -8,4 +8,5 @@
     <color name="pink_light">#FF60A1</color>
     <color name="separator">#22000000</color>
     <color name="spots_dialog_color">@color/indigo</color>
+    <color name="dropdown_text_color">#ff333333</color>
 </resources>

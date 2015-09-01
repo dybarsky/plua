@@ -10,7 +10,6 @@ import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -64,16 +63,15 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
 
         MainActivity activity = getCastedActivity();
-        DataSource dataSource = activity.getDataSource();
-        CardInteractionListener listener = new CardInteractionListener(new CardStateSwitcher(), new CardPriorityManager(pager, dataSource));
-        this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
-        this.adapter = new CardsPagerAdapter(activity, dataSource, listener);
 
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         activity.setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
 
-        //switcher.init(getView());
+        DataSource dataSource = activity.getDataSource();
+        CardInteractionListener listener = new CardInteractionListener(new CardStateSwitcher(), new CardPriorityManager(pager, dataSource));
+        this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
+        this.adapter = new CardsPagerAdapter(activity, dataSource, listener);
 
         // if datasource is not empty - show pager with cards
         if (adapter.getCount() > 0) {
@@ -87,8 +85,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
 
         ActionBar actionBar = getCastedActivity().getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setTitle(null);
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         setHasOptionsMenu(true);
     }
 
@@ -172,7 +170,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         pager.setAdapter(adapter);
     }
 
-    private MainActivity getCastedActivity() {
+    MainActivity getCastedActivity() {
         return (MainActivity) getActivity();
     }
 

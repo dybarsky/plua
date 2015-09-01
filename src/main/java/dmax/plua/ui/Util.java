@@ -26,11 +26,6 @@ public class Util {
 
     private static final int DURATION = 250;
 
-    public static View createDarkThemedView(Context context, int resId) {
-        ContextThemeWrapper themed = new ContextThemeWrapper(context, android.R.style.ThemeOverlay_Material_Dark);
-        return View.inflate(themed, resId, null);
-    }
-
     public static Animator prepareCardCollapseTransition(View card) {
         Animator vertical = ObjectAnimator.ofFloat(card, "scaleY", 1f, 0);
         Animator horizontal = ObjectAnimator.ofFloat(card, "scaleX", 1f, 0);

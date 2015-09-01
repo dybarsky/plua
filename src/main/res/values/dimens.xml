@@ -2,31 +2,34 @@
 <resources>
     <dimen name="pager_margin_top">80dp</dimen>
     <dimen name="pager_margin_bottom">140dp</dimen>
+
     <dimen name="card_size">230dp</dimen>
     <dimen name="card_radius">8dp</dimen>
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="card_padding">15dp</dimen>
+    <dimen name="card_actions_panel_padding">3dp</dimen>
+
     <dimen name="add_button_margin">20dp</dimen>
     <dimen name="add_button_elevation">6dp</dimen>
-    <dimen name="flag_margin_right">5dp</dimen>
-    <dimen name="flag_little">32dp</dimen>
-    <dimen name="language_item_text_size">18sp</dimen>
-    <dimen name="flag_margin_left">20dp</dimen>
-    <dimen name="language_item_padding">5dp</dimen>
-    <dimen name="actionbar_padding">5dp</dimen>
+
+    <dimen name="dropdown_width">180dp</dimen>
+    <dimen name="dropdown_padding">8dp</dimen>
+    <dimen name="dropdown_item_flag_margin_right">16dp</dimen>
+    <dimen name="dropdown_item_flag_height">32dp</dimen>
+    <dimen name="dropdown_item_text_size">17sp</dimen>
+    <dimen name="dropdown_item_text_margin_left">16dp</dimen>
+
+    <dimen name="spinner_width">110dp</dimen>
+    <dimen name="spinner_margin_left">16dp</dimen>
+    <dimen name="spinner_text_size">18sp</dimen>
+
     <dimen name="placeholder_size">64dp</dimen>
-    <dimen name="spot_size">6dp</dimen>
-    <dimen name="spot_padding">24dp</dimen>
-    <dimen name="dialog_title_margin">10dp</dimen>
-    <dimen name="progress_width">250dp</dimen>
+
     <dimen name="detail_layout_padding">40dp</dimen>
-    <dimen name="card_actions_panel_padding">3dp</dimen>
+
     <dimen name="about_layout_padding">20dp</dimen>
     <dimen name="about_items_padding">15dp</dimen>
     <dimen name="about_items_padding_left">16dp</dimen>
     <dimen name="about_items_padding_right">24dp</dimen>
     <dimen name="about_items_text_padding_right">56dp</dimen>
-    <dimen name="undo_margin">24dp</dimen>
-    <dimen name="undo_padding">36dp</dimen>
-    <dimen name="undo_button_padding">8dp</dimen>
 </resources>

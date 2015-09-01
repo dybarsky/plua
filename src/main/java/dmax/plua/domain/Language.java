@@ -19,4 +19,9 @@ public enum Language implements Serializable {
     public void setCodeName(String codeName) {
         this.codeName = codeName;
     }
+
+    @Override
+    public String toString() {
+        return codeName;
+    }
 }

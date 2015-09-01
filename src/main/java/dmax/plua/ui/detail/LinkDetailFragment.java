@@ -65,7 +65,11 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         MainActivity activity = getCastedActivity();
 
         ActionBar actionBar = activity.getSupportActionBar();
-        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE|ActionBar.DISPLAY_HOME_AS_UP);
+        actionBar.setDisplayShowCustomEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_close);
         actionBar.setTitle(R.string.add_word_title);
         setHasOptionsMenu(true);
 
