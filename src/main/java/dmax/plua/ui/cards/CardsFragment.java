@@ -216,7 +216,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         LinkDetailFragment fragment = new LinkDetailFragment();
         fragment.setArguments(params);
         getFragmentManager().beginTransaction()
-                .setCustomAnimations(R.animator.slide_up, 0, 0, R.animator.slide_down)
+                .setCustomAnimations(R.anim.slide_up, 0, 0, R.anim.slide_down)
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit();
@@ -225,7 +225,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     private void showAboutFragment() {
         AboutFragment fragment = new AboutFragment();
         getFragmentManager().beginTransaction()
-                .setCustomAnimations(R.animator.slide_up, 0, 0, R.animator.slide_down)
+                .setCustomAnimations(R.anim.slide_up, 0, 0, R.anim.slide_down)
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit();

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<dmax.plua.ui.AnimationLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,7 +27,9 @@
             android:paddingTop="@dimen/about_items_padding"
             android:paddingBottom="@dimen/about_items_padding"
             android:paddingLeft="@dimen/about_items_padding_left"
+            android:paddingStart="@dimen/about_items_padding_left"
             android:paddingRight="@dimen/about_items_padding_right"
+            android:paddingEnd="@dimen/about_items_padding_right"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true">
 
@@ -35,6 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/ic_help"/>
 
@@ -44,7 +47,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/about_items_text_padding_right"
+                android:layout_marginStart="@dimen/about_items_text_padding_right"
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 android:text="@string/help_title"/>
 
@@ -53,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/helpTitle"
                 android:layout_alignLeft="@id/helpTitle"
+                android:layout_alignStart="@id/helpTitle"
                 android:text="@string/help_description"/>
 
         </RelativeLayout>
@@ -64,7 +70,9 @@
             android:paddingTop="@dimen/about_items_padding"
             android:paddingBottom="@dimen/about_items_padding"
             android:paddingLeft="@dimen/about_items_padding_left"
+            android:paddingStart="@dimen/about_items_padding_left"
             android:paddingRight="@dimen/about_items_padding_right"
+            android:paddingEnd="@dimen/about_items_padding_right"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true">
 
@@ -72,6 +80,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/ic_rate"/>
 
@@ -81,7 +90,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/about_items_text_padding_right"
+                android:layout_marginStart="@dimen/about_items_text_padding_right"
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 android:text="@string/rate_title"/>
 
@@ -90,6 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/rateTitle"
                 android:layout_alignLeft="@id/rateTitle"
+                android:layout_alignStart="@id/rateTitle"
                 android:text="@string/rate_description"/>
 
         </RelativeLayout>
@@ -101,7 +113,9 @@
             android:paddingTop="@dimen/about_items_padding"
             android:paddingBottom="@dimen/about_items_padding"
             android:paddingLeft="@dimen/about_items_padding_left"
+            android:paddingStart="@dimen/about_items_padding_left"
             android:paddingRight="@dimen/about_items_padding_right"
+            android:paddingEnd="@dimen/about_items_padding_right"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true">
 
@@ -109,6 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/ic_feedback"/>
 
@@ -118,7 +133,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/about_items_text_padding_right"
+                android:layout_marginStart="@dimen/about_items_text_padding_right"
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 android:text="@string/feedback_title"/>
 
@@ -127,6 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/feedbackTitle"
                 android:layout_alignLeft="@id/feedbackTitle"
+                android:layout_alignStart="@id/feedbackTitle"
                 android:text="@string/feedback_description"/>
 
         </RelativeLayout>
@@ -138,7 +156,9 @@
             android:paddingTop="@dimen/about_items_padding"
             android:paddingBottom="@dimen/about_items_padding"
             android:paddingLeft="@dimen/about_items_padding_left"
+            android:paddingStart="@dimen/about_items_padding_left"
             android:paddingRight="@dimen/about_items_padding_right"
+            android:paddingEnd="@dimen/about_items_padding_right"
             android:background="?android:attr/selectableItemBackground"
             android:clickable="true">
 
@@ -146,6 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_alignParentTop="true"
                 android:src="@drawable/ic_about"/>
 
@@ -155,7 +176,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
                 android:layout_marginLeft="@dimen/about_items_text_padding_right"
+                android:layout_marginStart="@dimen/about_items_text_padding_right"
                 android:textAppearance="?android:attr/textAppearanceListItem"
                 android:text="@string/about_title"/>
 
@@ -164,9 +187,10 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/aboutTitle"
                 android:layout_alignLeft="@id/aboutTitle"
+                android:layout_alignStart="@id/aboutTitle"
                 android:text="@string/about_description"/>
 
         </RelativeLayout>
 
     </LinearLayout>
-</dmax.plua.ui.AnimationLayout>
+</FrameLayout>

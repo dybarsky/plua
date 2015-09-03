@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<dmax.plua.ui.AnimationLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -41,8 +41,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/origin_lang"
+            android:layout_toEndOf="@id/origin_lang"
             android:layout_alignTop="@id/origin_lang"
             android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
         <EditText
@@ -50,10 +52,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/transl_lang"
+            android:layout_toEndOf="@id/transl_lang"
             android:layout_alignTop="@id/transl_lang"
             android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
     </RelativeLayout>
 
-</dmax.plua.ui.AnimationLayout>
+</FrameLayout>
