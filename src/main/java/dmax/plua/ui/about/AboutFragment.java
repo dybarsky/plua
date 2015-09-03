@@ -1,11 +1,12 @@
 package dmax.plua.ui.about;
 
-import android.app.ActionBar;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,17 +47,21 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         getView().findViewById(R.id.feedback).setOnClickListener(this);
         getView().findViewById(R.id.about).setOnClickListener(this);
 
-        ActionBar actionBar = getActivity().getActionBar();
+        ActionBar actionBar = getCastedActivity().getSupportActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_HOME_AS_UP);
         actionBar.setTitle(R.string.help);
         setHasOptionsMenu(true);
+    }
+
+    private AppCompatActivity getCastedActivity() {
+        return (AppCompatActivity) getActivity();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home: {
-                getActivity().getFragmentManager().popBackStack();
+                getCastedActivity().getSupportFragmentManager().popBackStack();
                 return true;
             }
             default:

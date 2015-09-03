@@ -2,7 +2,6 @@ package dmax.plua.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 
 import dmax.plua.DataSource;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements Importer.Callback
     // after import update cards fragment
     private Runnable updater = new Runnable() {
         public void run() {
-            CardsFragment fragment = (CardsFragment) getFragmentManager().findFragmentByTag(TAG);
+            CardsFragment fragment = (CardsFragment) getSupportFragmentManager().findFragmentByTag(TAG);
             if (fragment != null) {
                 fragment.reload();
                 invalidateOptionsMenu();
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements Importer.Callback
         // do not add fragment when activity restored (not created freshly)
         // because old fragment will be restored as well.
         if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.container, new CardsFragment(), TAG)
                     .commit();
         }

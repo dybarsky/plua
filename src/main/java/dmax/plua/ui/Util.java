@@ -59,16 +59,6 @@ public class Util {
         return set;
     }
 
-    public static Animator prepareExpandTransition(ImageView actionBarIcon, View languagesList) {
-        ObjectAnimator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 0, 180);
-        ObjectAnimator move = ObjectAnimator.ofFloat(languagesList, "yRatio", -1, 0);
-        move.setInterpolator(new DecelerateInterpolator(1f));
-        AnimatorSet set = new AnimatorSet();
-        set.setDuration(DURATION);
-        set.playTogether(rotate, move);
-        return set;
-    }
-
     public static Animator prepareSwitchTransition(View switcher, View view1, View view2) {
         ObjectAnimator rotate = ObjectAnimator.ofFloat(switcher, "rotation", 0, 180);
         ObjectAnimator moveOriginal = ObjectAnimator.ofFloat(view1, "y", view1.getY(), view2.getY());

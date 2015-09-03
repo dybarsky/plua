@@ -1,10 +1,9 @@
 package dmax.plua.ui.detail;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -159,7 +158,7 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(originalText.getWindowToken(), 0);
 
-        getActivity().getFragmentManager().popBackStack();
+        getCastedActivity().getSupportFragmentManager().popBackStack();
     }
 
     private boolean check(EditText text) {
