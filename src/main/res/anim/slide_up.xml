@@ -7,8 +7,4 @@
         android:toYDelta="0%"
         android:duration="@android:integer/config_longAnimTime" />
 
-    <alpha
-        android:fromAlpha="0.9"
-        android:toAlpha="1" />
-
 </set>
