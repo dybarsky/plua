@@ -6,8 +6,10 @@ import android.app.Fragment;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.Snackbar.Callback;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.CardView;
@@ -23,6 +25,8 @@ import android.widget.RelativeLayout;
 import dmax.plua.DataSource;
 import dmax.plua.R;
 import dmax.plua.domain.Language;
+import dmax.plua.domain.Link;
+import dmax.plua.domain.Word;
 import dmax.plua.ui.Util;
 import dmax.plua.ui.about.AboutFragment;
 import dmax.plua.ui.detail.LinkDetailFragment;
@@ -42,8 +46,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     private ViewPager pager;
     private CardsPagerAdapter adapter;
     private LanguageSwitcher switcher;
-
-    private boolean removing;
+    private RemoveTransaction removeTransaction;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -130,7 +133,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         super.onConfigurationChanged(newConfig);
 
         // change margin in dependency from orientation
-        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) pager.getLayoutParams();
+        CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) pager.getLayoutParams();
         Resources resources = getResources();
         lp.setMargins(0, resources.getDimensionPixelSize(R.dimen.pager_margin_top),
                       0, resources.getDimensionPixelSize(R.dimen.pager_margin_bottom));
@@ -153,7 +156,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
      */
     public void reload() {
         // hide undo bar for previous deletion operation (if exists)
-        //TODO
+        if (removeTransaction != null) removeTransaction.snackbar.dismiss();
 
         getDataSource().reset();
         showCards();
@@ -198,10 +201,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
      */
     private void removeCurrentCard() {
         // avoid removing while previous is still working (animation)
-        if (removing) return;
-
-        // hide undo bar for previous deletion operation (if exists)
-        //TODO
+        if (removeTransaction != null && removeTransaction.inProgress) return;
 
         int id = pager.getCurrentItem();
         CardView cardView = (CardView) pager.findViewById(id).findViewById(R.id.card);
@@ -211,13 +211,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         Animator transition = Util.prepareCardCollapseTransition(cardView);
         transition.addListener(new PageRemover(id, holder));
         transition.start();
-        removing = true;
     }
 
     private void openDetailedFragment(Bundle params) {
-        // hide undo bar for previous deletion operation (if exists)
-        //TODO
-
         LinkDetailFragment fragment = new LinkDetailFragment();
         fragment.setArguments(params);
         getFragmentManager().beginTransaction()
@@ -228,9 +224,6 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     }
 
     private void showAboutFragment() {
-        // hide undo bar for previous deletion operation (if exists)
-        //TODO
-
         AboutFragment fragment = new AboutFragment();
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.animator.slide_up, 0, 0, R.animator.slide_down)
@@ -244,7 +237,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     /**
      * Class for encapsulation removing words pair logic
      */
-    private class PageRemover extends AnimatorListenerAdapter implements ViewPager.OnPageChangeListener {
+    private class PageRemover extends AnimatorListenerAdapter implements ViewPager.OnPageChangeListener  {
 
         // pager item number to be removed
         private int pageToRemove;
@@ -255,12 +248,34 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         // pager item number to be showed when removing finished and adapter updated
         private int pageToShowAfterRemoving;
 
-        // removing item data holder
-        private CardViewHolder holder;
+        private View.OnClickListener undoClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onUndo();
+            }
+        };
+
+        private Callback dismissListener = new Callback() {
+            @Override
+            public void onDismissed(Snackbar snackbar, int event) {
+                CardsFragment.this.removeTransaction = null;
+            }
+        };
+
 
         private PageRemover(int pageToRemove, CardViewHolder holder) {
+            // hide undo bar for previous deletion operation (if exists)
+            if (CardsFragment.this.removeTransaction != null) {
+                CardsFragment.this.removeTransaction.snackbar.setCallback(null);
+                CardsFragment.this.removeTransaction.snackbar.dismiss();
+            }
+            RemoveTransaction removeTransaction = new RemoveTransaction();
+            removeTransaction.link = holder.link;
+            removeTransaction.originalWord = holder.originalWord;
+            removeTransaction.translationWord = holder.translationWord;
+            CardsFragment.this.removeTransaction = removeTransaction;
+
             this.pageToRemove = pageToRemove;
-            this.holder = holder;
         }
 
         private void showNextPage() {
@@ -279,7 +294,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                     : pageToShowBeforeRemoving;
 
             pager.setCurrentItem(pageToShowBeforeRemoving, true);
-            pager.setOnPageChangeListener(this);
+            pager.addOnPageChangeListener(this);
         }
 
         private void hidePager() {
@@ -291,12 +306,17 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
          * Remove current item data from datasource AND update adapter
          */
         private void removeItem() {
-            getDataSource().removeWords(holder.link, holder.originalWord, holder.translationWord);
+            RemoveTransaction transaction = CardsFragment.this.removeTransaction;
+            getDataSource().removeWords(transaction.link, transaction.originalWord, transaction.translationWord);
             adapter.notifyDataSetChanged();
         }
 
         private void showUndo() {
-            // TODO
+            removeTransaction.snackbar = Snackbar.make(pager, R.string.deleted, Snackbar.LENGTH_LONG);
+            removeTransaction.snackbar
+                    .setAction(R.string.undo, undoClickListener)
+                    .setCallback(dismissListener)
+                    .show();
         }
 
         /**
@@ -314,7 +334,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
                 showUndo();
                 getActivity().invalidateOptionsMenu();
                 // removing procedure finished
-                removing = false;
+                CardsFragment.this.removeTransaction.inProgress = false;
             }
         }
 
@@ -325,20 +345,22 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         public void onPageScrollStateChanged(int state) {
             // if next page appears - do actual removing and update pager with new adapter
             if (state == ViewPager.SCROLL_STATE_IDLE && pager.getCurrentItem() == pageToShowBeforeRemoving) {
-                pager.setOnPageChangeListener(null);
+                pager.removeOnPageChangeListener(this);
                 removeItem();
                 showUndo();
                 pager.setCurrentItem(pageToShowAfterRemoving, false);
-                removing = false;
+                // removing procedure finished
+                CardsFragment.this.removeTransaction.inProgress = false;
             }
         }
 
         /**
          * Reacts on undo bar button click
          */
-        public void onUndo(Parcelable parcelable) {
+        public void onUndo() {
+            RemoveTransaction transaction = CardsFragment.this.removeTransaction;
             // restore item data into datasource
-            getDataSource().addWords(holder.originalWord, holder.translationWord);
+            getDataSource().addWords(transaction.originalWord, transaction.translationWord);
             getActivity().invalidateOptionsMenu();
             // in last item restored - show pager, if not last - just update adapter
             if (adapter.getCount() > 1) {
@@ -356,5 +378,14 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         public void onPageSelected(int position) {
             /* nothing to do */
         }
+    }
+
+    private class RemoveTransaction {
+        Link link;
+        Word originalWord;
+        Word translationWord;
+
+        Snackbar snackbar;
+        boolean inProgress;
     }
 }
