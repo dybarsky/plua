@@ -20,6 +20,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import dmax.plua.DataSource;
 import dmax.plua.R;
@@ -131,12 +134,21 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
+        Resources resources = getResources();
+
         // change margin in dependency from orientation
         CoordinatorLayout.LayoutParams lp = (CoordinatorLayout.LayoutParams) pager.getLayoutParams();
-        Resources resources = getResources();
         lp.setMargins(0, resources.getDimensionPixelSize(R.dimen.pager_margin_top),
                       0, resources.getDimensionPixelSize(R.dimen.pager_margin_bottom));
         pager.setLayoutParams(lp);
+
+        // change margin and background for empty view
+        ImageView emptyImage = (ImageView) emptyView.findViewById(R.id.empty_image);
+        emptyImage.setImageDrawable(resources.getDrawable(R.drawable.placeholder));
+        TextView emptyText = (TextView) emptyView.findViewById(R.id.empty_text);
+        RelativeLayout.LayoutParams lp2 = (RelativeLayout.LayoutParams) emptyText.getLayoutParams();
+        lp2.setMargins(0, 0, 0, resources.getDimensionPixelSize(R.dimen.empty_text_bottom_margin));
+        emptyText.setLayoutParams(lp2);
     }
 
     //~
@@ -311,7 +323,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         }
 
         private void showUndo() {
-            removeTransaction.snackbar = Snackbar.make(pager, R.string.deleted, Snackbar.LENGTH_LONG);
+            removeTransaction.snackbar = Snackbar.make(pager, R.string.deleted, Snackbar.LENGTH_SHORT);
             removeTransaction.snackbar
                     .setAction(R.string.undo, undoClickListener)
                     .setCallback(dismissListener)

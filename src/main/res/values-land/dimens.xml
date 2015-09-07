@@ -2,4 +2,5 @@
 <resources>
     <dimen name="pager_margin_top">0dp</dimen>
     <dimen name="pager_margin_bottom">0dp</dimen>
+    <dimen name="empty_text_bottom_margin">80dp</dimen>
 </resources>

@@ -11,20 +11,22 @@
         android:layout_height="match_parent">
 
         <ImageView
+            android:id="@+id/empty_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/placeholder"
             android:scaleType="centerCrop" />
 
         <TextView
-            android:id="@+id/empty_text2"
+            android:id="@+id/empty_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="140dp"
-            android:textSize="26sp"
+            android:layout_marginBottom="@dimen/empty_text_bottom_margin"
+            android:textSize="24sp"
             android:textColor="@color/empty"
+            android:textStyle="bold"
             android:text="@string/no_words"/>
 
     </RelativeLayout>
