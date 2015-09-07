@@ -62,10 +62,8 @@
                     android:gravity="center"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:layout_marginLeft="@dimen/card_actions_margin"
-                    android:layout_marginStart="@dimen/card_actions_margin"
                     android:text="@string/remember"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
 
                 <Button
                     android:id="@+id/forgot"
@@ -74,11 +72,9 @@
                     android:gravity="center"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="@dimen/card_actions_margin"
-                    android:layout_marginRight="@dimen/card_actions_margin"
                     android:text="@string/forgot"
                     android:textColor="@color/pink"
-                    style="?android:attr/borderlessButtonStyle"/>
+                    style="@style/Widget.AppCompat.Button.Borderless"/>
             </RelativeLayout>
 
             <View

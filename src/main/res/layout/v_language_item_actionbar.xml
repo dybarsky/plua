@@ -13,7 +13,6 @@
         android:layout_marginLeft="@dimen/spinner_margin_left"
         android:layout_marginStart="@dimen/spinner_margin_left"
         android:textColor="@android:color/white"
-        android:textSize="@dimen/spinner_text_size"
-        android:textStyle="bold"/>
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"/>
 
 </LinearLayout>

@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dropdown_item_flag_margin_right">16dp</dimen>
+    <dimen name="spinner_width">110dp</dimen>
 </resources>

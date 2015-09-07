@@ -8,14 +8,13 @@
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="card_padding">15dp</dimen>
     <dimen name="card_actions_panel_padding">3dp</dimen>
-    <dimen name="card_actions_margin">5dp</dimen>
 
     <dimen name="add_button_margin">20dp</dimen>
     <dimen name="add_button_elevation">6dp</dimen>
 
     <dimen name="dropdown_width">180dp</dimen>
     <dimen name="dropdown_padding">8dp</dimen>
-    <dimen name="dropdown_item_flag_margin_right">16dp</dimen>
+    <dimen name="dropdown_item_flag_margin_right">0dp</dimen>
     <dimen name="dropdown_item_flag_height">32dp</dimen>
     <dimen name="dropdown_item_text_size">17sp</dimen>
     <dimen name="dropdown_item_text_margin_left">16dp</dimen>
