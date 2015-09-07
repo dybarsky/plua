@@ -2,6 +2,7 @@ package dmax.plua;
 
 import android.widget.Toast;
 
+import java.io.Closeable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -14,6 +15,7 @@ import dmax.plua.domain.Persistable;
 import dmax.plua.domain.Word;
 import dmax.plua.persist.Dao;
 import dmax.plua.persist.DataBaseManager;
+import dmax.plua.persist.dao.CloseableIterator;
 import dmax.plua.persist.dao.DaoFactory;
 
 /**
@@ -159,9 +161,10 @@ public class DataSource {
     private void loadLinks() {
         links = new LinkedList<Link>();
         Dao<Link> linkDao = DaoFactory.createDao(Link.class);
-        Iterator<Link> it = dataBaseManager.retrieveIterator(linkDao);
+        CloseableIterator<Link> it = dataBaseManager.retrieveIterator(linkDao);
 
         while (it.hasNext()) links.add(it.next());
+        it.close();
 
         Collections.sort(links, new PrioritySorter());
     }

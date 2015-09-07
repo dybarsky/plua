@@ -2,9 +2,11 @@ package dmax.plua.persist;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import java.io.Closeable;
 import java.util.Iterator;
 
 import dmax.plua.domain.Persistable;
+import dmax.plua.persist.dao.CloseableIterator;
 
 /**
  * Base class for encapsulate database operation with persistable entities.
@@ -85,7 +87,7 @@ public abstract class Dao<T extends Persistable> implements Constants {
     /**
      * Load all data from database table. Returns iterator based on {@link android.database.Cursor}.
      */
-    public abstract Iterator<T> retrieveIterator(SQLiteDatabase db);
+    public abstract CloseableIterator<T> retrieveIterator(SQLiteDatabase db);
 
     /**
      * Updates in database record based on data set by method {@link #setPersistable(dmax.plua.domain.Persistable)}

@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.util.Iterator;
+import java.io.IOException;
 
 import dmax.plua.domain.Language;
 import dmax.plua.domain.Word;
@@ -55,11 +55,13 @@ class WordDao extends Dao<Word> {
             case UKRAINIAN: sql = SQL_SELECT_BY_ID_UKRAINIAN; break;
             default: throw new IllegalArgumentException("Language not supported");
         }
-        Cursor result = db.rawQuery(sql, new String[]{ String.valueOf(getId()) });
-        if (result.getCount() == 0) return null;
-        result.moveToFirst();
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(getId())});
+        if (cursor.getCount() == 0) return null;
+        cursor.moveToFirst();
 
-        return createWord(result, language);
+        Word result = createWord(cursor, language);
+        cursor.close();
+        return result;
     }
 
     @Override
@@ -69,7 +71,7 @@ class WordDao extends Dao<Word> {
     }
 
     @Override
-    public Iterator<Word> retrieveIterator(SQLiteDatabase db) {
+    public CloseableIterator<Word> retrieveIterator(SQLiteDatabase db) {
         Language language = getLanguage();
         String sql;
         switch (language) {
@@ -110,7 +112,7 @@ class WordDao extends Dao<Word> {
 
     //~
 
-    private static class WordIterator implements Iterator<Word> {
+    private static class WordIterator implements CloseableIterator<Word> {
 
         private Cursor cursor;
         private Language language;
@@ -134,6 +136,11 @@ class WordDao extends Dao<Word> {
         @Override
         public void remove() {
             throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void close() {
+            cursor.close();
         }
     }
 }

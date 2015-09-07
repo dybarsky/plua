@@ -3,9 +3,11 @@ package dmax.plua.persist;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.io.Closeable;
 import java.util.Iterator;
 
 import dmax.plua.domain.Persistable;
+import dmax.plua.persist.dao.CloseableIterator;
 
 /**
  * Database operations entry point. Manages database lifecycle. Uses dao classes to do database job.
@@ -74,9 +76,9 @@ public class DataBaseManager {
      * Load all data from database table with operation based on dao instance.
      * @return iterator based on {@link android.database.Cursor}.
      */
-    public <T extends Persistable> Iterator<T> retrieveIterator(Dao<T> dao) {
+    public <T extends Persistable> CloseableIterator<T> retrieveIterator(Dao<T> dao) {
         if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
-        Iterator<T> it = dao.retrieveIterator(database);
+        CloseableIterator<T> it = dao.retrieveIterator(database);
         dao.reset();
         return it;
     }

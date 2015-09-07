@@ -27,5 +27,5 @@
     <string name="deleted">Видалено</string>
     <string name="undo">Повернути</string>
     <string name="saving_error">Слово існує</string>
-    <string name="no_words">No words to display</string>
+    <string name="no_words">Немає слів для відображення</string>
 </resources>

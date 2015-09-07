@@ -29,5 +29,4 @@
     <string name="undo">Undo</string>
     <string name="saving_error">Word exists</string>
     <string name="no_words">No words to display</string>
-    <string name="no_words2">Press + button to add a word</string>
 </resources>

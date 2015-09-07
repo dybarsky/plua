@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.io.Closeable;
 import java.util.Iterator;
 
 import dmax.plua.domain.Language;
@@ -40,11 +41,13 @@ class LinkDao extends Dao<Link> {
 
     @Override
     public Link retrieve(SQLiteDatabase db) {
-        Cursor result = db.rawQuery(SQL_SELECT_BY_ID_LINK, new String[]{ String.valueOf(getId()) });
-        if (result.getCount() == 0) return null;
-        result.moveToFirst();
+        Cursor cursor = db.rawQuery(SQL_SELECT_BY_ID_LINK, new String[]{ String.valueOf(getId()) });
+        if (cursor.getCount() == 0) return null;
+        cursor.moveToFirst();
 
-        return createLink(result);
+        Link result = createLink(cursor);
+        cursor.close();
+        return result;
     }
 
     @Override
@@ -54,7 +57,7 @@ class LinkDao extends Dao<Link> {
     }
 
     @Override
-    public Iterator<Link> retrieveIterator(SQLiteDatabase db) {
+    public CloseableIterator<Link> retrieveIterator(SQLiteDatabase db) {
         Cursor result = db.rawQuery(SQL_SELECT_ALL_LINKS, null);
         return new LinkIterator(result);
     }
@@ -82,7 +85,7 @@ class LinkDao extends Dao<Link> {
 
     //~
 
-    private static class LinkIterator implements Iterator<Link> {
+    private static class LinkIterator implements CloseableIterator<Link> {
 
         private Cursor cursor;
 
@@ -104,6 +107,11 @@ class LinkDao extends Dao<Link> {
         @Override
         public void remove() {
             throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public void close() {
+            cursor.close();
         }
     }
 }
