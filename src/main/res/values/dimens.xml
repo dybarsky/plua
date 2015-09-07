@@ -8,6 +8,7 @@
     <dimen name="card_elevation">4dp</dimen>
     <dimen name="card_padding">15dp</dimen>
     <dimen name="card_actions_panel_padding">3dp</dimen>
+    <dimen name="card_actions_margin">5dp</dimen>
 
     <dimen name="add_button_margin">20dp</dimen>
     <dimen name="add_button_elevation">6dp</dimen>

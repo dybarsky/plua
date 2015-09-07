@@ -2,10 +2,12 @@ package dmax.plua.ui.cards;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import dmax.plua.BuildConfig;
 import dmax.plua.ui.Util;
 import dmax.plua.ui.cards.CardsPagerAdapter.CardViewHolder;
 
@@ -45,7 +47,9 @@ class CardStateSwitcher extends AnimatorListenerAdapter {
         groupToShow.setVisibility(View.VISIBLE);
         groupToShow.bringToFront();
 
-        Animator anim = Util.prepareCircularRevealTransition(groupToShow, event);
+        Animator anim = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+                ? Util.prepareCircularRevealTransition(groupToShow, event)
+                : Util.prepareAlphaTransition(groupToShow);
         anim.addListener(this);
         anim.start();
         animate = true;

@@ -3,7 +3,9 @@ package dmax.plua.ui;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.view.ContextThemeWrapper;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,6 +39,7 @@ public class Util {
         return set;
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public static Animator prepareCircularRevealTransition(View v, MotionEvent event) {
         int cx = (int) event.getX();
         int cy = (int) event.getY();
@@ -49,14 +52,8 @@ public class Util {
         return ViewAnimationUtils.createCircularReveal(v, cx, cy, 0, radius);
     }
 
-    public static Animator prepareCollapseTransition(ImageView actionBarIcon, View languagesList) {
-        ObjectAnimator rotate = ObjectAnimator.ofFloat(actionBarIcon, "rotation", 180, 360);
-        ObjectAnimator move = ObjectAnimator.ofFloat(languagesList, "yRatio", 0, -1);
-        move.setInterpolator(new AccelerateInterpolator(1f));
-        AnimatorSet set = new AnimatorSet();
-        set.setDuration(DURATION);
-        set.playTogether(rotate, move);
-        return set;
+    public static Animator prepareAlphaTransition(View v) {
+        return ObjectAnimator.ofFloat(v, "alpha", 0, 1).setDuration(DURATION);
     }
 
     public static Animator prepareSwitchTransition(View switcher, View view1, View view2) {
