@@ -96,6 +96,8 @@ public class CardsPagerAdapter extends PagerAdapter {
      * Update all cards using new language
      */
     public void onLanguageChanged() {
+        if (container == null) return;
+
         Language currentLanguage = dataSource.getSelectedLanguage();
 
         for (int i = 0; i < container.getChildCount(); i++) {
