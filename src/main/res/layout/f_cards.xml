@@ -24,7 +24,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/empty_text_bottom_margin"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textColor="@color/empty"
             android:textStyle="bold"
             android:text="@string/no_words"/>
