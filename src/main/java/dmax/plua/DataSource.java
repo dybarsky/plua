@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import dmax.plua.domain.Language;
 import dmax.plua.domain.Link;
 import dmax.plua.domain.Persistable;
@@ -39,6 +41,7 @@ public class DataSource {
      * @param language default language. Used in methods {@link #loadOriginalWord(dmax.plua.domain.Link)}
      * and {@link #loadTranslationWord(dmax.plua.domain.Link)}
      */
+    @Inject
     public DataSource(DataBaseManager dataBaseManager, Language language) {
         this.dataBaseManager = dataBaseManager;
         this.language = language;

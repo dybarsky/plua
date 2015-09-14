@@ -24,6 +24,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import javax.inject.Inject;
+
 import dmax.plua.DataSource;
 import dmax.plua.R;
 import dmax.plua.domain.Language;
@@ -51,6 +53,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
     private LanguageSwitcher switcher;
     private RemoveTransaction removeTransaction;
 
+    @Inject
+    DataSource dataSource;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.f_cards, container, false);
@@ -74,7 +79,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
         activity.setSupportActionBar(toolbar);
         setHasOptionsMenu(true);
 
-        DataSource dataSource = activity.getDataSource();
+        activity.getGraph().inject(this);
+
         CardInteractionListener listener = new CardInteractionListener(new CardStateSwitcher(), new CardPriorityManager(pager, dataSource));
         this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
         this.adapter = new CardsPagerAdapter(activity, dataSource, listener);
@@ -158,7 +164,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
      * @param language selected language
      */
     public void updateLanguage(Language language) {
-        getDataSource().setSelectedLanguage(language);
+        dataSource.setSelectedLanguage(language);
         adapter.onLanguageChanged();
     }
 
@@ -175,7 +181,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
         // hide undo bar for previous deletion operation (if exists)
         if (removeTransaction != null) removeTransaction.snackbar.dismiss();
 
-        getDataSource().reset();
+        dataSource.reset();
         showCards();
     }
 
@@ -195,10 +201,6 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
 
     MainActivity getCastedActivity() {
         return (MainActivity) getActivity();
-    }
-
-    private DataSource getDataSource() {
-        return getCastedActivity().getDataSource();
     }
 
     /**
@@ -327,7 +329,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
          */
         private void removeItem() {
             RemoveTransaction transaction = CardsFragment.this.removeTransaction;
-            getDataSource().removeWords(transaction.link, transaction.originalWord, transaction.translationWord);
+            dataSource.removeWords(transaction.link, transaction.originalWord, transaction.translationWord);
             adapter.notifyDataSetChanged();
         }
 
@@ -380,7 +382,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
         public void onUndo() {
             RemoveTransaction transaction = CardsFragment.this.removeTransaction;
             // restore item data into datasource
-            getDataSource().addWords(transaction.originalWord, transaction.translationWord);
+            dataSource.addWords(transaction.originalWord, transaction.translationWord);
             getActivity().invalidateOptionsMenu();
             // in last item restored - show pager, if not last - just update adapter
             if (adapter.getCount() > 1) {

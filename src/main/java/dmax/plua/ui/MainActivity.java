@@ -3,8 +3,13 @@ package dmax.plua.ui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import javax.inject.Inject;
+
 import dmax.plua.DataSource;
 import dmax.plua.R;
+import dmax.plua.di.DaggerDependenciesGraph;
+import dmax.plua.di.DependenciesGraph;
+import dmax.plua.di.DependenciesProvider;
 import dmax.plua.domain.Language;
 import dmax.plua.persist.DataBaseManager;
 import dmax.plua.ui.cards.CardsFragment;
@@ -20,10 +25,11 @@ public class MainActivity extends AppCompatActivity  {
 
     private static String TAG = "list";
 
-    private static Language DEFAULT = Language.POLISH;
+    @Inject
+    DataBaseManager database;
 
-    private DataBaseManager database;
-    private DataSource dataSource;
+    private DependenciesGraph graph;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +39,11 @@ public class MainActivity extends AppCompatActivity  {
 
         initLanguageCodeNames();
 
-        database = new DataBaseManager(this);
-        dataSource = new DataSource(database, DEFAULT);
+        graph = DaggerDependenciesGraph
+                .builder()
+                .dependenciesProvider(new DependenciesProvider(this))
+                .build();
+        graph.inject(this);
 
         database.open();
 
@@ -54,10 +63,6 @@ public class MainActivity extends AppCompatActivity  {
         database.close();
     }
 
-    public DataSource getDataSource() {
-        return dataSource;
-    }
-
     @Override
     public void onBackPressed() {
         if (getFragmentManager().getBackStackEntryCount() > 0) {
@@ -65,6 +70,10 @@ public class MainActivity extends AppCompatActivity  {
         } else {
             super.onBackPressed();
         }
+    }
+
+    public DependenciesGraph getGraph() {
+        return graph;
     }
 
     /**

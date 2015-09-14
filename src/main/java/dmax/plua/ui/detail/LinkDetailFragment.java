@@ -14,6 +14,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import javax.inject.Inject;
+
+import dmax.plua.DataSource;
 import dmax.plua.R;
 import dmax.plua.domain.Language;
 import dmax.plua.domain.Word;
@@ -44,6 +47,9 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
     private Word translationWord;
     private boolean edit = false;
 
+    @Inject
+    DataSource dataSource;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.f_detail, container, false);
@@ -58,12 +64,17 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
     }
 
     @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        getCastedActivity().getGraph().inject(this);
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
 
-        MainActivity activity = getCastedActivity();
-
-        ActionBar actionBar = activity.getSupportActionBar();
+        ActionBar actionBar = getCastedActivity().getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(false);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
@@ -75,7 +86,7 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         this.switchFlag.bringToFront();
         this.switchFlag.setOnClickListener(this);
 
-        current = activity.getDataSource().getSelectedLanguage();
+        current = dataSource.getSelectedLanguage();
 
         this.originalFlag.setImageResource(current.equals(Language.UKRAINIAN)
                 ? R.drawable.ic_ukrainian
@@ -145,9 +156,9 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
             word1.setId(word1.getData().equals(originalWord.getData()) ? -1 : originalWord.getId());
             word2.setId(word2.getData().equals(translationWord.getData()) ? -1 : translationWord.getId());
 
-            saved = getCastedActivity().getDataSource().updateWords(word1, word2);
+            saved = dataSource.updateWords(word1, word2);
         } else {
-            saved = getCastedActivity().getDataSource().addWords(word1, word2);
+            saved = dataSource.addWords(word1, word2);
         }
         if (!saved) Util.toast(getActivity(), R.string.saving_error);
 
