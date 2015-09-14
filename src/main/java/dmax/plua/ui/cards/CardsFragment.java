@@ -295,6 +295,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
             removeTransaction.link = holder.link;
             removeTransaction.originalWord = holder.originalWord;
             removeTransaction.translationWord = holder.translationWord;
+            removeTransaction.inProgress = true;
             CardsFragment.this.removeTransaction = removeTransaction;
 
             this.pageToRemove = pageToRemove;
