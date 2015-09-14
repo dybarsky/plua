@@ -1,13 +1,11 @@
 package dmax.plua.ui;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import dmax.plua.DataSource;
 import dmax.plua.R;
 import dmax.plua.domain.Language;
-import dmax.plua.importer.Importer;
 import dmax.plua.persist.DataBaseManager;
 import dmax.plua.ui.cards.CardsFragment;
 
@@ -18,7 +16,7 @@ import dmax.plua.ui.cards.CardsFragment;
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 12.12.14 at 14:20
  */
-public class MainActivity extends AppCompatActivity implements Importer.Callback {
+public class MainActivity extends AppCompatActivity  {
 
     private static String TAG = "list";
 
@@ -26,30 +24,19 @@ public class MainActivity extends AppCompatActivity implements Importer.Callback
 
     private DataBaseManager database;
     private DataSource dataSource;
-    private Handler uiHandler;
-    private Importer importer;
-
-    // after import update cards fragment
-    private Runnable updater = new Runnable() {
-        public void run() {
-            CardsFragment fragment = (CardsFragment) getSupportFragmentManager().findFragmentByTag(TAG);
-            if (fragment != null) {
-                fragment.reload();
-                invalidateOptionsMenu();
-                importer = null;
-            }
-        }
-    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.a_main);
+
         initLanguageCodeNames();
 
-        this.uiHandler = new Handler();
+        database = new DataBaseManager(this);
+        dataSource = new DataSource(database, DEFAULT);
 
-        setContentView(R.layout.a_main);
+        database.open();
 
         // do not add fragment when activity restored (not created freshly)
         // because old fragment will be restored as well.
@@ -59,27 +46,11 @@ public class MainActivity extends AppCompatActivity implements Importer.Callback
                     .commit();
         }
 
-        database = new DataBaseManager(this);
-        database.open();
-
-        dataSource = new DataSource(database, DEFAULT);
-
-        importer = new Importer(this, database);
-        importer.execute(this);
     }
 
     @Override
-    protected void onResume() {
-        database.open();
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (importer != null) {
-            importer.cancel(true);
-        }
+    protected void onDestroy() {
+        super.onDestroy();
         database.close();
     }
 
@@ -94,11 +65,6 @@ public class MainActivity extends AppCompatActivity implements Importer.Callback
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    public void onDatabaseUpdated() {
-        uiHandler.post(updater);
     }
 
     /**

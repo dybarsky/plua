@@ -29,6 +29,7 @@ import dmax.plua.R;
 import dmax.plua.domain.Language;
 import dmax.plua.domain.Link;
 import dmax.plua.domain.Word;
+import dmax.plua.importer.Importer;
 import dmax.plua.ui.Util;
 import dmax.plua.ui.about.AboutFragment;
 import dmax.plua.ui.detail.LinkDetailFragment;
@@ -42,7 +43,7 @@ import dmax.plua.ui.cards.CardsPagerAdapter.CardViewHolder;
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 18.12.14 at 12:25
  */
-public class CardsFragment extends Fragment implements View.OnClickListener {
+public class CardsFragment extends Fragment implements View.OnClickListener, Importer.Callback {
 
     private View emptyView;
     private ViewPager pager;
@@ -78,10 +79,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
         this.adapter = new CardsPagerAdapter(activity, dataSource, listener);
 
-        // if datasource is not empty - show pager with cards
-        if (adapter.getCount() > 0) {
-            showCards();
-        }
+        showCards();
+
+        new Importer(activity, dataSource).execute(this);
     }
 
     @Override
@@ -162,10 +162,16 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
         adapter.onLanguageChanged();
     }
 
+    @Override
+    public void onDatabaseUpdated() {
+        reload();
+        getCastedActivity().invalidateOptionsMenu();
+    }
+
     /**
      * Clear datasource cache, load links and show cards pager
      */
-    public void reload() {
+    private void reload() {
         // hide undo bar for previous deletion operation (if exists)
         if (removeTransaction != null) removeTransaction.snackbar.dismiss();
 
@@ -179,6 +185,9 @@ public class CardsFragment extends Fragment implements View.OnClickListener {
      * Hide empty view and show cards pager
      */
     private void showCards() {
+        // if datasource is not empty - show pager with cards
+        if (adapter.getCount() == 0) return;
+
         emptyView.setVisibility(View.GONE);
         pager.setVisibility(View.VISIBLE);
         pager.setAdapter(adapter);
