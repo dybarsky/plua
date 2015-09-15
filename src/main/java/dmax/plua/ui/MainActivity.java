@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity  {
 
         graph = DaggerDependenciesGraph
                 .builder()
-                .dependenciesProvider(new DependenciesProvider(this))
+                .dependenciesProvider(new DependenciesProvider(getApplicationContext()))
                 .build();
         graph.inject(this);
 
