@@ -9,7 +9,7 @@ interface Constants {
     String DATABASE_NAME = "dictionary";
     int DATABASE_VERSION = 1;
 
-    String TABLE_POLISH = "pl";
+    String TABLE_GERMAN = "de";
     String TABlE_UKRAINIAN = "ua";
     String TABlE_LINK = "link";
 
@@ -32,7 +32,7 @@ interface Constants {
             + COLUMN_WORD_DATA + " TEXT UNIQUE NOT NULL"
             + ")";
 
-    String SQL_CREATE_POLISH_TABLE = "CREATE TABLE " + TABLE_POLISH + SQL_WORD_TABLE_TEMPLATE;
+    String SQL_CREATE_GERMAN_TABLE = "CREATE TABLE " + TABLE_GERMAN + SQL_WORD_TABLE_TEMPLATE;
 
     String SQL_CREATE_UKRAINIAN_TABLE = "CREATE TABLE " + TABlE_UKRAINIAN + SQL_WORD_TABLE_TEMPLATE;
 
@@ -48,13 +48,13 @@ interface Constants {
 
     String SQL_SELECT_ALL_LINKS = "SELECT * FROM " + TABlE_LINK;
 
-    String SQL_SELECT_ALL_POLISH = "SELECT * FROM " + TABLE_POLISH;
+    String SQL_SELECT_ALL_GERMAN = "SELECT * FROM " + TABLE_GERMAN;
 
     String SQL_SELECT_ALL_UKRAINIAN = "SELECT * FROM " + TABlE_UKRAINIAN;
 
     String SQL_SELECT_BY_ID_LINK = "SELECT * FROM " + TABlE_LINK + " WHERE " + COLUMN_ID + " = ?";
 
-    String SQL_SELECT_BY_ID_POLISH = "SELECT * FROM " + TABLE_POLISH + " WHERE " + COLUMN_ID + " = ?";
+    String SQL_SELECT_BY_ID_GERMAN = "SELECT * FROM " + TABLE_GERMAN + " WHERE " + COLUMN_ID + " = ?";
 
     String SQL_SELECT_BY_ID_UKRAINIAN = "SELECT * FROM " + TABlE_UKRAINIAN + " WHERE " + COLUMN_ID + " = ?";
 }

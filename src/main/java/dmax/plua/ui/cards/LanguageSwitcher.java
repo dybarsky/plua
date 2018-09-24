@@ -94,8 +94,8 @@ import dmax.plua.domain.Language;
             if (imageView != null) {
                 int flagId = -1;
                 switch (language) {
-                    case POLISH: flagId = R.drawable.ic_polish; break;
-                    case UKRAINIAN: flagId = R.drawable.ic_ukrainian; break;
+                    case UKRAINIAN: flagId = R.mipmap.ic_ukrainian; break;
+                    case GERMAN: flagId = R.mipmap.ic_german; break;
                 }
                 imageView.setImageResource(flagId);
             }

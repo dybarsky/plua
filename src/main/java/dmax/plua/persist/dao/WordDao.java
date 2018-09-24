@@ -4,8 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import java.io.IOException;
-
 import dmax.plua.domain.Language;
 import dmax.plua.domain.Word;
 import dmax.plua.persist.Dao;
@@ -51,7 +49,7 @@ class WordDao extends Dao<Word> {
         Language language = getLanguage();
         String sql;
         switch (language) {
-            case POLISH: sql = SQL_SELECT_BY_ID_POLISH; break;
+            case GERMAN: sql = SQL_SELECT_BY_ID_GERMAN; break;
             case UKRAINIAN: sql = SQL_SELECT_BY_ID_UKRAINIAN; break;
             default: throw new IllegalArgumentException("Language not supported");
         }
@@ -75,7 +73,7 @@ class WordDao extends Dao<Word> {
         Language language = getLanguage();
         String sql;
         switch (language) {
-            case POLISH: sql = SQL_SELECT_ALL_POLISH; break;
+            case GERMAN: sql = SQL_SELECT_ALL_GERMAN; break;
             case UKRAINIAN: sql = SQL_SELECT_ALL_UKRAINIAN; break;
             default: throw new IllegalArgumentException("Language not supported");
         }
@@ -87,7 +85,7 @@ class WordDao extends Dao<Word> {
 
     private String getTable() {
         switch (getLanguage()) {
-            case POLISH: return TABLE_POLISH;
+            case GERMAN: return TABLE_GERMAN;
             case UKRAINIAN: return TABlE_UKRAINIAN;
             default: throw new IllegalArgumentException("Language not supported");
         }

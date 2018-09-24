@@ -48,40 +48,40 @@
                 android:layout_margin="@dimen/card_padding"
                 android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-            <RelativeLayout
-                android:id="@+id/actions"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:padding="@dimen/card_actions_panel_padding">
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/actions"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentBottom="true"-->
+                <!--android:padding="@dimen/card_actions_panel_padding">-->
 
-                <Button
-                    android:id="@+id/remember"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/remember"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
+                <!--<Button-->
+                    <!--android:id="@+id/remember"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_alignParentLeft="true"-->
+                    <!--android:layout_alignParentStart="true"-->
+                    <!--android:text="@string/remember"-->
+                    <!--style="@style/Widget.AppCompat.Button.Borderless"/>-->
 
-                <Button
-                    android:id="@+id/forgot"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:text="@string/forgot"
-                    android:textColor="@color/pink"
-                    style="@style/Widget.AppCompat.Button.Borderless"/>
-            </RelativeLayout>
+                <!--<Button-->
+                    <!--android:id="@+id/forgot"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:gravity="center"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentEnd="true"-->
+                    <!--android:text="@string/forgot"-->
+                    <!--android:textColor="@color/pink"-->
+                    <!--style="@style/Widget.AppCompat.Button.Borderless"/>-->
+            <!--</RelativeLayout>-->
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:layout_above="@id/actions"
-                android:background="@color/separator"/>
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="0.5dp"-->
+                <!--android:layout_above="@id/actions"-->
+                <!--android:background="@color/separator"/>-->
 
         </RelativeLayout>
 

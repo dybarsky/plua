@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import javax.inject.Inject;
 
-import dmax.plua.DataSource;
 import dmax.plua.R;
 import dmax.plua.di.DaggerDependenciesGraph;
 import dmax.plua.di.DependenciesGraph;
@@ -81,6 +80,6 @@ public class MainActivity extends AppCompatActivity  {
      */
     private void initLanguageCodeNames() {
         Language.UKRAINIAN.setCodeName(getString(R.string.ukrainian));
-        Language.POLISH.setCodeName(getString(R.string.polish));
+        Language.GERMAN.setCodeName(getString(R.string.german));
     }
 }

@@ -1,11 +1,7 @@
 package dmax.plua;
 
-import android.widget.Toast;
-
-import java.io.Closeable;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -138,7 +134,7 @@ public class DataSource {
      */
     public Word loadTranslationWord(Link link) {
         return loadWord(link, Language.UKRAINIAN.equals(language)
-                                ? Language.POLISH
+                                ? Language.GERMAN
                                 : Language.UKRAINIAN);
     }
 
@@ -169,7 +165,7 @@ public class DataSource {
         while (it.hasNext()) links.add(it.next());
         it.close();
 
-        Collections.sort(links, new PrioritySorter());
+        Collections.shuffle(links);
     }
 
     /**

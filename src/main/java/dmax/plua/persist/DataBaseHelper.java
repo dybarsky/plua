@@ -17,7 +17,7 @@ public class DataBaseHelper extends SQLiteOpenHelper implements Constants {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE_UKRAINIAN_TABLE);
-        db.execSQL(SQL_CREATE_POLISH_TABLE);
+        db.execSQL(SQL_CREATE_GERMAN_TABLE);
         db.execSQL(SQL_CREATE_LINK_TABLE);
     }
 

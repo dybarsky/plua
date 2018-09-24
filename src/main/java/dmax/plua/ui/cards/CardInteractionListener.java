@@ -27,7 +27,7 @@ public class CardInteractionListener implements View.OnTouchListener, View.OnCli
     public void onClick(View v) {
         CardViewHolder holder = (CardViewHolder) v.getTag();
         // increase priority is 'forgot' button clicked OR decrease if 'recalled' button clicked
-        priorityManager.onChangePriority(holder, v.getId() == R.id.forgot);
+        priorityManager.onChangePriority(holder, /*v.getId() == R.id.forgot*/ false);
     }
 
     @Override

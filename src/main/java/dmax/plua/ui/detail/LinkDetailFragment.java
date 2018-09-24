@@ -89,11 +89,11 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         current = dataSource.getSelectedLanguage();
 
         this.originalFlag.setImageResource(current.equals(Language.UKRAINIAN)
-                ? R.drawable.ic_ukrainian
-                : R.drawable.ic_polish);
+                ? R.mipmap.ic_ukrainian
+                : R.mipmap.ic_german);
         this.translationFlag.setImageResource(current.equals(Language.UKRAINIAN)
-                ? R.drawable.ic_polish
-                : R.drawable.ic_ukrainian);
+                ? R.mipmap.ic_german
+                : R.mipmap.ic_ukrainian);
 
         Bundle args = getArguments();
         // if some args - use edit mode
@@ -132,7 +132,7 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        this.current = current.equals(Language.UKRAINIAN) ? Language.POLISH : Language.UKRAINIAN;
+        this.current = current.equals(Language.UKRAINIAN) ? Language.GERMAN : Language.UKRAINIAN;
         Word tmp = originalWord;
         originalWord = translationWord;
         translationWord = tmp;
@@ -147,7 +147,7 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
         word1.setData(originalText.getText().toString());
 
         Word word2 = new Word();
-        word2.setLanguage(current.equals(Language.UKRAINIAN) ? Language.POLISH : Language.UKRAINIAN);
+        word2.setLanguage(current.equals(Language.UKRAINIAN) ? Language.GERMAN : Language.UKRAINIAN);
         word2.setData(translationText.getText().toString());
 
         boolean saved;
