@@ -96,7 +96,7 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
             if (assetVersion == -1) return;
 
             // check if asset file with this version is already imported
-            SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_APPEND);
+            SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
             if (assetVersion == prefs.getInt(VERSION, -1)) return;
 
             // check if can read asset file languages header
@@ -157,9 +157,12 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
     }
 
     private void showDialog() {
-        dialog = new SpotsDialog(context, R.style.Dialog);
-        dialog.setCancelable(true);
-        dialog.setOnCancelListener(this);
+        dialog = new SpotsDialog.Builder()
+            .setContext(context)
+            .setTheme(R.style.Dialog)
+            .setCancelable(true)
+            .setCancelListener(this)
+            .build();
         dialog.show();
     }
 
