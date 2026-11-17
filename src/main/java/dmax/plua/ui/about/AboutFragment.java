@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import dmax.plua.R;
+import dmax.plua.ui.Util;
 
 /**
  * Fragment for about page.
@@ -89,7 +90,11 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
         Intent intent = new Intent();
         intent.setAction(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse(getString(R.string.send_feedback)));
-        startActivity(intent);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException e) {
+            Util.toast(getActivity(), R.string.no_email_app);
+        }
     }
 
     private void openPlayStore() {

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Legacy full-backup rules (API 23-30). Keep in sync with data_extraction_rules.xml:
+    the word database and the import marker must be backed up together or not at all.
+-->
+<full-backup-content>
+    <include domain="database" path="dictionary"/>
+    <include domain="sharedpref" path="import.xml"/>
+</full-backup-content>

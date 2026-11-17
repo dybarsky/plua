@@ -28,4 +28,5 @@
     <string name="undo">Повернути</string>
     <string name="saving_error">Слово існує</string>
     <string name="no_words">Немає слів для відображення</string>
+    <string name="no_email_app">Не знайдено поштовий застосунок</string>
 </resources>

@@ -29,4 +29,5 @@
     <string name="undo">Undo</string>
     <string name="saving_error">Word exists</string>
     <string name="no_words">No words to display</string>
+    <string name="no_email_app">No email app found</string>
 </resources>
