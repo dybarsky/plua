@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="importing">Aktualizacja bazy danych</string>
+    <string name="add_word_title">Dodaj słowo</string>
+    <string name="save">Zapisz</string>
+    <string name="type_error">Nie może być puste</string>
+    <string name="ukrainian">Ukraiński</string>
+    <string name="polish">Polski</string>
+    <string name="delete">Usuń</string>
+    <string name="edit">Edytuj</string>
+    <string name="edit_word_title">Edytuj słowo</string>
+    <string name="reload">Odśwież</string>
+    <string name="forgot">Nie wiem</string>
+    <string name="remember">Wiem</string>
+    <string name="settings">Ustawienia</string>
+    <string name="settings_order_title">Powtórki interwałowe</string>
+    <string name="settings_order_random">Losowa kolejność. Fiszki są mieszane przy każdym wczytaniu listy. Włącz, aby powtarzać słowa według priorytetu.</string>
+    <string name="settings_order_spaced">Powtórki interwałowe: najpierw słowa, których nie znasz. Po odwróceniu fiszki oznacz ją „Wiem” lub „Nie wiem”. Kolejność jest ustalana przy wczytaniu listy (po zmianie ustawienia lub „Odśwież”).</string>
+    <string name="help">Pomoc i opinie</string>
+    <string name="help_title">Pomoc</string>
+    <string name="help_description">Dowiedz się, jak korzystać z aplikacji.</string>
+    <string name="rate_title">Oceń</string>
+    <string name="rate_description">Oceń i skomentuj w Google Play.</string>
+    <string name="feedback_title">Wyślij opinię</string>
+    <string name="feedback_description">Masz problem lub pomysł? Napisz e-mail.</string>
+    <string name="about_title">O aplikacji</string>
+    <string name="about_description">Więcej informacji o aplikacji.</string>
+    <string name="send_feedback">mailto:maxim.dybarskyy@gmail.com?subject=Words : Feedback</string>
+    <string name="rate">market://details?id=</string>
+    <string name="rate_web">http://play.google.com/store/apps/details?id=</string>
+    <string name="deleted">Usunięto</string>
+    <string name="undo">Cofnij</string>
+    <string name="saving_error">Słowo już istnieje</string>
+    <string name="no_words">Brak słów do wyświetlenia</string>
+    <string name="no_email_app">Nie znaleziono aplikacji pocztowej</string>
+</resources>

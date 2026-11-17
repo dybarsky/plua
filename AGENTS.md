@@ -64,7 +64,8 @@ There is **no `app/` module**: the root project is the app module and sources li
 - File header javadoc: `Created by Maxim Dybarsky | <email> on <date>`. Don't add it to new files; don't strip it from existing ones.
 - Resource prefixes: `a_*.xml` activity layouts, `f_*.xml` fragment layouts, `v_*.xml` custom/item views, `ic_*` icons.
 - Do **not** `switch` on `R.id.*` / `R.*` values — R fields are non-final (that's why recent commits convert switches to `if` chains).
-- Strings: English in `values/strings.xml`, Ukrainian in `values-uk/strings.xml`. Keep both in sync.
+- Strings: English in `values/strings.xml`, Ukrainian in `values-uk/strings.xml`, Polish in `values-pl/strings.xml`. Keep all in sync
+  (verify on a device with `adb shell cmd locale set-app-locales dmax.plua --locales pl`, `--locales ""` to reset).
 - UI state lives in fragments / view holders (`CardViewHolder`); persistence goes only through `DataSource`.
 - Words are stored lower-cased by the importer; the unique constraint is per language table.
 
