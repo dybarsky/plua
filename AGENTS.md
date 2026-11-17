@@ -31,7 +31,7 @@ into SQLite on first launch. No network, no accounts, no permissions.
 
 ```
 build.gradle              single-module build, Groovy DSL, no settings.gradle yet
-proguard-android.txt      project-local R8/ProGuard rules (legacy, see upgrade/05)
+proguard-rules.pro        project-local R8 rules (AnimatedView keep)
 gradle/wrapper/           wrapper (8.10.2 in working tree)
 src/main/java/dmax/plua/  app code (see ARCHITECTURE.md)
 src/main/res/             layouts (a_ activity, f_ fragment, v_ view), values, values-uk (Ukrainian), mipmaps
