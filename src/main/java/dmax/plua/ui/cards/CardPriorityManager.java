@@ -1,6 +1,6 @@
 package dmax.plua.ui.cards;
 
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 import dmax.plua.DataSource;
 import dmax.plua.domain.Link;

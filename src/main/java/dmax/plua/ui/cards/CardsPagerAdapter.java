@@ -1,11 +1,11 @@
 package dmax.plua.ui.cards;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.cardview.widget.CardView;
+import androidx.viewpager.widget.PagerAdapter;
 
 import dmax.plua.DataSource;
 import dmax.plua.R;
