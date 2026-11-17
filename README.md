@@ -19,7 +19,7 @@ word pairs (nouns, adjectives, verbs) that are imported into a local SQLite data
 
 No network, no accounts, no permissions, no analytics. See [PRIVACY.md](PRIVACY.md).
 
-###Build
+### Build
 
 Java, XML views, single module. Requires JDK 17+ (21 recommended) and Android SDK platform 36.
 
@@ -33,13 +33,13 @@ without it the release bundle is built unsigned. See [AGENTS.md](AGENTS.md) and 
 
 ===========
 
-###Developed By
+### Developed By
 
-Maksym Dybarskyi - http://d-max.info
+Maksym Dybarskyi
 
 ===========
 
-###License
+### License
 
 	The MIT License (MIT)
 	Copyright © 2015 Maxim Dybarsky
