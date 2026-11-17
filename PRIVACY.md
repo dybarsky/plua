@@ -1,74 +1,46 @@
 **Privacy Policy**
 
-This privacy policy applies to the PLUA Cards app (hereby referred to as "Application") for mobile devices that was created by Maksym Dybarskyi (hereby referred to as "Service Provider") as an Open Source service. This service is intended for use "AS IS".
+This privacy policy applies to the PLUA Cards app (the "Application") for Android, created by Maksym Dybarskyi (the "Service Provider") as an open-source project. The Application is provided "AS IS".
+
+**Summary**
+
+The Application does not collect, transmit or share any personal data. It works fully offline.
 
 **Information Collection and Use**
 
-The Application collects information when you download and use it. This information may include information such as
+*   The Application does not request any Android permissions, including network and location access, and contains no code that connects to the internet.
+*   The Application contains no analytics, advertising, crash-reporting or other third-party SDKs.
+*   The words you add, edit or delete are stored only in a local database on your device. The Service Provider has no access to them.
+*   The Service Provider does not collect your IP address, device identifiers, location, usage statistics or any other information.
 
-*   Your device's Internet Protocol address (e.g. IP address)
-*   The pages of the Application that you visit, the time and date of your visit, the time spent on those pages
-*   The time spent on the Application
-*   The operating system you use on your mobile device
+**Feedback and Rating**
 
-The Application does not gather precise information about the location of your mobile device.
+The "send feedback" action in the About screen opens your own e-mail app with a new message addressed to the Service Provider. Nothing is sent unless you send that e-mail yourself, and then the Service Provider receives only what the message contains (your e-mail address and the text you wrote). The "rate" action opens the Application's page in Google Play (or a web browser); that is handled by those apps under their own privacy policies.
 
-The Application collects your device's location, which helps the Service Provider determine your approximate geographical location and make use of in below ways:
+**Backup**
 
-*   Geolocation Services: The Service Provider utilizes location data to provide features such as personalized content, relevant recommendations, and location-based services.
-*   Analytics and Improvements: Aggregated and anonymized location data helps the Service Provider to analyze user behavior, identify trends, and improve the overall performance and functionality of the Application.
-*   Third-Party Services: Periodically, the Service Provider may transmit anonymized location data to external services. These services assist them in enhancing the Application and optimizing their offerings.
-
-The Service Provider may use the information you provided to contact you from time to time to provide you with important information, required notices and marketing promotions.
-
-For a better experience, while using the Application, the Service Provider may require you to provide us with certain personally identifiable information. The information that the Service Provider request will be retained by them and used as described in this privacy policy.
+The Application allows Android's standard backup and device-to-device transfer of its local word database. If you have backup enabled in your Android settings, a copy of the database may be stored in your own Google account and is handled by Google under [Google's privacy policy](https://policies.google.com/privacy). You can turn this off in your device settings. The Service Provider has no access to these backups.
 
 **Third Party Access**
 
-Only aggregated, anonymized data is periodically transmitted to external services to aid the Service Provider in improving the Application and their service. The Service Provider may share your information with third parties in the ways that are described in this privacy statement.
+The Application does not share any information with third parties, because it does not collect any.
 
-Please note that the Application utilizes third-party services that have their own Privacy Policy about handling data. Below are the links to the Privacy Policy of the third-party service providers used by the Application:
+**Opt-Out Rights and Data Deletion**
 
-*   [Google Play Services](https://www.google.com/policies/privacy/)
-
-The Service Provider may disclose User Provided and Automatically Collected Information:
-
-*   as required by law, such as to comply with a subpoena, or similar legal process;
-*   when they believe in good faith that disclosure is necessary to protect their rights, protect your safety or the safety of others, investigate fraud, or respond to a government request;
-*   with their trusted services providers who work on their behalf, do not have an independent use of the information we disclose to them, and have agreed to adhere to the rules set forth in this privacy statement.
-
-**Opt-Out Rights**
-
-You can stop all collection of information by the Application easily by uninstalling it. You may use the standard uninstall processes as may be available as part of your mobile device or via the mobile application marketplace or network.
-
-**Data Retention Policy**
-
-The Service Provider will retain User Provided data for as long as you use the Application and for a reasonable time thereafter. If you'd like them to delete User Provided Data that you have provided via the Application, please contact them at maxim.dybarskyy@gmail.com and they will respond in a reasonable time.
+All data lives on your device. You can remove it at any time by clearing the Application's storage or by uninstalling the Application in your device settings.
 
 **Children**
 
-The Service Provider does not use the Application to knowingly solicit data from or market to children under the age of 13.
-
-The Application does not address anyone under the age of 13. The Service Provider does not knowingly collect personally identifiable information from children under 13 years of age. In the case the Service Provider discover that a child under 13 has provided personal information, the Service Provider will immediately delete this from their servers. If you are a parent or guardian and you are aware that your child has provided us with personal information, please contact the Service Provider (maxim.dybarskyy@gmail.com) so that they will be able to take the necessary actions.
+The Application does not collect personal information from anyone, including children under 13.
 
 **Security**
 
-The Service Provider is concerned about safeguarding the confidentiality of your information. The Service Provider provides physical, electronic, and procedural safeguards to protect information the Service Provider processes and maintains.
+Because data never leaves your device, it is protected by the security of your device (screen lock, device encryption).
 
 **Changes**
 
-This Privacy Policy may be updated from time to time for any reason. The Service Provider will notify you of any changes to the Privacy Policy by updating this page with the new Privacy Policy. You are advised to consult this Privacy Policy regularly for any changes, as continued use is deemed approval of all changes.
-
-This privacy policy is effective as of 2025-01-30
-
-**Your Consent**
-
-By using the Application, you are consenting to the processing of your information as set forth in this Privacy Policy now and as amended by us.
+This Privacy Policy may be updated from time to time. Changes are published on this page. This privacy policy is effective as of 2026-11-17.
 
 **Contact Us**
 
-If you have any questions regarding privacy while using the Application, or have questions about the practices, please contact the Service Provider via email at maxim.dybarskyy@gmail.com.
-
-* * *
-
-This privacy policy page was generated by [App Privacy Policy Generator](https://app-privacy-policy-generator.nisrulz.com/)
+If you have any questions about privacy, please contact the Service Provider at maxim.dybarskyy@gmail.com.
