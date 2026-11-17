@@ -15,12 +15,12 @@ Remaining hazard (P2): `Importer.getLanguages()` (`Importer.java:155`) still cal
 header and does not catch `IllegalArgumentException`; a future bad header would crash again. Defensive fix: catch it
 and return `null`.
 
-### P0-2 — Save button in `LinkDetailFragment` is inverted
+### P0-2 — Save button in `LinkDetailFragment` is inverted — RESOLVED
 `LinkDetailFragment.java:123`: `if (item.getItemId() != R.id.save) { save(); return true; }`.
 The `switch`→`if` rewrite flipped the condition: pressing **Save** falls through to `super` (nothing saved), any
 other item triggers a save. Fix: `== R.id.save`.
 
-### P1-3 — Release signing password is now a literal
+### P1-3 — Release signing password is now a literal — RESOLVED (password read from `keystorePassword` property)
 `build.gradle` signing config: `storePassword "keystorePassword"` / `keyPassword "keystorePassword"` — the string
 literal, whereas `HEAD` read the Gradle property `keystorePassword` (defined in `~/.gradle/gradle.properties`).
 A release build would fail to sign (wrong password). Restore the property lookup (snippet in
@@ -33,7 +33,7 @@ A release build would fail to sign (wrong password). Restore the property lookup
 
 ## Build
 
-### P1-4 — Project does not build in this environment
+### P1-4 — Project does not build in this environment — RESOLVED (Gradle 9.6.1 / AGP 9.5.1 / SDK 36 build on JDK 25)
 - Gradle 8.10.2 on JDK 25 → `BUG! exception in phase 'semantic analysis' … Unsupported class file major version 69`.
 - `compileSdk 34` platform not installed (only `android-36`, `android-37.0`; build-tools `36.0.0`, `37.0.0`).
 - `AGP 8.8.0-beta01` is a pre-release; no `settings.gradle`; no `gradle.properties` in the repo.
@@ -43,7 +43,7 @@ Fix path: [upgrade/README.md](../upgrade/README.md).
 Redundant (warning today, to be removed). No `applicationId` is set in `defaultConfig`; it silently falls back to the
 namespace `dmax.plua`. Make it explicit so the Play id can never drift.
 
-### P2-6 — `proguard-android.txt` is stale
+### P2-6 — `proguard-android.txt` is stale — RESOLVED (replaced by `proguard-rules.pro`, optimize + obfuscation on)
 Keeps `dmax.dialog.**` (library no longer used; code now lives in `dmax.plua.ui.dialog`), `-dontwarn android.support.**`,
 and disables optimization/obfuscation (`-dontoptimize`, `-dontobfuscate`). See [upgrade/05](../upgrade/05-r8-lint-testing-release.md).
 

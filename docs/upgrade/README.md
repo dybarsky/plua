@@ -1,7 +1,13 @@
 # Upgrade plan — overview
 
 Goal: bring PLUA Cards from a 2018-era stack (support libraries, SDK 28 → half-migrated to 34) to a current,
-Play-compliant stack. Analysis date: **2026-11-17**. Nothing in this folder has been applied to the code yet.
+Play-compliant stack. Analysis date: **2026-11-17**.
+
+> **Status (branch `upgrade/agp9`):** steps 0–3 and the R8 part of step 5 are applied and committed — Gradle 9.6.1,
+> AGP 9.5.1, SDK 36, minSdk 23, AndroidX/Material, Dagger 2.60.1, `proguard-rules.pro` + `shrinkResources`.
+> `./gradlew help assembleDebug testDebugUnitTest lintDebug bundleRelease` is green on JDK 25. The "working tree"
+> table below describes the pre-upgrade state and is kept for history. Still open: step 4 leftovers, lint baseline,
+> instrumented tests, PRIVACY.md/README, on-device verification.
 
 ## Where the project is today
 
