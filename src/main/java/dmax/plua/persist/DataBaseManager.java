@@ -93,4 +93,19 @@ public class DataBaseManager {
         dao.reset();
         return t;
     }
+
+    /**
+     * Runs the action in one database transaction: committed if the action completes normally, rolled back if it
+     * throws (the exception is propagated).
+     */
+    public void runInTransaction(Runnable action) {
+        if (database == null || !database.isOpen()) throw new IllegalStateException("DBManager not initialized");
+        database.beginTransaction();
+        try {
+            action.run();
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+    }
 }

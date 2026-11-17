@@ -81,6 +81,15 @@ public class DataSource {
     }
 
     /**
+     * Run the action (e.g. many {@link #addWords} calls) in one database transaction: committed if the action
+     * completes normally, rolled back if it throws. Note: the links cache is not rolled back, call
+     * {@link #reset()} after a rollback.
+     */
+    public void runInTransaction(Runnable action) {
+        dataBaseManager.runInTransaction(action);
+    }
+
+    /**
      * Save words into database. This words should be loaded from database before (should contain id).
      * @return false if error during saving occurred
      */

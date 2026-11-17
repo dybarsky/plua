@@ -52,6 +52,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
     private CardsPagerAdapter adapter;
     private LanguageSwitcher switcher;
     private RemoveTransaction removeTransaction;
+    private Importer importer;
 
     @Inject
     DataSource dataSource;
@@ -87,7 +88,18 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
 
         showCards();
 
-        new Importer(activity, dataSource).execute(this);
+        importer = new Importer(activity, dataSource);
+        importer.execute(this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        // stop importing: activity (and database) may be gone, callback must not be called
+        if (importer != null) {
+            importer.detach();
+            importer = null;
+        }
+        super.onDestroyView();
     }
 
     @Override

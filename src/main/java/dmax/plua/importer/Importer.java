@@ -4,11 +4,17 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import dmax.plua.ui.dialog.SpotsDialog;
 import dmax.plua.DataSource;
@@ -17,8 +23,9 @@ import dmax.plua.domain.Language;
 import dmax.plua.domain.Word;
 
 /**
- * Reads words data line by line from 'data' asset file and stores into database in the background thread.
- * Stores data file version into shared preferences and checks is this file already imported.
+ * Reads words data line by line from 'data' asset file and stores into database in the background thread
+ * (all inserts in one database transaction). Stores data file version into shared preferences and checks is this
+ * file already imported.
  * <br/>
  * <b>Asset file format:</b><br/>
  * <ul>
@@ -32,133 +39,191 @@ import dmax.plua.domain.Word;
  * UKRAINIAN|POLISH<br/>
  * Брехати|kłamać<br/>
  * Брехун|kłamca<br/>
+ * Parsing is done by {@link DataFileParser}. A malformed header aborts the import quietly (logged).
+ * <br/>
+ * <b>Cancelling:</b>
+ * <ul>
+ * <li>User cancels the dialog: import stops, the transaction is rolled back (nothing partial is stored, version is not
+ * saved), dialog is dismissed and {@link Callback#onDatabaseUpdated()} is still called.
+ * <li>{@link #detach()} (lifecycle teardown): import stops, dialog is dismissed and the callback is NOT called.
+ * </ul>
+ * Must be created and executed on the main thread.
  *
  * <br/><br/>
  * Created by Maxim Dybarsky | maxim.dybarskyy@gmail.com
  * on 22.12.14 at 12:57
  */
-public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callback> implements DialogInterface.OnCancelListener {
+public class Importer implements DialogInterface.OnCancelListener {
+
+    private static final String TAG = "Importer";
 
     private static final String FILE_NAME = "data";
     private static final String VERSION = "version";
     private static final String PREFS_NAME = "import";
-    private static final String SEPARATOR = "\\|";
 
-    private DataSource dataSource;
+    private final DataSource dataSource;
+    /** Application context: used from the background thread, must not leak an Activity. */
+    private final Context appContext;
+    /** Activity context: used only on the main thread to show the dialog, released in {@link #detach()}. */
+    private Context uiContext;
+    private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
-    private Context context;
-    private BufferedReader reader;
+    private ExecutorService executor;
     private AlertDialog dialog;
 
+    /** User cancelled the dialog or {@link #detach()} was called: import loop must stop. */
+    private volatile boolean cancelled;
+    /** {@link #detach()} was called: callback must not be called, nothing UI related must be touched. */
+    private volatile boolean detached;
+
     public Importer(Context context, DataSource dataSource) {
-        this.context = context;
+        this.uiContext = context;
+        this.appContext = context.getApplicationContext() != null ? context.getApplicationContext() : context;
         this.dataSource = dataSource;
     }
 
-    @Override
-    protected void onPreExecute() {
+    /**
+     * Show progress dialog and start importing in the background. Result is delivered to the callback on the main
+     * thread (unless {@link #detach()} is called before).
+     */
+    public void execute(final Callback callback) {
+        if (executor != null) throw new IllegalStateException("Importer can be executed only once");
         showDialog();
+        executor = Executors.newSingleThreadExecutor();
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    importData();
+                } catch (RuntimeException e) {
+                    // never crash the process from the import thread (e.g. database closed during teardown)
+                    if (detached) {
+                        Log.d(TAG, "Import stopped after detach: " + e);
+                    } else {
+                        Log.w(TAG, "Import failed", e);
+                    }
+                }
+                mainHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        finished(callback);
+                    }
+                });
+            }
+        });
+        // already submitted task will be completed, thread is released after that
+        executor.shutdown();
     }
 
-    @Override
-    protected Callback doInBackground(Callback... callback) {
-        importData();
-        return callback[0];
+    /**
+     * Stop importing (the transaction is rolled back), dismiss the dialog and never call the callback.
+     * Call it when the screen which started the import is destroyed.
+     */
+    public void detach() {
+        detached = true;
+        cancelled = true;
+        mainHandler.removeCallbacksAndMessages(null);
+        dismissDialog();
+        uiContext = null;
     }
 
-    @Override
-    protected void onPostExecute(Callback callback) {
-        finished(callback);
-    }
-
-    @Override
-    protected void onCancelled(Callback callback) {
-        finished(callback);
-    }
-
+    /** Main thread. Can be called after {@link #detach()}: then does nothing. */
     private void finished(Callback callback) {
-        dialog.dismiss();
+        if (detached) return;
+        dismissDialog();
+        // After a cancel (rollback) the DataSource links cache (filled by addWords) is stale, but callback
+        // reloads the data: CardsFragment.reload() calls DataSource.reset().
         callback.onDatabaseUpdated();
     }
 
     @Override
     public void onCancel(DialogInterface dialog) {
-        cancel(true);
+        cancelled = true;
     }
 
     //~
 
+    /** Background thread. */
     private void importData() {
+        BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(context.getAssets().open(FILE_NAME)));
+            reader = new BufferedReader(new InputStreamReader(appContext.getAssets().open(FILE_NAME), StandardCharsets.UTF_8));
             // check if can read asset file version
-            int assetVersion = getAssetVersion();
-            if (assetVersion == -1) return;
+            int assetVersion = DataFileParser.parseVersion(reader.readLine());
+            if (assetVersion == DataFileParser.NO_VERSION) {
+                Log.w(TAG, "Asset file has no valid 'version|int' header, nothing imported");
+                return;
+            }
 
             // check if asset file with this version is already imported
-            SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            SharedPreferences prefs = appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
             if (assetVersion == prefs.getInt(VERSION, -1)) return;
 
             // check if can read asset file languages header
-            Language[] languages = getLanguages();
-            if (languages == null) return;
-
-            String line;
-            while(!isCancelled() && (line = reader.readLine()) != null) {
-                String[] data = line.split(SEPARATOR);
-                if (data.length == 2) {
-                    Word w1 = new Word();
-                    w1.setLanguage(languages[0]);
-                    w1.setData(data[0].toLowerCase());
-
-                    Word w2 = new Word();
-                    w2.setLanguage(languages[1]);
-                    w2.setData(data[1].toLowerCase());
-
-                    dataSource.addWords(w1, w2);
-                }
+            final Language[] languages = DataFileParser.parseLanguages(reader.readLine());
+            if (languages == null) {
+                Log.w(TAG, "Asset file has no valid languages header, nothing imported");
+                return;
             }
 
-            // save asset file version
+            final BufferedReader in = reader;
+            try {
+                dataSource.runInTransaction(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            importWords(in, languages);
+                        } catch (IOException e) {
+                            // abort: transaction will be rolled back
+                            throw new ImportAbortedException(e);
+                        }
+                    }
+                });
+            } catch (ImportAbortedException e) {
+                if (e.getCause() != null) Log.w(TAG, "Import failed, rolled back", e.getCause());
+                return;
+            }
+
+            // save asset file version only after completed import
             prefs.edit().putInt(VERSION, assetVersion).apply();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.w(TAG, "Can't read asset file", e);
         } finally {
             if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    Log.w(TAG, "Can't close asset file", e);
                 }
             }
         }
     }
 
-    private int getAssetVersion() throws IOException {
-        String header = reader.readLine();
-        if (header == null) {
-            return -1;
-        }
-        String[] headerData = header.split(SEPARATOR);
-        return headerData.length == 2 && headerData[0].equals(VERSION)
-                ? Integer.parseInt(headerData[1])
-                : -1;
-    }
+    /** Runs inside the transaction. Throws {@link ImportAbortedException} if cancelled. */
+    private void importWords(BufferedReader reader, Language[] languages) throws IOException {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (cancelled) throw new ImportAbortedException(null);
 
-    private Language[] getLanguages() throws IOException {
-        String languages = reader.readLine();
-        if (languages == null) {
-            return null;
+            String[] data = DataFileParser.parsePair(line);
+            if (data == null) continue;
+
+            Word w1 = new Word();
+            w1.setLanguage(languages[0]);
+            w1.setData(data[0].toLowerCase(Locale.ROOT));
+
+            Word w2 = new Word();
+            w2.setLanguage(languages[1]);
+            w2.setData(data[1].toLowerCase(Locale.ROOT));
+
+            dataSource.addWords(w1, w2);
         }
-        String[] data = languages.split(SEPARATOR);
-        return data.length == 2
-                ? new Language[] { Language.valueOf(data[0]), Language.valueOf(data[1]) }
-                : null;
+        if (cancelled) throw new ImportAbortedException(null);
     }
 
     private void showDialog() {
         dialog = new SpotsDialog.Builder()
-            .setContext(context)
+            .setContext(uiContext)
             .setTheme(R.style.Dialog)
             .setCancelable(true)
             .setCancelListener(this)
@@ -166,7 +231,26 @@ public class Importer extends AsyncTask<Importer.Callback, Void, Importer.Callba
         dialog.show();
     }
 
+    private void dismissDialog() {
+        if (dialog != null) {
+            try {
+                dialog.dismiss();
+            } catch (IllegalArgumentException e) {
+                // window is already gone
+                Log.w(TAG, "Dialog already detached from window", e);
+            }
+            dialog = null;
+        }
+    }
+
     //~
+
+    /** Thrown inside the transaction to roll it back (cancel or read error). */
+    private static class ImportAbortedException extends RuntimeException {
+        ImportAbortedException(Throwable cause) {
+            super(cause);
+        }
+    }
 
     public interface Callback {
         void onDatabaseUpdated();
