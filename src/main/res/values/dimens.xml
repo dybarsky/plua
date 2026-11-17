@@ -32,4 +32,10 @@
     <dimen name="about_items_text_padding_right">56dp</dimen>
 
     <dimen name="empty_text_bottom_margin">140dp</dimen>
+
+    <dimen name="spot_size">6dp</dimen>
+    <dimen name="title_margin">10dp</dimen>
+    <dimen name="title_padding">6dp</dimen>
+    <dimen name="progress_margin">24dp</dimen>
+    <dimen name="progress_width">250dp</dimen>
 </resources>

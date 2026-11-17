@@ -10,7 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import dmax.dialog.SpotsDialog;
+import dmax.plua.ui.dialog.SpotsDialog;
 import dmax.plua.DataSource;
 import dmax.plua.R;
 import dmax.plua.domain.Language;
