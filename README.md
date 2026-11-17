@@ -8,8 +8,13 @@
 
 Offline Android flashcard app for learning vocabulary, **Ukrainian ⇄ Polish**.
 
-A card shows a word. Tap it to reveal the translation, swipe to get the next card. Cards come in random order.
-You can add, edit and delete word pairs, and switch which language is shown first. The app ships with about 1500
+A card shows a word. Tap it to reveal the translation, swipe to get the next card. You can add, edit and delete word
+pairs, and switch which language is shown first.
+
+Card order is configurable in **Settings** (overflow menu): *random* (default) or *spaced repetition*. In the spaced
+mode the translation side of a card shows **Recalled** / **Forgot** buttons; forgotten words are shown earlier, recalled
+ones later (see [spaced repetition][1]). The order is applied whenever the list is loaded: after changing the setting or
+tapping Reload. The app ships with about 1500
 word pairs (nouns, adjectives, verbs) that are imported into a local SQLite database on first launch.
 
 No network, no accounts, no permissions, no analytics. See [PRIVACY.md](PRIVACY.md).
@@ -56,3 +61,5 @@ Maksym Dybarskyi - http://d-max.info
 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 	THE SOFTWARE.
+
+[1]: https://en.wikipedia.org/wiki/Spaced_repetition

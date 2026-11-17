@@ -1,6 +1,7 @@
 package dmax.plua;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import dmax.plua.persist.Dao;
 import dmax.plua.persist.DataBaseManager;
 import dmax.plua.persist.dao.CloseableIterator;
 import dmax.plua.persist.dao.DaoFactory;
+import dmax.plua.settings.OrderMode;
+import dmax.plua.settings.Settings;
 
 /**
  * Main access and operations point with links and words. Uses links cache inside.
@@ -28,18 +31,23 @@ public class DataSource {
     private Language language;
     private DataBaseManager dataBaseManager;
     private Dao<Word> dao;
+    private Settings settings;
 
     private List<Link> links;
+    /** Order mode the cached {@link #links} were ordered with. */
+    private OrderMode linksOrderMode;
 
     /**
      * Create data source.
      * @param language default language. Used in methods {@link #loadOriginalWord(dmax.plua.domain.Link)}
      * and {@link #loadTranslationWord(dmax.plua.domain.Link)}
+     * @param settings source of the cards order mode, read each time links are requested
      */
     @Inject
-    public DataSource(DataBaseManager dataBaseManager, Language language) {
+    public DataSource(DataBaseManager dataBaseManager, Language language, Settings settings) {
         this.dataBaseManager = dataBaseManager;
         this.language = language;
+        this.settings = settings;
         this.dao = DaoFactory.createDao(Word.class);
     }
 
@@ -104,6 +112,22 @@ public class DataSource {
     }
 
     /**
+     * Save link into database. This link should be loaded from database before (should contain id).
+     * The order of the cached links is not changed, it is applied next time links are loaded.
+     */
+    public void updateLink(Link link) {
+        Dao<Link> linkDao = DaoFactory.createDao(Link.class);
+        dataBaseManager.update(linkDao.setPersistable(link));
+    }
+
+    /**
+     * Current order mode from the settings.
+     */
+    public OrderMode getOrderMode() {
+        return settings.getOrderMode();
+    }
+
+    /**
      * Remove link and words from cache and database.
      * @param link link to be removed from cache and database
      * @param word1 word to be removed from database
@@ -147,17 +171,21 @@ public class DataSource {
 
     /**
      * Return cached collection of links or load if cache not exists.
-     * Collection is in random order (shuffled when loaded, see {@link #loadLinks()}).
+     * Collection is ordered according to the saved {@link OrderMode} (see {@link #loadLinks()}); if the mode was
+     * changed since the cache was built, links are loaded again.
      */
     public List<Link> getLinks() {
-        if (links == null) loadLinks();
+        if (links == null || linksOrderMode != settings.getOrderMode()) loadLinks();
         return links;
     }
 
     /**
-     * Load links from database and cache them in random order. The only place where the order is changed.
+     * Load links from database and cache them. The only place where the order is changed:
+     * {@link OrderMode#RANDOM} shuffles, {@link OrderMode#SPACED} sorts by priority (shuffled first, so links
+     * with equal priority and time stay in random order relative to each other).
      */
     private void loadLinks() {
+        OrderMode mode = settings.getOrderMode();
         links = new LinkedList<Link>();
         Dao<Link> linkDao = DaoFactory.createDao(Link.class);
         CloseableIterator<Link> it = dataBaseManager.retrieveIterator(linkDao);
@@ -166,6 +194,8 @@ public class DataSource {
         it.close();
 
         Collections.shuffle(links);
+        if (mode == OrderMode.SPACED) Collections.sort(links, new PrioritySorter());
+        linksOrderMode = mode;
     }
 
     /**
@@ -178,5 +208,29 @@ public class DataSource {
 
     private boolean verifySaved(Persistable persistable) {
         return persistable.getId() != -1;
+    }
+
+    //~
+
+    /**
+     * Used for collection sorting by priority and updated time.
+     * After sorting at beginning of collection should be links with big priority value.
+     * If priorities are same, link with less updated time should be before link with bigger time.
+     * That means, link which was updated earlier (but has same priority) should be shown first.
+     */
+    static class PrioritySorter implements Comparator<Link> {
+
+        @Override
+        public int compare(Link lhs, Link rhs) {
+            // higher priority first
+            if (lhs.getPriority() != rhs.getPriority()) {
+                return lhs.getPriority() > rhs.getPriority() ? -1 : 1;
+            }
+            // same priority: earlier updated first (long compare: no int overflow on big differences)
+            if (lhs.getUpdated() != rhs.getUpdated()) {
+                return lhs.getUpdated() < rhs.getUpdated() ? -1 : 1;
+            }
+            return 0;
+        }
     }
 }

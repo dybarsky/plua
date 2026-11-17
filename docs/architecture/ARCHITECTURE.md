@@ -11,13 +11,14 @@ facade; persistence is a hand-rolled DAO layer over `SQLiteOpenHelper`. Dagger 2
 MainActivity (AppCompatActivity, hosts Toolbar + FrameLayout-like container)
  ├─ CardsFragment        home screen: ViewPager of cards, FAB, toolbar spinner, undo Snackbar
  │    ├─ CardsPagerAdapter   one card View per Link; CardViewHolder holds both Words + views
- │    ├─ CardInteractionListener  touch → flip card;  (click → priority, currently disabled)
+ │    ├─ CardInteractionListener  touch → flip card;  click Forgot/Recalled → priority (spaced mode only)
  │    │    ├─ CardStateSwitcher   flip animation (circular reveal API21+, alpha fade below)
- │    │    └─ CardPriorityManager priority ±1 + go to next page (not reachable from UI now)
+ │    │    └─ CardPriorityManager priority ±1 + go to next page
  │    ├─ LanguageSwitcher    custom ActionBar spinner (Polish / Ukrainian = "original" side)
  │    └─ Importer (AsyncTask) loads assets/data into DB, shows SpotsDialog
  ├─ LinkDetailFragment   add / edit a word pair (back stack, slide_up animation)
- └─ AboutFragment        help / rate / feedback / about (WebView over assets/*.html)
+ ├─ AboutFragment        help / rate / feedback / about (WebView over assets/*.html)
+ └─ SettingsFragment     settings list (one item: order mode random / spaced repetition), saved via `Settings`
 ```
 
 ## Packages (`src/main/java/dmax/plua`)
@@ -82,14 +83,14 @@ Failure toast `saving_error` = "Word exists" (unique constraint).
   `card_size 230dp`), overridden in `values-land`, `values-uk`, `values-v21`. `onConfigurationChanged` in
   `CardsFragment` patches margins manually because the Activity declares `configChanges="orientation|screenSize"`.
 - Flags are mipmaps (`ic_polish`, `ic_ukrainian`); toolbar icons are PNGs in all densities (no vector drawables).
-- The `forgot` / `remember` buttons exist as strings, and priority code exists, but the buttons are commented out in
-  `CardsPagerAdapter` and `CardInteractionListener.onClick` hard-codes `increment=false`. The README's
-  "spaced repetition" feature is **inactive**: cards are `Collections.shuffle`d, and `DataSource.PrioritySorter`
-  (tested by `SorterTest`) is not used.
+- Order mode (`settings.OrderMode`, stored by `settings.Settings` in shared prefs `settings`, provided by Dagger):
+  `RANDOM` (default) shuffles links when loaded; `SPACED` shuffles then sorts with `DataSource.PrioritySorter`
+  (priority desc, updated asc). `DataSource.getLinks()` reloads when the saved mode differs from the cached one, so the
+  Settings screen only has to save the value. The Forgot/Recalled buttons in `v_word_card` are `gone` unless `SPACED`.
 
 ## Tests
 
-`src/test/java/dmax/plua`: `SorterTest` (PrioritySorter), `domain/LinkEqualsTest`, `domain/WordEqualsTest`.
+`src/test/java/dmax/plua`: `SorterTest` (PrioritySorter), `settings/OrderModeTest`, `domain/LinkEqualsTest`, `domain/WordEqualsTest`.
 JUnit 4.12, pure JVM, no Android dependencies. Nothing covers persistence, importer or UI.
 
 ## Threading & lifecycle (important for refactors)

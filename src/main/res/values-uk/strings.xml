@@ -10,6 +10,12 @@
     <string name="edit">Редагувати</string>
     <string name="edit_word_title">Редагувати слово</string>
     <string name="reload">Оновити</string>
+    <string name="forgot">Забув</string>
+    <string name="remember">Згадав</string>
+    <string name="settings">Налаштування</string>
+    <string name="settings_order_title">Інтервальне повторення</string>
+    <string name="settings_order_random">Випадковий порядок. Картки перемішуються щоразу, коли завантажується список. Увімкніть, щоб повторювати слова за пріоритетом.</string>
+    <string name="settings_order_spaced">Інтервальне повторення. Спочатку йдуть слова, які ви забули, потім ті, що згадали. Після повороту картки позначте її «Забув» або «Згадав». Порядок застосовується під час завантаження списку: після зміни налаштування або натискання «Оновити».</string>
     <string name="help"><![CDATA[Допомога і відгук]]></string>
     <string name="help_title">Допомога</string>
     <string name="help_description">Як користуватися додатком.</string>

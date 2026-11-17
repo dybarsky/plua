@@ -12,6 +12,7 @@ import dmax.plua.R;
 import dmax.plua.domain.Language;
 import dmax.plua.domain.Link;
 import dmax.plua.domain.Word;
+import dmax.plua.settings.OrderMode;
 
 /**
  * Cards view pager adapter.
@@ -60,6 +61,15 @@ public class CardsPagerAdapter extends PagerAdapter {
         holder.translationTextView = (TextView) card.findViewById(android.R.id.text2);
 
         holder.originalViewGroup.bringToFront();
+
+        // forgot / recalled buttons make sense only when cards are ordered by priority
+        View actions = root.findViewById(R.id.actions);
+        actions.setVisibility(dataSource.getOrderMode() == OrderMode.SPACED ? View.VISIBLE : View.GONE);
+        for (int id : new int[] { R.id.forgot, R.id.remember }) {
+            View button = root.findViewById(id);
+            button.setTag(holder);
+            button.setOnClickListener(listener);
+        }
 
         // fill out data holder with actual data from datasource
         holder.link = dataSource.getLinks().get(position);

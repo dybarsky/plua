@@ -6,6 +6,7 @@ import dagger.Component;
 import dmax.plua.ui.MainActivity;
 import dmax.plua.ui.cards.CardsFragment;
 import dmax.plua.ui.detail.LinkDetailFragment;
+import dmax.plua.ui.settings.SettingsFragment;
 
 /**
  * Created by Maksym Dybarskyi | maksym.dybarskyi@symphonyteleca.com
@@ -17,4 +18,5 @@ public interface DependenciesGraph {
     void inject(MainActivity activity);
     void inject(LinkDetailFragment fragment);
     void inject(CardsFragment fragment);
+    void inject(SettingsFragment fragment);
 }

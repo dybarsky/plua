@@ -37,6 +37,7 @@ import dmax.plua.ui.Util;
 import dmax.plua.ui.about.AboutFragment;
 import dmax.plua.ui.cards.CardsPagerAdapter.CardViewHolder;
 import dmax.plua.ui.detail.LinkDetailFragment;
+import dmax.plua.ui.settings.SettingsFragment;
 
 /**
  * Fragment with cards. Main user UI component.
@@ -82,7 +83,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
 
         activity.getGraph().inject(this);
 
-        CardInteractionListener listener = new CardInteractionListener(new CardStateSwitcher());
+        CardInteractionListener listener = new CardInteractionListener(new CardStateSwitcher(), new CardPriorityManager(pager, dataSource));
         this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
         this.adapter = new CardsPagerAdapter(activity, dataSource, listener);
 
@@ -137,6 +138,10 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
         }
         if (item.getItemId() == R.id.about) {
             showAboutFragment();
+            return true;
+        }
+        if (item.getItemId() == R.id.settings) {
+            showSettingsFragment();
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -260,7 +265,14 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
     }
 
     private void showAboutFragment() {
-        AboutFragment fragment = new AboutFragment();
+        showFragment(new AboutFragment());
+    }
+
+    private void showSettingsFragment() {
+        showFragment(new SettingsFragment());
+    }
+
+    private void showFragment(Fragment fragment) {
         getFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_up, 0, 0, R.anim.slide_down)
                 .replace(R.id.container, fragment)

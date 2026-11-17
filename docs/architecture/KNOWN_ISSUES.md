@@ -60,8 +60,9 @@ and disables optimization/obfuscation (`-dontoptimize`, `-dontobfuscate`). See [
 - **P2 — Static mutable `Language.codeName`**: null (→ `toString()`/spinner text null) if anything reads it before
   `MainActivity.initLanguageCodeNames()`.
 - **P2 — Selected language is not persisted**; resets to Polish on every launch.
-- **P2 — Spaced-repetition feature is dead code**: priority buttons commented out, `PrioritySorter` unused, links are
-  shuffled. README still advertises it.
+- **Spaced repetition — RESOLVED**: it is now an opt-in `OrderMode.SPACED` (Settings screen, persisted in the `settings`
+  shared preferences). The order is applied only when links are loaded; a Forgot/Recalled click updates the DB but does
+  not re-sort the cards already shown. New links keep priority 0 / updated 0 and are appended at the end until reload.
 - **P2 — Crossed FKs / misleading column names** in the `link` table: `original` is declared `REFERENCES pl(id)` but
   holds the Ukrainian id; `translation` is declared `REFERENCES ua(id)` but holds the Polish id. Same as in the published
   0.6 schema; harmless because FK enforcement is off, but it blocks any future `PRAGMA foreign_keys=ON` / Room schema
@@ -75,4 +76,3 @@ and disables optimization/obfuscation (`-dontoptimize`, `-dontobfuscate`). See [
   shares data with third parties. The app declares no permissions, has no network code and no analytics SDKs
   (verified: manifest has no `<uses-permission>`; dependencies are only support libs + Dagger). Looks like a generic
   template. Owner should rewrite it, and keep the Play Console "Data safety" form consistent.
-- README mentions spaced repetition as working; see above. Screenshot link is a dead-prone googleusercontent URL.

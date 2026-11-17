@@ -9,6 +9,7 @@ import dagger.Provides;
 import dmax.plua.DataSource;
 import dmax.plua.domain.Language;
 import dmax.plua.persist.DataBaseManager;
+import dmax.plua.settings.Settings;
 
 /**
  * Created by Maksym Dybarskyi | maksym.dybarskyi@symphonyteleca.com
@@ -25,8 +26,13 @@ public class DependenciesProvider {
     }
 
     @Provides @Singleton
-    public DataSource provideDataSource(DataBaseManager manager) {
-        return new DataSource(manager, DEFAULT);
+    public DataSource provideDataSource(DataBaseManager manager, Settings settings) {
+        return new DataSource(manager, DEFAULT, settings);
+    }
+
+    @Provides @Singleton
+    public Settings provideSettings() {
+        return new Settings(context);
     }
 
     @Provides @Singleton
