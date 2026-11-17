@@ -1,7 +1,6 @@
 package dmax.plua;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -105,14 +104,6 @@ public class DataSource {
     }
 
     /**
-     * Save link into database. This link should be loaded from database before (should contain id).
-     */
-    public void updateLink(Link link) {
-        Dao<Link> linkDao = DaoFactory.createDao(Link.class);
-        dataBaseManager.update(linkDao.setPersistable(link));
-    }
-
-    /**
      * Remove link and words from cache and database.
      * @param link link to be removed from cache and database
      * @param word1 word to be removed from database
@@ -156,7 +147,7 @@ public class DataSource {
 
     /**
      * Return cached collection of links or load if cache not exists.
-     * Collection is sorted by priority and updated time.
+     * Collection is in random order (shuffled when loaded, see {@link #loadLinks()}).
      */
     public List<Link> getLinks() {
         if (links == null) loadLinks();
@@ -164,7 +155,7 @@ public class DataSource {
     }
 
     /**
-     * Load links from database and cache them. Sort by priority.
+     * Load links from database and cache them in random order. The only place where the order is changed.
      */
     private void loadLinks() {
         links = new LinkedList<Link>();
@@ -187,28 +178,5 @@ public class DataSource {
 
     private boolean verifySaved(Persistable persistable) {
         return persistable.getId() != -1;
-    }
-
-    //~
-
-    /**
-     * Used for collection sorting by priority and updated time.
-     * After sorting at beginning of collection should be links with big priority value.
-     * If priorities are same, link with less updated time should be before link with bigger time.
-     * That means, link which was updated earlier (but has same priority) should be shown first.
-     */
-    static class PrioritySorter implements Comparator<Link> {
-
-        @Override
-        public int compare(Link lhs, Link rhs) {
-            /*
-            if priorities different: return <0 if right link priority less, >0 if lest priority less.
-            if priorities same: return <0 if left updated time less, >0 if right updated time less.
-            */
-            int priorityDiff = rhs.getPriority() - lhs.getPriority();
-            return priorityDiff != 0
-                    ? priorityDiff
-                    : (int) (lhs.getUpdated() - rhs.getUpdated());
-        }
     }
 }

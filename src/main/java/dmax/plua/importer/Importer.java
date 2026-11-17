@@ -47,6 +47,13 @@ import dmax.plua.domain.Word;
  * saved), dialog is dismissed and {@link Callback#onDatabaseUpdated()} is still called.
  * <li>{@link #detach()} (lifecycle teardown): import stops, dialog is dismissed and the callback is NOT called.
  * </ul>
+ * <br/>
+ * <b>When it runs:</b> {@link #execute(Callback)} first decides synchronously on the main thread whether an import is
+ * needed: only the first line of the asset is read and its version is compared with the one saved in shared
+ * preferences. If the asset is already imported (or its header is unreadable/invalid) nothing happens at all: no
+ * dialog, no thread and no callback. So {@link Callback#onDatabaseUpdated()} is called only when an import ran to
+ * completion or was cancelled by the user (the links cache is stale then), never when there was nothing to do.
+ * <br/>
  * Must be created and executed on the main thread.
  *
  * <br/><br/>
@@ -69,6 +76,7 @@ public class Importer implements DialogInterface.OnCancelListener {
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
     private ExecutorService executor;
+    private boolean executed;
     private AlertDialog dialog;
 
     /** User cancelled the dialog or {@link #detach()} was called: import loop must stop. */
@@ -83,11 +91,14 @@ public class Importer implements DialogInterface.OnCancelListener {
     }
 
     /**
-     * Show progress dialog and start importing in the background. Result is delivered to the callback on the main
-     * thread (unless {@link #detach()} is called before).
+     * If the asset file is not imported yet: show progress dialog and start importing in the background. Result is
+     * delivered to the callback on the main thread (unless {@link #detach()} is called before).
+     * If there is nothing to import - does nothing (no dialog, no thread, callback is not called).
      */
     public void execute(final Callback callback) {
-        if (executor != null) throw new IllegalStateException("Importer can be executed only once");
+        if (executed) throw new IllegalStateException("Importer can be executed only once");
+        executed = true;
+        if (!isImportNeeded()) return;
         showDialog();
         executor = Executors.newSingleThreadExecutor();
         executor.execute(new Runnable() {
@@ -142,6 +153,38 @@ public class Importer implements DialogInterface.OnCancelListener {
     }
 
     //~
+
+    /**
+     * Cheap check on the main thread: reads only the first line of the asset file and compares its version with the
+     * saved one. Any read problem or invalid header means "no import needed" (logged).
+     */
+    private boolean isImportNeeded() {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new InputStreamReader(appContext.getAssets().open(FILE_NAME), StandardCharsets.UTF_8));
+            int assetVersion = DataFileParser.parseVersion(reader.readLine());
+            if (assetVersion == DataFileParser.NO_VERSION) {
+                Log.w(TAG, "Asset file has no valid 'version|int' header, nothing to import");
+                return false;
+            }
+            SharedPreferences prefs = appContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+            return assetVersion != prefs.getInt(VERSION, -1);
+        } catch (IOException e) {
+            Log.w(TAG, "Can't read asset file, nothing to import", e);
+            return false;
+        } catch (RuntimeException e) {
+            Log.w(TAG, "Can't check asset file version, nothing to import", e);
+            return false;
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    Log.w(TAG, "Can't close asset file", e);
+                }
+            }
+        }
+    }
 
     /** Background thread. */
     private void importData() {
@@ -253,6 +296,10 @@ public class Importer implements DialogInterface.OnCancelListener {
     }
 
     public interface Callback {
+        /**
+         * Main thread. Called only after an import ran to completion or was cancelled by the user (the data source
+         * cache is stale then). Never called when there was nothing to import or after {@link #detach()}.
+         */
         void onDatabaseUpdated();
     }
 }

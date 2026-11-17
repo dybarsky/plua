@@ -50,9 +50,6 @@ public class CardsPagerAdapter extends PagerAdapter {
         View root = View.inflate(context, R.layout.v_word_card, null);
         root.setId(position);
 
-//        View forgotButton = root.findViewById(R.id.forgot);
-//        View rememberButton = root.findViewById(R.id.remember);
-
         CardView card = (CardView) root.findViewById(R.id.card);
 
         // init card data holder
@@ -69,11 +66,6 @@ public class CardsPagerAdapter extends PagerAdapter {
         holder.originalWord = dataSource.loadOriginalWord(holder.link);
         holder.translationWord = dataSource.loadTranslationWord(holder.link);
         holder.originalTextView.setText(holder.originalWord.getData());
-
-//        forgotButton.setTag(holder);
-//        forgotButton.setOnClickListener(listener);
-//        rememberButton.setTag(holder);
-//        rememberButton.setOnClickListener(listener);
 
         card.setOnTouchListener(listener);
         card.setTag(holder);

@@ -82,7 +82,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
 
         activity.getGraph().inject(this);
 
-        CardInteractionListener listener = new CardInteractionListener(new CardStateSwitcher(), new CardPriorityManager(pager, dataSource));
+        CardInteractionListener listener = new CardInteractionListener(new CardStateSwitcher());
         this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
         this.adapter = new CardsPagerAdapter(activity, dataSource, listener);
 

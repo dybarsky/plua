@@ -9,9 +9,7 @@
     <string name="delete">Видалити</string>
     <string name="edit">Редагувати</string>
     <string name="edit_word_title">Редагувати слово</string>
-    <string name="forgot">Забув</string>
     <string name="reload">Оновити</string>
-    <string name="remember">Згадав</string>
     <string name="help"><![CDATA[Допомога і відгук]]></string>
     <string name="help_title">Допомога</string>
     <string name="help_description">Як користуватися додатком.</string>
