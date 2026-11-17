@@ -17,7 +17,7 @@ import dmax.plua.persist.DataBaseManager;
 @Module
 public class DependenciesProvider {
 
-    private static final Language DEFAULT = Language.GERMAN;
+    private static final Language DEFAULT = Language.POLISH;
     private Context context;
 
     public DependenciesProvider(Context context) {

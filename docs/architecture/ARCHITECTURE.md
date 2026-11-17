@@ -14,7 +14,7 @@ MainActivity (AppCompatActivity, hosts Toolbar + FrameLayout-like container)
  │    ├─ CardInteractionListener  touch → flip card;  (click → priority, currently disabled)
  │    │    ├─ CardStateSwitcher   flip animation (circular reveal API21+, alpha fade below)
  │    │    └─ CardPriorityManager priority ±1 + go to next page (not reachable from UI now)
- │    ├─ LanguageSwitcher    custom ActionBar spinner (German / Ukrainian = "original" side)
+ │    ├─ LanguageSwitcher    custom ActionBar spinner (Polish / Ukrainian = "original" side)
  │    └─ Importer (AsyncTask) loads assets/data into DB, shows SpotsDialog
  ├─ LinkDetailFragment   add / edit a word pair (back stack, slide_up animation)
  └─ AboutFragment        help / rate / feedback / about (WebView over assets/*.html)
@@ -26,7 +26,7 @@ MainActivity (AppCompatActivity, hosts Toolbar + FrameLayout-like container)
 |---|---|
 | `dmax.plua` | `DataSource` — the facade used by UI. Caches `List<Link>` (loaded once, shuffled), maps Link→Word, add/update/remove. |
 | `di` | `DependenciesGraph` (`@Singleton @Component`) and `DependenciesProvider` (`@Module`, takes a `Context`). |
-| `domain` | `Word`, `Link`, `Language` (enum GERMAN, UKRAINIAN), `Persistable`. POJOs, `Serializable`, value-ish `equals`. |
+| `domain` | `Word`, `Link`, `Language` (enum POLISH, UKRAINIAN), `Persistable`. POJOs, `Serializable`, value-ish `equals`. |
 | `persist` | `DataBaseHelper` (SQLiteOpenHelper), `DataBaseManager` (open/close + generic CRUD via a `Dao`), `Dao<T>` base, `Constants` (SQL + indexes). |
 | `persist.dao` | `WordDao`, `LinkDao` (package-private), `DaoFactory`, `CloseableIterator` (cursor wrapper). |
 | `importer` | `Importer` — reads `assets/data`, inserts pairs, remembers imported version in SharedPreferences `import`. |
@@ -42,7 +42,7 @@ MainActivity (AppCompatActivity, hosts Toolbar + FrameLayout-like container)
   and exposes it with `getGraph()`.
 - Fragments inject themselves: `((MainActivity) getActivity()).getGraph().inject(this)` in `onActivityCreated`.
   Injectable members: `MainActivity.database`, `CardsFragment.dataSource`, `LinkDetailFragment.dataSource`.
-- Provided: `DataSource(DataBaseManager, Language.GERMAN)` and `DataBaseManager(Context)`, both `@Singleton`
+- Provided: `DataSource(DataBaseManager, Language.POLISH)` and `DataBaseManager(Context)`, both `@Singleton`
   (scope = lifetime of the component, which is the lifetime of the **Activity instance**, not the process).
 - Dagger runs as a Java annotation processor (`annotationProcessor 'com.google.dagger:dagger-compiler:2.15'`);
   generated class `DaggerDependenciesGraph` is referenced from `MainActivity`.
@@ -81,7 +81,7 @@ Failure toast `saving_error` = "Word exists" (unique constraint).
 - Layout is portrait-oriented with fixed dimens (`pager_margin_top 80dp`, `pager_margin_bottom 140dp`,
   `card_size 230dp`), overridden in `values-land`, `values-uk`, `values-v21`. `onConfigurationChanged` in
   `CardsFragment` patches margins manually because the Activity declares `configChanges="orientation|screenSize"`.
-- Flags are mipmaps (`ic_german`, `ic_ukrainian`); toolbar icons are PNGs in all densities (no vector drawables).
+- Flags are mipmaps (`ic_polish`, `ic_ukrainian`); toolbar icons are PNGs in all densities (no vector drawables).
 - The `forgot` / `remember` buttons exist as strings, and priority code exists, but the buttons are commented out in
   `CardsPagerAdapter` and `CardInteractionListener.onClick` hard-codes `increment=false`. The README's
   "spaced repetition" feature is **inactive**: cards are `Collections.shuffle`d, and `DataSource.PrioritySorter`

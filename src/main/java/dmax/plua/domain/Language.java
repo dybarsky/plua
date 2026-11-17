@@ -7,7 +7,7 @@ import java.io.Serializable;
  * on 10.12.14 at 13:46
  */
 public enum Language implements Serializable {
-    GERMAN,
+    POLISH,
     UKRAINIAN;
 
     private String codeName;

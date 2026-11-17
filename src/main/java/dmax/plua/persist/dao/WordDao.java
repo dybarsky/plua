@@ -49,7 +49,7 @@ class WordDao extends Dao<Word> {
         Language language = getLanguage();
         String sql;
         switch (language) {
-            case GERMAN: sql = SQL_SELECT_BY_ID_GERMAN; break;
+            case POLISH: sql = SQL_SELECT_BY_ID_POLISH; break;
             case UKRAINIAN: sql = SQL_SELECT_BY_ID_UKRAINIAN; break;
             default: throw new IllegalArgumentException("Language not supported");
         }
@@ -73,7 +73,7 @@ class WordDao extends Dao<Word> {
         Language language = getLanguage();
         String sql;
         switch (language) {
-            case GERMAN: sql = SQL_SELECT_ALL_GERMAN; break;
+            case POLISH: sql = SQL_SELECT_ALL_POLISH; break;
             case UKRAINIAN: sql = SQL_SELECT_ALL_UKRAINIAN; break;
             default: throw new IllegalArgumentException("Language not supported");
         }
@@ -85,7 +85,7 @@ class WordDao extends Dao<Word> {
 
     private String getTable() {
         switch (getLanguage()) {
-            case GERMAN: return TABLE_GERMAN;
+            case POLISH: return TABLE_POLISH;
             case UKRAINIAN: return TABlE_UKRAINIAN;
             default: throw new IllegalArgumentException("Language not supported");
         }

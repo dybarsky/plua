@@ -4,7 +4,7 @@ Entry point for AI agents (and humans) working in this repo. Read this first, th
 
 ## What this app is
 
-Offline Android flashcard app for learning vocabulary (Ukrainian ⇄ German). A card shows a word; tap to reveal the
+Offline Android flashcard app for learning vocabulary (Ukrainian ⇄ Polish). A card shows a word; tap to reveal the
 translation; swipe for the next card; add / edit / delete word pairs. Words are bundled in an asset file and imported
 into SQLite on first launch. No network, no accounts, no permissions.
 
@@ -55,7 +55,8 @@ There is **no `app/` module**: the root project is the app module and sources li
 1. Gradle 8.10.2 cannot run on JDK 25 (`Unsupported class file major version 69`); the Android Studio JBR here is also 25.
 2. `compileSdk 34` is not installed locally (installed platforms: `android-36`, `android-37.0`).
 3. `AGP 8.8.0-beta01` is a pre-release.
-4. `assets/data` header uses `POLISH`, which is not a `Language` value → importer crash at runtime (see KNOWN_ISSUES).
+4. ~~`assets/data` header uses `POLISH`, not a `Language` value~~ — resolved: the app's language pair is Ukrainian ⇄ Polish
+   again (`Language.POLISH`, table `pl`), matching the published 0.6 DB schema (see KNOWN_ISSUES P0-1).
 
 ## Conventions in this codebase
 
@@ -74,6 +75,6 @@ There is **no `app/` module**: the root project is the app module and sources li
 - The working tree has substantial **uncommitted migration work** (AGP/Gradle bump, vendored `SpotsDialog`, `switch`→`if`
   rewrites, manifest `exported`). Don't revert it; `git status` first.
 - Don't change the DB schema or table names without a real migration — the DB is `version 1` with an empty
-  `onUpgrade`, and installed users have data in it (`ua`, `de`, `link`).
+  `onUpgrade`, and installed users have data in it (`ua`, `pl`, `link`).
 - Run `./gradlew testDebugUnitTest` after touching `domain/`, `DataSource` or `persist/`.
 - Prefer fixing items from KNOWN_ISSUES before starting the upgrade — the first two are functional regressions.

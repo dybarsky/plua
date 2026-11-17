@@ -28,7 +28,7 @@ Gradle supplies the rest):
 -keepnames class dmax.plua.domain.** { *; }
 ```
 `Language.valueOf(String)` on asset header names: the enum's `name()` strings are baked into the constants and R8's
-default rules keep `values()`/`valueOf()`, so `GERMAN`/`UKRAINIAN` keep resolving. Still, verify with a release build on
+default rules keep `values()`/`valueOf()`, so `POLISH`/`UKRAINIAN` keep resolving. Still, verify with a release build on
 a clean install — the importer is the one reflective-ish path.
 
 Enable `shrinkResources true` (works with minify). Check `build/outputs/mapping/release/` for `configuration.txt`
@@ -72,7 +72,7 @@ for the toolchain upgrade — JUnit 4.12 → 4.13.2 is binary compatible.
    no crash on `Language.valueOf`.
 5. Update README (remove or implement spaced repetition claim; badges/links), `about.html` version text if any.
 6. Screenshots for Play listing after edge-to-edge/Material changes.
-7. Confirm `assets/data` header and content (German, not Polish) and bump its `version|N` if the word list changed.
+7. Confirm `assets/data` header and content (`UKRAINIAN|POLISH` header, Polish words) and bump its `version|N` if the word list changed.
 8. Store listing: confirm supported devices after minSdk change (API 23+).
 
 ## CI (optional)

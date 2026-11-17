@@ -134,7 +134,7 @@ public class DataSource {
      */
     public Word loadTranslationWord(Link link) {
         return loadWord(link, Language.UKRAINIAN.equals(language)
-                                ? Language.GERMAN
+                                ? Language.POLISH
                                 : Language.UKRAINIAN);
     }
 

@@ -34,12 +34,12 @@ Suggested commits: (1) Fragment APIs, (2) MenuProvider, (3) Importer executor + 
 |---|---|---|
 | **ViewModel + LiveData/Flow** for cards state | survives configuration changes, removes `configChanges`, per-Activity graph and `CardViewHolder` state hacks | moderate; do before ViewPager2/Compose |
 | **ViewPager2** + `RecyclerView.Adapter` | maintained pager, vertical/RTL, DiffUtil instead of `POSITION_NONE` | rewrite `CardsPagerAdapter`, `PageRemover`, `CardPriorityManager.showNextCard`, flip logic |
-| **Room** instead of hand-rolled DAO/`Dao<T>` stack | schema-checked, migrations, transactions, background execution | **must migrate existing installs**: DB v1 with misleading FKs (`pl(id)`) and `original`=UA/`translation`=DE columns. Room validates the schema exactly → write `Migration(1,2)` that recreates `link` and copies data (and test with a DB captured from a real old install). Don't rename tables blindly. |
+| **Room** instead of hand-rolled DAO/`Dao<T>` stack | schema-checked, migrations, transactions, background execution | **must migrate existing installs**: DB v1 with misleading FKs (`pl(id)`) and `original`=UA/`translation`=PL columns. Room validates the schema exactly → write `Migration(1,2)` that recreates `link` and copies data (and test with a DB captured from a real old install). Don't rename tables blindly. |
 | **Kotlin** | null-safety, coroutines | AGP 9 has built-in Kotlin: *don't* add `org.jetbrains.kotlin.android`; use the built-in support (see `agp-9-upgrade` skill, `migrate-to-built-in-kotlin.md`). Convert incrementally (domain/persist first). |
 | **Jetpack Compose** (Material 3) | replaces XML, fragments, ViewPager, custom dialog | an agent skill `migrate-xml-views-to-jetpack-compose` exists. UI is small (3 screens) → feasible; do after ViewModel. Navigation 3 skill also available. |
 | **Re-enable spaced repetition** | README feature currently dead | product decision: restore forgot/recalled buttons in `v_word_card`, sort with `PrioritySorter` instead of `shuffle`, persist selected language |
 | **Persist selected language / progress** | UX | `SharedPreferences`/DataStore |
-| **Localization** | German-first UI; only `en` + `uk` strings | add `values-de`, `values-pl` if wanted; per-app locale (API 33+) |
+| **Localization** | Polish/Ukrainian app; only `en` + `uk` UI strings | add `values-pl` if wanted; per-app locale (API 33+) |
 | **Dependency injection removal** | less build machinery | `Application`-scoped holder, see 02 |
 
 ## Test-first guidance for Tier A

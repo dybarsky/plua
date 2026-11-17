@@ -80,6 +80,6 @@ public class MainActivity extends AppCompatActivity  {
      */
     private void initLanguageCodeNames() {
         Language.UKRAINIAN.setCodeName(getString(R.string.ukrainian));
-        Language.GERMAN.setCodeName(getString(R.string.german));
+        Language.POLISH.setCodeName(getString(R.string.polish));
     }
 }

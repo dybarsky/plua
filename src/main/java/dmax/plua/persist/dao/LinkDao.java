@@ -64,7 +64,7 @@ class LinkDao extends Dao<Link> {
     private ContentValues prepareContentValues() {
         ContentValues values = new ContentValues();
         values.put(COLUMN_LINK_ORIGINAL, persistable.getWordId(Language.UKRAINIAN));
-        values.put(COLUMN_LINK_TRANSLATION, persistable.getWordId(Language.GERMAN));
+        values.put(COLUMN_LINK_TRANSLATION, persistable.getWordId(Language.POLISH));
         values.put(COLUMN_LINK_PRIORITY, persistable.getPriority());
         values.put(COLUMN_LINK_UPDATED, persistable.getUpdated());
         return values;
@@ -74,7 +74,7 @@ class LinkDao extends Dao<Link> {
         Link link = new Link();
         link.setId(cursor.getLong(COLUMN_ID_INDEX));
         link.setWordId(Language.UKRAINIAN, cursor.getLong(COLUMN_LINK_ORIGINAL_INDEX));
-        link.setWordId(Language.GERMAN, cursor.getLong(COLUMN_LINK_TRANSLATION_INDEX));
+        link.setWordId(Language.POLISH, cursor.getLong(COLUMN_LINK_TRANSLATION_INDEX));
         link.setPriority(cursor.getInt(COLUMN_LINK_PRIORITY_INDEX));
         link.setUpdated(cursor.getLong(COLUMN_LINK_UPDATED_INDEX));
         return link;

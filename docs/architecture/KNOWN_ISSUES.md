@@ -5,14 +5,15 @@ Severity: **P0** = app broken, **P1** = real bug / blocks upgrade, **P2** = risk
 
 ## Functional regressions in the uncommitted tree
 
-### P0-1 — `assets/data` header is `POLISH` → importer crash on first launch
-`src/main/assets/data:2` is `UKRAINIAN|POLISH`; `Language` only has `GERMAN`/`UKRAINIAN`.
-`Importer.getLanguages()` (`Importer.java:155`) calls `Language.valueOf("POLISH")` → `IllegalArgumentException`
-(unchecked, not caught by the `IOException` handler) inside `doInBackground` → process crash with the progress dialog
-showing. `HEAD` has a valid 3-line German file; the 481-line working copy contains Polish translations (e.g.
-`Брехати|kłamać`). **Decision needed from the owner:** restore a real German word list, or keep Polish and add a
-`POLISH` language everywhere (not a small change — see DATA_MODEL "adding a language"). Defensive fix regardless:
-catch `IllegalArgumentException` in `getLanguages()` and return `null`.
+### P0-1 — `assets/data` header is `POLISH` → importer crash on first launch — RESOLVED
+Resolved by restoring Polish as the app's second language (reversal of commit `44bf59d` "Move to german"):
+`Language` is `POLISH, UKRAINIAN` again, table `pl` / `Constants.TABLE_POLISH`, flag `R.mipmap.ic_polish`, string
+`polish`, `DependenciesProvider.DEFAULT = Language.POLISH`. The published 0.6 app used table `pl`, so installed
+databases keep working with no migration (`DATABASE_VERSION` stays 1). `assets/data` (header `UKRAINIAN|POLISH`, 481
+lines) is valid again; one typo was fixed (`Załatwic` → `Załatwię`).
+Remaining hazard (P2): `Importer.getLanguages()` (`Importer.java:155`) still calls `Language.valueOf` on the file
+header and does not catch `IllegalArgumentException`; a future bad header would crash again. Defensive fix: catch it
+and return `null`.
 
 ### P0-2 — Save button in `LinkDetailFragment` is inverted
 `LinkDetailFragment.java:123`: `if (item.getItemId() != R.id.save) { save(); return true; }`.
@@ -24,6 +25,11 @@ other item triggers a save. Fix: `== R.id.save`.
 literal, whereas `HEAD` read the Gradle property `keystorePassword` (defined in `~/.gradle/gradle.properties`).
 A release build would fail to sign (wrong password). Restore the property lookup (snippet in
 [upgrade/01](../upgrade/01-toolchain-gradle-agp.md#signing)). Never put the real password in the repo.
+
+## Resolved
+
+- **Unit tests did not compile** (`LinkEqualsTest` / `WordEqualsTest` use `Language.POLISH`, which was missing from the
+  enum) — resolved together with P0-1; `./gradlew testDebugUnitTest` compiles and runs again.
 
 ## Build
 
@@ -53,10 +59,13 @@ and disables optimization/obfuscation (`-dontoptimize`, `-dontobfuscate`). See [
   targetSdk 36 (predictive back) `onBackPressed` isn't called at all.
 - **P2 — Static mutable `Language.codeName`**: null (→ `toString()`/spinner text null) if anything reads it before
   `MainActivity.initLanguageCodeNames()`.
-- **P2 — Selected language is not persisted**; resets to German on every launch.
+- **P2 — Selected language is not persisted**; resets to Polish on every launch.
 - **P2 — Spaced-repetition feature is dead code**: priority buttons commented out, `PrioritySorter` unused, links are
   shuffled. README still advertises it.
-- **P2 — Stale FKs / misleading column names** in the `link` table (see DATA_MODEL).
+- **P2 — Crossed FKs / misleading column names** in the `link` table: `original` is declared `REFERENCES pl(id)` but
+  holds the Ukrainian id; `translation` is declared `REFERENCES ua(id)` but holds the Polish id. Same as in the published
+  0.6 schema; harmless because FK enforcement is off, but it blocks any future `PRAGMA foreign_keys=ON` / Room schema
+  validation without a migration (see DATA_MODEL).
 - **P2 — `Importer` ignores `addWords` result and inserts without a transaction** (481 lines × 3 inserts, auto-commit).
 - **P2 — Hardcoded Gmail address** in `strings.xml` (`send_feedback`) — intended, but note it when publishing.
 
