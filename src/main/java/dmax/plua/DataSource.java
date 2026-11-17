@@ -70,21 +70,46 @@ public class DataSource {
     /**
      * Save new words into database. Words should contain different language.
      * Link will be created and saved into database and cache.
+     * Main thread only (it changes the cache which is read by the UI).
      * @return false if error during saving occurred
      */
     public boolean addWords(Word word1, Word word2) {
-        Link link = new Link();
-        Dao<Link> linkDao = DaoFactory.createDao(Link.class);
-
-        for (Word word : new Word[]{ word1, word2 }) {
-            Word saved = dataBaseManager.insert(dao.setPersistable(word));
-            if (!verifySaved(saved)) return false;
-            link.setWord(saved);
-        }
-        link = dataBaseManager.insert(linkDao.setPersistable(link));
-        if (!verifySaved(link)) return false;
+        Link link = insertWords(word1, word2);
+        if (link == null) return false;
 
         return links.add(link);
+    }
+
+    /**
+     * Save new words and their link into database only: the links cache is NOT touched, so it is safe to call this
+     * from a background thread (the importer) while the UI shows cards. Uses its own DAO instances because they
+     * are stateful. If the second word can't be saved (e.g. it already exists) the first one is removed again, so no
+     * orphan word rows stay in the database. Reload the data (see {@link #reset()}) to see the result in the cache.
+     * @return saved link or null if error during saving occurred
+     */
+    public Link insertWords(Word word1, Word word2) {
+        Dao<Word> wordDao = DaoFactory.createDao(Word.class);
+        Dao<Link> linkDao = DaoFactory.createDao(Link.class);
+        Link link = new Link();
+
+        Word saved1 = dataBaseManager.insert(wordDao.setPersistable(word1));
+        if (!verifySaved(saved1)) return null;
+        link.setWord(saved1);
+
+        Word saved2 = dataBaseManager.insert(wordDao.setPersistable(word2));
+        if (!verifySaved(saved2)) {
+            dataBaseManager.delete(wordDao.setPersistable(saved1));
+            return null;
+        }
+        link.setWord(saved2);
+
+        link = dataBaseManager.insert(linkDao.setPersistable(link));
+        if (!verifySaved(link)) {
+            dataBaseManager.delete(wordDao.setPersistable(saved1));
+            dataBaseManager.delete(wordDao.setPersistable(saved2));
+            return null;
+        }
+        return link;
     }
 
     /**

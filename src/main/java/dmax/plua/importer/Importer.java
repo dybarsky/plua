@@ -94,11 +94,14 @@ public class Importer implements DialogInterface.OnCancelListener {
      * If the asset file is not imported yet: show progress dialog and start importing in the background. Result is
      * delivered to the callback on the main thread (unless {@link #detach()} is called before).
      * If there is nothing to import - does nothing (no dialog, no thread, callback is not called).
+     * While the import runs the database is locked by its transaction: the caller must not read the database on
+     * the main thread (e.g. load cards) until the callback is called.
+     * @return true if the import was started (callback will be called), false if there is nothing to import
      */
-    public void execute(final Callback callback) {
+    public boolean execute(final Callback callback) {
         if (executed) throw new IllegalStateException("Importer can be executed only once");
         executed = true;
-        if (!isImportNeeded()) return;
+        if (!isImportNeeded()) return false;
         showDialog();
         executor = Executors.newSingleThreadExecutor();
         executor.execute(new Runnable() {
@@ -124,6 +127,7 @@ public class Importer implements DialogInterface.OnCancelListener {
         });
         // already submitted task will be completed, thread is released after that
         executor.shutdown();
+        return true;
     }
 
     /**
@@ -142,8 +146,9 @@ public class Importer implements DialogInterface.OnCancelListener {
     private void finished(Callback callback) {
         if (detached) return;
         dismissDialog();
-        // After a cancel (rollback) the DataSource links cache (filled by addWords) is stale, but callback
-        // reloads the data: CardsFragment.reload() calls DataSource.reset().
+        // The import never touches the DataSource links cache (it is read by the UI), so after a completed import
+        // the cache is stale and after a cancel (rollback) it is still valid; callback reloads the data anyway:
+        // CardsFragment.reload() calls DataSource.reset().
         callback.onDatabaseUpdated();
     }
 
@@ -259,7 +264,8 @@ public class Importer implements DialogInterface.OnCancelListener {
             w2.setLanguage(languages[1]);
             w2.setData(data[1].toLowerCase(Locale.ROOT));
 
-            dataSource.addWords(w1, w2);
+            // duplicates are skipped: result is ignored on purpose. Does not touch the links cache (UI thread reads it).
+            dataSource.insertWords(w1, w2);
         }
         if (cancelled) throw new ImportAbortedException(null);
     }

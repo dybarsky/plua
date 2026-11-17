@@ -52,7 +52,7 @@
         errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/dmax/plua/ui/cards/CardsFragment.java"
-            line="172"
+            line="175"
             column="37"/>
     </issue>
 
@@ -114,13 +114,6 @@
             file="src/main/res/values/dimens.xml"
             line="24"
             column="12"/>
-    </issue>
-
-    <issue
-        id="UnusedResources"
-        message="The resource `R.mipmap.ic_launcher_round` appears to be unused">
-        <location
-            file="src/main/res/mipmap-hdpi/ic_launcher_round.png"/>
     </issue>
 
     <issue

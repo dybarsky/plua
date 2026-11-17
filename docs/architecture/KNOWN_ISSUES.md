@@ -50,10 +50,11 @@ and disables optimization/obfuscation (`-dontoptimize`, `-dontobfuscate`). See [
 ## Runtime / code
 
 - **P2 — Uncaught `ActivityNotFoundException`** in `AboutFragment.sendFeedback()` (`:92`) when no mail app is installed.
-- **P2 — Thread-safety** of `DataSource.links` and the shared `Dao<Word>` between the UI thread and `Importer`'s
-  background thread (see ARCHITECTURE "Threading").
-- **P2 — `Importer` leaks / outlives the Activity** (holds Context + dialog; `dialog.dismiss()` on a destroyed window can throw).
-- **P2 — Non-atomic `addWords`**: orphan word rows when the second word is a duplicate; no transaction.
+- **Thread-safety of `DataSource.links` / shared `Dao<Word>` between UI thread and `Importer` — RESOLVED**: the importer uses
+  `DataSource.insertWords` (own DAOs, no cache access) and the cards are loaded only after the import finished.
+- **`Importer` leaks / outlives the Activity — RESOLVED** (`detach()` on `onDestroyView` cancels and rolls back).
+- **Non-atomic `addWords` — RESOLVED**: `insertWords` deletes the first word if the second can't be saved. The 0.6 data had 4 orphan `ua`
+  rows already; they are harmless and not cleaned up.
 - **P2 — `MainActivity.onBackPressed`** (`:66`) inspects the *framework* `getFragmentManager()` back stack, but all
   fragments are *support* fragments, so the branch is dead and `super.onBackPressed()` does the real work. With
   targetSdk 36 (predictive back) `onBackPressed` isn't called at all.
@@ -67,7 +68,7 @@ and disables optimization/obfuscation (`-dontoptimize`, `-dontobfuscate`). See [
   holds the Ukrainian id; `translation` is declared `REFERENCES ua(id)` but holds the Polish id. Same as in the published
   0.6 schema; harmless because FK enforcement is off, but it blocks any future `PRAGMA foreign_keys=ON` / Room schema
   validation without a migration (see DATA_MODEL).
-- **P2 — `Importer` ignores `addWords` result and inserts without a transaction** (481 lines × 3 inserts, auto-commit).
+- **`Importer` ignores the insert result** (on purpose: duplicates are skipped); it runs in one transaction.
 - **P2 — Hardcoded Gmail address** in `strings.xml` (`send_feedback`) — intended, but note it when publishing.
 
 ## Docs / policy

@@ -67,7 +67,10 @@ for the toolchain upgrade — JUnit 4.12 → 4.13.2 is binary compatible.
    (alias `dmax`). If the keystore is lost, enroll in Play App Signing / key reset.
 3. Target API requirement (03) satisfied; Data-safety form says "no data collected" **and PRIVACY.md is rewritten**
    to match (current text claims IP/location/analytics collection and third-party sharing — false for this app).
-4. Test the upgrade path from the *currently published* version: install the Play build, add/delete some words,
+4. (Done 2026-11-17 on a Pixel 7 with a stand-in 0.6 — current code with the 0.6 asset `version|1`, versionCode 7, same release key,
+   seeded with user data — then `adb install -r` of the release APK: DB intact, priorities/user words kept, asset v2 imported (+1501 pairs),
+   user-deleted pairs that are still in the asset come back. It found the import-vs-pager crash fixed in `insertWords`.
+   Repeat with the real Play build if possible.) Test the upgrade path from the *currently published* version: install the Play build, add/delete some words,
    then install the new build over it. Check: DB opens, `import` pref prevents or re-runs the import as intended,
    no crash on `Language.valueOf`.
 5. Update README (remove or implement spaced repetition claim; badges/links), `about.html` version text if any.

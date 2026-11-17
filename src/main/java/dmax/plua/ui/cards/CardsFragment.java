@@ -54,6 +54,8 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
     private LanguageSwitcher switcher;
     private RemoveTransaction removeTransaction;
     private Importer importer;
+    /** The importer holds the database lock: do not read the database on the main thread until it's done. */
+    private boolean importing;
 
     @Inject
     DataSource dataSource;
@@ -87,10 +89,11 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
         this.switcher = new LanguageSwitcher(this, dataSource.getSelectedLanguage());
         this.adapter = new CardsPagerAdapter(activity, dataSource, listener);
 
-        showCards();
-
         importer = new Importer(activity, dataSource);
-        importer.execute(this);
+        importing = importer.execute(this);
+        // if the import started, cards are shown when it's finished (onDatabaseUpdated): reading the database now
+        // would block the main thread until the import transaction ends and the list would change under the pager
+        if (!importing) showCards();
     }
 
     @Override
@@ -116,7 +119,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(adapter.getCount() > 0
+        inflater.inflate(!importing && adapter.getCount() > 0
                 ? R.menu.word_list
                 : R.menu.word_list_empty
                 , menu);
@@ -189,6 +192,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
 
     @Override
     public void onDatabaseUpdated() {
+        importing = false;
         reload();
         getCastedActivity().invalidateOptionsMenu();
     }

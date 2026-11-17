@@ -96,8 +96,11 @@ JUnit 4.12, pure JVM, no Android dependencies. Nothing covers persistence, impor
 ## Threading & lifecycle (important for refactors)
 
 - DB open, all DAO calls, `DataSource` cache reads: **main thread**.
-- `Importer.doInBackground` calls `dataSource.addWords` **off the main thread** while the UI may read the same
-  non-thread-safe `LinkedList` (`DataSource.links`) and the same shared `Dao<Word>` instance (stateful: holds the
-  "current persistable"). Works in practice only because the import is short and mostly happens before cards exist.
-- `Importer` holds an Activity `Context` + dialog; no cancellation on Activity destroy.
+- `Importer` runs in one background transaction and uses `DataSource.insertWords`, which neither touches the links
+  cache (read by the pager adapter on the UI thread) nor shares the stateful `Dao<Word>`. While it runs, `CardsFragment`
+  does not load cards (the transaction holds the database lock, and the pager would otherwise see a changing list):
+  `Importer.execute()` returns true when an import started and cards are shown from `onDatabaseUpdated()`.
+  (Before this, upgrading an install that already had words crashed with "PagerAdapter changed the adapter's contents
+  without calling notifyDataSetChanged".)
+- `Importer` holds an Activity `Context` + dialog; `detach()` (from `onDestroyView`) cancels it and rolls back.
 - A new Dagger graph (new `DataBaseManager`, new `DataSource`) is created each time the Activity is created.
