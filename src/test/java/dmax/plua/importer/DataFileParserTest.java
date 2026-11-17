@@ -12,7 +12,10 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import dmax.plua.domain.Language;
 
@@ -98,7 +101,8 @@ public class DataFileParserTest {
         List<String> lines = Files.readAllLines(Paths.get("src/main/assets/data"), StandardCharsets.UTF_8);
         assertTrue(lines.size() > 2);
 
-        assertEquals(1, DataFileParser.parseVersion(lines.get(0)));
+        // bump this together with the file: installed apps re-import only when the version changes
+        assertEquals(2, DataFileParser.parseVersion(lines.get(0)));
         Language[] languages = DataFileParser.parseLanguages(lines.get(1));
         assertNotNull(languages);
         assertArrayEquals(new Language[] { Language.UKRAINIAN, Language.POLISH }, languages);
@@ -107,6 +111,36 @@ public class DataFileParserTest {
         for (String line : lines.subList(2, lines.size())) {
             if (DataFileParser.parsePair(line) != null) pairs++;
         }
-        assertTrue("pairs parsed: " + pairs, pairs >= 460);
+        assertTrue("pairs parsed: " + pairs, pairs >= 1900);
+    }
+
+    @Test
+    public void realAssetFile_everyLineIsAPair() throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get("src/main/assets/data"), StandardCharsets.UTF_8);
+        for (int i = 2; i < lines.size(); i++) {
+            assertNotNull("line " + (i + 1) + " is not a 'ukrainian|polish' pair: " + lines.get(i),
+                    DataFileParser.parsePair(lines.get(i)));
+        }
+    }
+
+    /**
+     * The database has a UNIQUE constraint per language table and the importer lower-cases words, so a word
+     * that occurs twice in one column makes its whole pair fail to import (and may leave an orphaned word).
+     */
+    @Test
+    public void realAssetFile_hasNoDuplicateWords() throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get("src/main/assets/data"), StandardCharsets.UTF_8);
+        Map<String, Integer> ukrainian = new HashMap<String, Integer>();
+        Map<String, Integer> polish = new HashMap<String, Integer>();
+        for (int i = 2; i < lines.size(); i++) {
+            String[] pair = DataFileParser.parsePair(lines.get(i));
+            if (pair == null) continue;
+            String ua = pair[0].toLowerCase(Locale.ROOT);
+            String pl = pair[1].toLowerCase(Locale.ROOT);
+            Integer firstUa = ukrainian.put(ua, i + 1);
+            assertNull("duplicate Ukrainian word '" + ua + "' on lines " + firstUa + " and " + (i + 1), firstUa);
+            Integer firstPl = polish.put(pl, i + 1);
+            assertNull("duplicate Polish word '" + pl + "' on lines " + firstPl + " and " + (i + 1), firstPl);
+        }
     }
 }

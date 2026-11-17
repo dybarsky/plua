@@ -1,4 +1,4 @@
-version|1
+version|2
 UKRAINIAN|POLISH
 Брехати|kłamać
 Брехун|kłamca
@@ -41,7 +41,6 @@ UKRAINIAN|POLISH
 Дратувати|dokuczać
 Надлишок|nadwyżka
 Відмовитись|zrezygnować
-Єдиний|wspólny (поодинокий|jedyny)
 Захід подія|przedsięwzięcie
 Захід сонця|zachód
 Вихід|wyjście
@@ -258,7 +257,6 @@ UKRAINIAN|POLISH
 Полум’я|płomień
 Канава|Fosa
 Суниця|Poziomka
-Полуниця :połunycia
 Офіціант|Kelner
 Окріп|Wrzątek
 Апельсин|Pomarańcza
@@ -340,10 +338,7 @@ UKRAINIAN|POLISH
 Дійсність|Rzeczywistość
 Навчання|Nauka, studia
 Знання|Wiedza
-Суспільство|Społeczeństwo
 Визначення|Definicja
-Дослідження|Doświadczenie
-Досвід|Doświadczenie
 Зв’язок|Kontakt
 Зв’язатися|Skontaktować się
 Зона|Strefa
@@ -353,7 +348,6 @@ UKRAINIAN|POLISH
 Мандрівка|Podróż
 Переміщення, пересування|Przemieszczenie
 Місце|Miejsce
-Думка|Opinia
 Дія|Czynność
 Діяльність|Działalność
 Діло|Interes, sprawa, przedsięwzięcie
@@ -364,8 +358,6 @@ UKRAINIAN|POLISH
 Виконувати вимоги|Spełniać kryteria
 Вид, сорт, гатунок|Rodzaj
 Вид|Kształt, forma
-Вислів|Stwierdzenie, fraza
-Висловлювання|Wypowiedź
 Висновок|Wniosek
 Мета|cel
 Досягти|osiągnąć
@@ -384,7 +376,6 @@ UKRAINIAN|POLISH
 Користуватися|Posługiwać się
 Розробляти|Opracowywać
 Догадатися|Domyślić się
-Згадати|Przypomnieć
 Встигати|Nadążać
 Встигнути|Zdążyć
 Вистачати|Wystarczać
@@ -410,20 +401,17 @@ UKRAINIAN|POLISH
 Стул|Krzesło
 Ковзани|Łyżwy
 Команда|Drużyna
-Килим|Dywan
 Гуртожиток|Akademik
 Роздягатися|Rozbierać się
 Поодинокий|poodynokyj
 Сліпий|Niewidomy
 Склад|Magazyn
-Точно|Na pewno
 Рейки|Szyny
 Мама|Matka
 Стукати|Pukać
 Зброя|Broń
 Вокзал|Dworzec
 Скеля, великий камінь|Głaz
-Кислота|Kwas
 Прокляття|Klątwa
 Галстук|Krawat
 Численний|Liczny
@@ -432,14 +420,12 @@ UKRAINIAN|POLISH
 Ранок|Rano
 Завтра|jutro
 Череп|Czaszka
-Груди|Sutki
 Тріснути, переламатися|Złamać się
 Транспортна аварія|Wypadek
 Скінчити (оргазм)|Spuścić się
 Файл|Plik
 Схвалюю, Погоджуюсь|Akceptuję
 Збереження|Przechowywanie
-Прилад, пристрій|Urządzenie
 Зірочка|Gwiazdka
 Обов’язковий|Wymagane
 Кіндл|Czytnik
@@ -451,9 +437,7 @@ UKRAINIAN|POLISH
 Цей|Niniejszy
 Веб сервіс|Serwis internetowy
 Обробка інформації|Przetwarzanie
-Зберігання|Przechowywanie
 Персональні дані|Dane osobowe
-Закон|Ustawa
 Рахунок для оплати|Faktura
 Переказ грошей|Przelew bankowy
 Миттєвий переказ|Błyskawiczny przelew
@@ -467,7 +451,6 @@ UKRAINIAN|POLISH
 Код на знижку|Kod rabatowy
 Користувач|Użytkownik
 Поштовий індекс|Kod pocztowy
-Держава|Kraj, państwo
 Бомж, п’яниця|Menel
 Сухе вино|Wytrawne
 Чувак|Facet
@@ -479,3 +462,1503 @@ UKRAINIAN|POLISH
 Вечірка|Balanga
 Раптом|Nagle
 Вдягнути, взути|Założyć
+батько|ojciec
+брат|brat
+сестра|siostra
+дочка|córka
+дідусь|dziadek
+бабуся|babcia
+тітка|ciocia
+онука|wnuczka
+свекруха|teściowa
+зять|zięć
+невістка|synowa
+кузен|kuzyn
+кузина|kuzynka
+сусід|sąsiad
+подруга|przyjaciółka
+дитина|dziecko
+дорослий|dorosły
+вухо|ucho
+ніс|nos
+губа|warga
+шия|szyja
+плече|ramię
+зап’ястя|nadgarstek
+долоня|dłoń
+палець|palec
+спина|plecy
+талія|talia
+стегно|udo
+коліно|kolano
+гомілка|goleń
+щиколотка|kostka
+п’ята|pięta
+серце|serce
+легені|płuca
+печінка|wątroba
+мозок|mózg
+кістка|kość
+шкіра|skóra
+кров|krew
+борода|broda
+брова|brew
+вія|rzęsa
+чоло|czoło
+щока|policzek
+підборіддя|podbródek
+горло|gardło
+ребро|żebro
+пупок|pępek
+лопатка|łopatka
+хліб|chleb
+масло|masło
+сир|ser
+яйце|jajko
+ковбаса|kiełbasa
+шинка|szynka
+свинина|wieprzowina
+яловичина|wołowina
+баранина|baranina
+салат|sałatka
+каша|kasza
+рис|ryż
+картопля|ziemniak
+цибуля|cebula
+часник|czosnek
+помідор|pomidor
+капуста|kapusta
+буряк|burak
+гриб|grzyb
+яблуко|jabłko
+груша|gruszka
+слива|śliwka
+вишня|wiśnia
+черешня|czereśnia
+банан|banan
+ананас|ananas
+полуниця|truskawka
+смородина|porzeczka
+чорниця|borówka
+кавун|arbuz
+диня|melon
+мед|miód
+цукор|cukier
+оцет|ocet
+торт|tort
+цукерка|cukierek
+шоколад|czekolada
+млинець|naleśnik
+вареник|pieróg
+чай|herbata
+кава|kawa
+сік|sok
+пиво|piwo
+вино|wino
+коктейль|koktajl
+шампанське|szampan
+стіл|stół
+шафа|szafa
+полиця|półka
+крісло|fotel
+стіна|ściana
+стеля|sufit
+підлога|podłoga
+дах|dach
+сходи|schody
+балкон|balkon
+кухня|kuchnia
+спальня|sypialnia
+вітальня|salon
+сад|ogród
+ворота|brama
+замок|zamek
+лампа|lampa
+телевізор|telewizor
+духовка|piekarnik
+чайник|czajnik
+тарілка|talerz
+склянка|szklanka
+ложка|łyżka
+виделка|widelec
+ніж|nóż
+серветка|serwetka
+рушник|ręcznik
+мило|mydło
+щітка|szczotka
+гребінець|grzebień
+ковдра|koc
+пилосос|odkurzacz
+совок|szufelka
+кошик|koszyk
+смітник|śmietnik
+футболка|koszulka
+пальто|płaszcz
+спідниця|spódnica
+сукня|sukienka
+капелюх|kapelusz
+рукавичка|rękawiczka
+шкарпетка|skarpetka
+черевик|but
+чобіт|kozak
+сандалі|sandały
+капці|kapcie
+нитка|nitka
+голка|igła
+парасолька|parasol
+окуляри|okulary
+намисто|naszyjnik
+браслет|bransoletka
+місто|miasto
+вулиця|ulica
+міст|most
+церква|kościół
+собор|katedra
+ринок|targ
+магазин|sklep
+аптека|apteka
+банк|bank
+лікарня|szpital
+університет|uniwersytet
+кінотеатр|kino
+ресторан|restauracja
+кафе|kawiarnia
+аеропорт|lotnisko
+зупинка|przystanek
+станція|stacja
+завод|fabryka
+офіс|biuro
+поліція|policja
+кладовище|cmentarz
+стадіон|stadion
+порт|port
+автомобіль|samochód
+автобус|autobus
+трамвай|tramwaj
+літак|samolot
+човен|łódź
+мотоцикл|motocykl
+таксі|taksówka
+бензин|benzyna
+квиток|bilet
+валіза|walizka
+паспорт|paszport
+мапа|mapa
+місяць|księżyc
+хмара|chmura
+дощ|deszcz
+сніг|śnieg
+вітер|wiatr
+грім|grzmot
+блискавка|błyskawica
+веселка|tęcza
+роса|rosa
+мороз|mróz
+спека|upał
+погода|pogoda
+океан|ocean
+річка|rzeka
+струмок|strumień
+водоспад|wodospad
+болото|bagno
+пісок|piasek
+камінь|kamień
+гора|góra
+долина|dolina
+печера|jaskinia
+поле|pole
+луг|łąka
+попіл|popiół
+повітря|powietrze
+шторм|sztorm
+тінь|cień
+галактика|galaktyka
+лист|liść
+корінь|korzeń
+кора|kora
+квітка|kwiat
+тюльпан|tulipan
+соняшник|słonecznik
+фіалка|fiołek
+лілія|lilia
+кактус|kaktus
+трава|trawa
+дуб|dąb
+ялина|świerk
+липа|lipa
+тополя|topola
+граб|grab
+горобина|jarzębina
+калина|kalina
+шишка|szyszka
+жолудь|żołądź
+ягода|jagoda
+кіт|kot
+кінь|koń
+корова|krowa
+свиня|świnia
+вівця|owca
+коза|koza
+півень|kogut
+гуска|gęś
+качка|kaczka
+пацюк|szczur
+білка|wiewiórka
+їжак|jeż
+лисиця|lis
+олень|jeleń
+лось|łoś
+видра|wydra
+лев|lew
+тигр|tygrys
+слон|słoń
+мавпа|małpa
+жирафа|żyrafa
+зебра|zebra
+верблюд|wielbłąd
+крокодил|krokodyl
+змія|wąż
+ящірка|jaszczurka
+жаба|żaba
+акула|rekin
+кит|wieloryb
+дельфін|delfin
+краб|krab
+павук|pająk
+комар|komar
+мураха|mrówka
+сарана|szarańcza
+орел|orzeł
+сова|sowa
+ворон|kruk
+сорока|sroka
+горобець|wróbel
+голуб|gołąb
+ластівка|jaskółka
+журавель|żuraw
+лебідь|łabędź
+чайка|mewa
+соловей|słowik
+павич|paw
+хвилина|minuta
+секунда|sekunda
+день|dzień
+ніч|noc
+вечір|wieczór
+полудень|południe
+північ|północ
+рік|rok
+століття|stulecie
+весна|wiosna
+осінь|jesień
+зима|zima
+понеділок|poniedziałek
+четвер|czwartek
+п’ятниця|piątek
+неділя|niedziela
+січень|styczeń
+травень|maj
+липень|lipiec
+вересень|wrzesień
+листопад|listopad
+грудень|grudzień
+свято|święto
+Великдень|Wielkanoc
+минуле|przeszłość
+майбутнє|przyszłość
+вічність|wieczność
+момент|moment
+календар|kalendarz
+розклад|rozkład
+клас|klasa
+вчитель|nauczyciel
+студент|student
+підручник|podręcznik
+олівець|ołówek
+лінійка|linijka
+дошка|tablica
+крейда|kreda
+диплом|dyplom
+стипендія|stypendium
+факультет|wydział
+питання|pytanie
+завдання|zadanie
+слово|słowo
+речення|zdanie
+літера|litera
+абетка|alfabet
+граматика|gramatyka
+переклад|tłumaczenie
+розмова|rozmowa
+біологія|biologia
+література|literatura
+музика|muzyka
+пісня|piosenka
+танець|taniec
+картина|obraz
+малюнок|rysunek
+фотографія|zdjęcie
+фільм|film
+газета|gazeta
+журнал|czasopismo
+стаття|artykuł
+вірш|wiersz
+роман|powieść
+оповідання|opowiadanie
+письменник|pisarz
+поет|poeta
+художник|malarz
+співак|śpiewak
+актор|aktor
+лікар|lekarz
+хірург|chirurg
+дантист|dentysta
+інженер|inżynier
+вчений|naukowiec
+адвокат|adwokat
+прокурор|prokurator
+поліцейський|policjant
+пожежник|strażak
+рятувальник|ratownik
+пілот|pilot
+моряк|marynarz
+рибалка|rybak
+фермер|rolnik
+селянин|chłop
+садівник|ogrodnik
+пастух|pasterz
+мисливець|myśliwy
+лісник|leśnik
+будівельник|budowlaniec
+слюсар|ślusarz
+електрик|elektryk
+сантехнік|hydraulik
+механік|mechanik
+кравець|krawiec
+швачка|szwaczka
+перукар|fryzjer
+кухар|kucharz
+пекар|piekarz
+м’ясник|rzeźnik
+касир|kasjer
+бухгалтер|księgowy
+секретар|sekretarz
+керівник|kierownik
+робітник|robotnik
+підприємець|przedsiębiorca
+банкір|bankier
+програміст|programista
+дизайнер|projektant
+архітектор|architekt
+скульптор|rzeźbiarz
+музикант|muzyk
+композитор|kompozytor
+танцюрист|tancerz
+спортсмен|sportowiec
+тренер|trener
+футболіст|piłkarz
+плавець|pływak
+бігун|biegacz
+монах|mnich
+король|król
+королева|królowa
+принц|książę
+принцеса|księżniczka
+цар|car
+президент|prezydent
+міністр|minister
+депутат|poseł
+посол|ambasador
+громадянин|obywatel
+іноземець|cudzoziemiec
+турист|turysta
+гість|gość
+сирота|sierota
+вдова|wdowa
+вбивця|zabójca
+свідок|świadek
+ворог|wróg
+союзник|sojusznik
+герой|bohater
+дурень|głupiec
+мудрець|mędrzec
+геній|geniusz
+лікування|leczenie
+здоров’я|zdrowie
+температура|gorączka
+кашель|kaszel
+нежить|katar
+грип|grypa
+опік|oparzenie
+синець|siniak
+таблетка|tabletka
+укол|zastrzyk
+рецепт|recepta
+операція|operacja
+діагноз|diagnoza
+симптом|objaw
+вірус|wirus
+бактерія|bakteria
+інфекція|zakażenie
+пульс|puls
+дієта|dieta
+вітамін|witamina
+гроші|pieniądze
+ціна|cena
+вартість|koszt
+кредит|kredyt
+премія|premia
+чек|paragon
+готівка|gotówka
+банкнота|banknot
+картка|karta
+бюджет|budżet
+заощадження|oszczędności
+покупка|zakup
+продаж|sprzedaż
+торгівля|handel
+конкуренція|konkurencja
+договір|umowa
+контракт|kontrakt
+підпис|podpis
+документ|dokument
+посилка|paczka
+телефон|telefon
+ноутбук|laptop
+клавіатура|klawiatura
+екран|ekran
+принтер|drukarka
+сайт|strona
+пошук|wyszukiwanie
+пароль|hasło
+додаток|aplikacja
+повідомлення|wiadomość
+електронна пошта|poczta elektroniczna
+відео|wideo
+камера|kamera
+батарея|bateria
+кабель|kabel
+розетка|gniazdko
+винахід|wynalazek
+інструмент|narzędzie
+молоток|młotek
+пила|piła
+сокира|siekiera
+граблі|grabie
+викрутка|śrubokręt
+дриль|wiertarka
+драбина|drabina
+мотузка|sznur
+ланцюг|łańcuch
+дріт|drut
+цегла|cegła
+цемент|cement
+скло|szkło
+залізо|żelazo
+мідь|miedź
+золото|złoto
+олово|cyna
+свинець|ołów
+алюміній|aluminium
+енергія|energia
+паливо|paliwo
+пластик|plastik
+шовк|jedwab
+вовна|wełna
+бавовна|bawełna
+хутро|futro
+хвіст|ogon
+ріг|róg
+кіготь|pazur
+копито|kopyto
+лапа|łapa
+дзьоб|dziób
+гніздо|gniazdo
+клітка|klatka
+зграя|wataha
+рій|rój
+спорт|sport
+гра|gra
+м’яч|piłka
+матч|mecz
+чемпіон|mistrz
+медаль|medal
+кубок|puchar
+рекорд|rekord
+перемога|zwycięstwo
+поразка|porażka
+шахи|szachy
+шашки|warcaby
+карти|karty
+кубик|kostka do gry
+лялька|lalka
+конструктор|klocki
+повітряна куля|balon
+колекція|kolekcja
+риболовля|wędkarstwo
+намет|namiot
+стежка|ścieżka
+відстань|odległość
+схід|wschód
+південь|południe-strona
+центр|centrum
+середина|środek
+кінець|koniec
+верх|wierzch
+низ|dół
+вага|waga
+форма|forma
+колір|kolor
+запах|zapach
+тиша|cisza
+голос|głos
+крик|krzyk
+сльоза|łza
+поцілунок|pocałunek
+обійми|uścisk
+щастя|szczęście
+горе|żal
+гнів|gniew
+злість|złość
+ненависть|nienawiść
+дружба|przyjaźń
+довіра|zaufanie
+мрія|marzenie
+бажання|pragnienie
+жалість|litość
+співчуття|współczucie
+вдячність|wdzięczność
+прощення|przebaczenie
+відвага|odwaga
+мужність|męstwo
+таємниця|tajemnica
+секрет|sekret
+загадка|zagadka
+чудо|cud
+доля|los
+нещастя|nieszczęście
+небезпека|niebezpieczeństwo
+безпека|bezpieczeństwo
+підтримка|wsparcie
+порада|rada
+пропозиція|propozycja
+вибір|wybór
+можливість|możliwość
+талант|talent
+звичка|nawyk
+звичай|obyczaj
+культура|kultura
+віра|wiara
+бог|bóg
+дух|duch
+ангел|anioł
+диявол|diabeł
+рай|raj
+пекло|piekło
+сон|sen
+кошмар|koszmar
+ідея|pomysł
+розум|rozum
+настрій|nastrój
+характер|charakter
+вдача|usposobienie
+поведінка|zachowanie
+справа|sprawa
+результат|rezultat
+плани|plany
+труднощі|trudność
+конфлікт|konflikt
+армія|armia
+куля|kula
+битва|bitwa
+перемир’я|rozejm
+революція|rewolucja
+уряд|rząd
+столиця|stolica
+справедливість|sprawiedliwość
+свобода|wolność
+рівність|równość
+вибори|wybory
+партія|partia
+політика|polityka
+економіка|gospodarka
+сільське господарство|rolnictwo
+врожай|plon
+пшениця|pszenica
+ячмінь|jęczmień
+овес|owies
+кукурудза|kukurydza
+соя|soja
+горох|groch
+квасоля|fasola
+сочевиця|soczewica
+просо|proso
+мак|mak
+хміль|chmiel
+льодовик|lodowiec
+столяр|stolarz
+великий|duży
+малий|mały
+високий|wysoki
+низький|niski
+довгий|długi
+короткий|krótki
+широкий|szeroki
+вузький|wąski
+товстий|gruby
+тонкий|cienki
+важкий|ciężki
+легкий|lekki
+глибокий|głęboki
+мілкий|płytki
+круглий|okrągły
+квадратний|kwadratowy
+плоский|płaski
+гострий|ostry
+тупий|tępy
+гладкий|gładki
+шорсткий|szorstki
+м’який|miękki
+твердий|twardy
+рідкий|rzadki
+густий|gęsty
+порожній|pusty
+повний|pełny
+цілий|cały
+розбитий|rozbity
+чистий|czysty
+брудний|brudny
+мокрий|mokry
+сухий|suchy
+вологий|wilgotny
+теплий|ciepły
+холодний|zimny
+гарячий|gorący
+прохолодний|chłodny
+спекотний|upalny
+морозний|mroźny
+світлий|jasny
+темний|ciemny
+яскравий|jaskrawy
+блідий|blady
+червоний|czerwony
+синій|niebieski
+зелений|zielony
+жовтий|żółty
+чорний|czarny
+білий|biały
+сірий|szary
+коричневий|brązowy
+рожевий|różowy
+фіолетовий|fioletowy
+помаранчевий|pomarańczowy
+золотий|złoty
+срібний|srebrny
+блакитний|błękitny
+багряний|karmazynowy
+прозорий|przezroczysty
+кольоровий|kolorowy
+смугастий|pasiasty
+картатий|kraciasty
+гарний|ładny
+красивий|piękny
+потворний|brzydki
+милий|miły
+приємний|przyjemny
+неприємний|nieprzyjemny
+чудовий|wspaniały
+жахливий|okropny
+страшний|straszny
+цікавий|ciekawy
+нудний|nudny
+смішний|śmieszny
+серйозний|poważny
+веселий|wesoły
+щасливий|szczęśliwy
+нещасний|nieszczęśliwy
+радісний|radosny
+розумний|mądry
+дурний|głupi
+мудрий|roztropny
+старий|stary
+молодий|młody
+новий|nowy
+давній|dawny
+древній|starożytny
+свіжий|świeży
+застарілий|przestarzały
+ранній|wczesny
+пізній|późny
+швидкий|szybki
+повільний|wolny
+раптовий|nagły
+тривалий|długotrwały
+короткочасний|krótkotrwały
+тимчасовий|tymczasowy
+вічний|wieczny
+щоденний|codzienny
+щотижневий|cotygodniowy
+місячний|miesięczny
+річний|roczny
+чемний|uprzejmy
+ввічливий|grzeczny
+грубий|niegrzeczny
+хитрий|przebiegły
+лінивий|leniwy
+працьовитий|pracowity
+сміливий|odważny
+боязкий|tchórzliwy
+сором’язливий|nieśmiały
+скромний|skromny
+гордий|dumny
+самовпевнений|zarozumiały
+щедрий|hojny
+скупий|skąpy
+ласкавий|czuły
+жорстокий|okrutny
+лагідний|łagodny
+впертий|uparty
+терплячий|cierpliwy
+нетерплячий|niecierpliwy
+спокійний|spokojny
+неспокійний|niespokojny
+нервовий|nerwowy
+обережний|ostrożny
+необережний|nieostrożny
+уважний|uważny
+неуважний|nieuważny
+розсіяний|roztargniony
+відповідальний|odpowiedzialny
+вірний|wierny
+зрадливий|zdradziecki
+відкритий|otwarty
+закритий|zamknięty
+втомлений|zmęczony
+бадьорий|rześki
+сонний|śpiący
+голодний|głodny
+ситий|syty
+спраглий|spragniony
+хворий|chory
+здоровий|zdrowy
+слабкий|słaby
+сильний|silny
+міцний|mocny
+кволий|wątły
+живий|żywy
+мертвий|martwy
+п’яний|pijany
+тверезий|trzeźwy
+вдячний|wdzięczny
+освічений|wykształcony
+неосвічений|niewykształcony
+багатий|bogaty
+бідний|biedny
+дорогий|drogi
+дешевий|tani
+безкоштовний|bezpłatny
+корисний|pożyteczny
+шкідливий|szkodliwy
+потрібний|potrzebny
+важливий|ważny
+головний|główny
+другорядний|drugorzędny
+можливий|możliwy
+неможливий|niemożliwy
+простий|prosty
+складний|skomplikowany
+трудний|trudny
+правильний|poprawny
+неправильний|niepoprawny
+точний|dokładny
+неточний|niedokładny
+справжній|prawdziwy
+фальшивий|fałszywy
+місцевий|lokalny
+міський|miejski
+сільський|wiejski
+національний|narodowy
+міжнародний|międzynarodowy
+громадський|publiczny
+приватний|prywatny
+особистий|osobisty
+солодкий|słodki
+гіркий|gorzki
+кислий|kwaśny
+солоний|słony
+смачний|smaczny
+несмачний|niesmaczny
+ароматний|aromatyczny
+духмяний|pachnący
+гучний|głośny
+тихий|cichy
+лівий|lewy
+правий|prawy
+верхній|górny
+нижній|dolny
+середній|średni
+внутрішній|wewnętrzny
+зовнішній|zewnętrzny
+передній|przedni
+задній|tylny
+бічний|boczny
+центральний|centralny
+північний|północny
+південний|południowy
+східний|wschodni
+західний|zachodni
+близький|bliski
+далекий|daleki
+прямий|bezpośredni
+кривий|krzywy
+перший|pierwszy
+другий|drugi
+третій|trzeci
+останній|ostatni
+наступний|następny
+попередній|poprzedni
+єдиний|jedyny
+спільний|wspólny
+кожний|każdy
+деякий|pewien
+дерев’яний|drewniany
+металевий|metalowy
+скляний|szklany
+паперовий|papierowy
+кам’яний|kamienny
+пластиковий|plastikowy
+залізний|żelazny
+шовковий|jedwabny
+вовняний|wełniany
+бавовняний|bawełniany
+шкіряний|skórzany
+гумовий|gumowy
+цегляний|ceglany
+глиняний|gliniany
+зіпсований|zepsuty
+стиглий|dojrzały
+смажений|smażony
+варений|gotowany
+печений|pieczony
+копчений|wędzony
+сонячний|słoneczny
+хмарний|pochmurny
+дощовий|deszczowy
+вітряний|wietrzny
+туманний|mglisty
+сніжний|śnieżny
+грозовий|burzowy
+ясний|pogodny
+модний|modny
+елегантний|elegancki
+незручний|niewygodny
+тісний|ciasny
+просторий|przestronny
+затишний|przytulny
+незвичайний|niezwykły
+звичайний|zwyczajny
+дивний|dziwny
+особливий|szczególny
+загальний|ogólny
+різний|różny
+однаковий|jednakowy
+схожий|podobny
+інший|inny
+власний|własny
+рідний|rodzimy
+знайомий|znajomy
+незнайомий|nieznajomy
+відомий|znany
+невідомий|nieznany
+популярний|popularny
+знаменитий|słynny
+радий|rad
+вдоволений|zadowolony
+незадоволений|niezadowolony
+схвильований|podekscytowany
+наляканий|przestraszony
+здивований|zdziwiony
+розгублений|zagubiony
+самотній|samotny
+ображений|obrażony
+засмучений|zasmucony
+шалений|szalony
+божевільний|obłąkany
+закоханий|zakochany
+професійний|zawodowy
+офіційний|oficjalny
+неофіційний|nieoficjalny
+юридичний|prawniczy
+медичний|medyczny
+технічний|techniczny
+науковий|naukowy
+економічний|ekonomiczny
+політичний|polityczny
+історичний|historyczny
+культурний|kulturalny
+релігійний|religijny
+військовий|wojskowy
+мирний|pokojowy
+небезпечний|niebezpieczny
+безпечний|bezpieczny
+смертельний|śmiertelny
+невидимий|niewidzialny
+видимий|widoczny
+чутливий|wrażliwy
+прихований|ukryty
+таємний|tajny
+стрункий|szczupły
+худий|chudy
+пухкий|pulchny
+кремезний|krępy
+лисий|łysy
+кучерявий|kędzierzawy
+рудий|rudy
+сивий|siwy
+чорнявий|ciemnowłosy
+глухий|głuchy
+німий|niemy
+кульгавий|kulawy
+бежевий|beżowy
+бордовий|bordowy
+бірюзовий|turkusowy
+лимонний|cytrynowy
+лазуровий|lazurowy
+пухнастий|puszysty
+колючий|kłujący
+липкий|lepki
+слизький|śliski
+пористий|porowaty
+гнучкий|elastyczny
+тендітний|delikatny
+крихкий|kruchy
+зношений|zużyty
+новенький|nowiutki
+пошкоджений|uszkodzony
+зламаний|złamany
+порваний|podarty
+рухливий|ruchliwy
+нерухомий|nieruchomy
+активний|aktywny
+пасивний|pasywny
+енергійний|energiczny
+млявий|ospały
+жвавий|ożywiony
+ідеальний|idealny
+досконалий|doskonały
+недосконалий|niedoskonały
+конкретний|konkretny
+абстрактний|abstrakcyjny
+реальний|realny
+логічний|logiczny
+абсурдний|absurdalny
+природний|naturalny
+штучний|sztuczny
+оригінальний|oryginalny
+типовий|typowy
+теперішній|obecny
+колишній|były
+майбутній|przyszły
+минулий|zeszły
+щорічний|coroczny
+нічний|nocny
+денний|dzienny
+ранковий|poranny
+вечірній|wieczorny
+зимовий|zimowy
+літній|letni
+осінній|jesienny
+весняний|wiosenny
+святковий|świąteczny
+буденний|powszedni
+домашній|domowy
+дикий|dziki
+ручний|oswojony
+лісовий|leśny
+морський|morski
+гірський|górski
+річковий|rzeczny
+озерний|jeziorny
+повітряний|powietrzny
+земний|ziemski
+космічний|kosmiczny
+електричний|elektryczny
+механічний|mechaniczny
+автоматичний|automatyczny
+цифровий|cyfrowy
+мобільний|mobilny
+сімейний|rodzinny
+дитячий|dziecięcy
+жіночий|damski
+чоловічий|męski
+грошовий|pieniężny
+фінансовий|finansowy
+прибутковий|dochodowy
+податковий|podatkowy
+творчий|twórczy
+кмітливий|bystry
+тямущий|pojętny
+талановитий|utalentowany
+здібний|zdolny
+невдалий|nieudany
+шикарний|szykowny
+розкішний|luksusowy
+убогий|ubogi
+дрібний|drobny
+величезний|ogromny
+крихітний|maleńki
+гігантський|gigantyczny
+мініатюрний|miniaturowy
+рівний|równy
+нерівний|nierówny
+шановний|szanowny
+певний|określony
+достатній|wystarczający
+недостатній|niewystarczający
+надмірний|nadmierny
+необмежений|nieograniczony
+дивовижний|zdumiewający
+прекрасний|śliczny
+чарівний|czarujący
+чудесний|cudowny
+огидний|obrzydliwy
+відразливий|odrażający
+нестерпний|nieznośny
+зарозумілий|wyniosły
+впливовий|wpływowy
+слухняний|posłuszny
+неслухняний|nieposłuszny
+балакучий|gadatliwy
+мовчазний|małomówny
+допитливий|ciekawski
+цілеспрямований|zdeterminowany
+вихований|dobrze wychowany
+жадібний|chciwy
+ревнивий|zazdrosny
+заздрісний|zawistny
+сердитий|rozgniewany
+розлючений|rozwścieczony
+наївний|naiwny
+романтичний|romantyczny
+дружній|przyjazny
+ворожий|wrogi
+гуманний|humanitarny
+жалюгідний|żałosny
+гідний|godny
+негідний|niegodny
+зайнятий|zajęty
+ранений|ranny
+стомлюючий|męczący
+захоплюючий|fascynujący
+розчарований|rozczarowany
+невпевнений|niepewny
+сумнівний|wątpliwy
+очевидний|oczywisty
+таємничий|tajemniczy
+дивакуватий|dziwaczny
+кумедний|zabawny
+нестримний|niepohamowany
+бути|być
+мати|mieć
+робити (зробити)|robić (zrobić)
+казати (сказати)|mówić (powiedzieć)
+розмовляти (поговорити)|rozmawiać (porozmawiać)
+говорити (погомоніти)|gadać (pogadać)
+іти (піти)|iść (pójść)
+ходити|chodzić
+їхати (поїхати)|jechać (pojechać)
+їздити|jeździć
+летіти (полетіти)|lecieć (polecieć)
+літати|latać
+бігти (побігти)|biec (pobiec)
+бігати|biegać
+плисти (попливти)|płynąć (popłynąć)
+плавати|pływać
+повзти|pełzać
+стрибати (стрибнути)|skakać (skoczyć)
+падати (впасти)|upadać (upaść)
+підніматися (піднятися)|wznosić się (wznieść się)
+спускатися (спуститися)|schodzić (zejść)
+входити (увійти)|wchodzić (wejść)
+виходити (вийти)|wychodzić (wyjść)
+приходити (прийти)|przychodzić (przyjść)
+приїжджати (приїхати)|przyjeżdżać (przyjechać)
+відходити (відійти)|odchodzić (odejść)
+від’їжджати (від’їхати)|odjeżdżać (odjechać)
+повертатися (повернутися)|wracać (wrócić)
+зупинятися (зупинитися)|zatrzymywać się (zatrzymać się)
+чекати (зачекати)|czekać (zaczekać)
+наближатися (наблизитися)|zbliżać się (zbliżyć się)
+віддалятися (віддалитися)|oddalać się (oddalić się)
+переходити (перейти)|przechodzić (przejść)
+перетинати (перетнути)|przekraczać (przekroczyć)
+минати (минути)|mijać (minąć)
+заходити (зайти)|zachodzić (zajść)
+доходити (дійти)|dochodzić (dojść)
+доїжджати (доїхати)|dojeżdżać (dojechać)
+обходити (обійти)|obchodzić (obejść)
+брати (взяти)|brać (wziąć)
+давати (дати)|dawać (dać)
+класти (покласти)|kłaść (położyć)
+ставити (поставити)|stawiać (postawić)
+тримати|trzymać
+ловити (піймати)|łapać (złapać)
+кидати (кинути)|rzucać (rzucić)
+тягнути (потягнути)|ciągnąć (pociągnąć)
+нести (понести)|nieść (ponieść)
+носити|nosić
+піднімати (підняти)|podnosić (podnieść)
+опускати (опустити)|opuszczać (opuścić)
+включати (включити)|włączać (włączyć)
+вимикати (вимкнути)|wyłączać (wyłączyć)
+ламати (зламати)|łamać (złamać)
+розбивати (розбити)|rozbijać (rozbić)
+рубати (зрубати)|rąbać (zrąbać)
+копати (викопати)|kopać (wykopać)
+садити (посадити)|sadzić (posadzić)
+сіяти (посіяти)|siać (posiać)
+жати|żąć
+збирати (зібрати)|zbierać (zebrać)
+складати (скласти)|składać (złożyć)
+розкладати (розкласти)|rozkładać (rozłożyć)
+в’язати (зв’язати)|wiązać (związać)
+розв’язувати (розв’язати)|rozwiązywać (rozwiązać)
+шити (зашити)|szyć (zaszyć)
+прати (випрати)|prać (wyprać)
+прасувати (випрасувати)|prasować (wyprasować)
+мити (помити)|myć (umyć)
+чистити (почистити)|czyścić (wyczyścić)
+підмітати (підмести)|zamiatać (zamieść)
+витирати (витерти)|wycierać (wytrzeć)
+сушити (висушити)|suszyć (wysuszyć)
+варити (зварити)|gotować (ugotować)
+смажити (посмажити)|smażyć (usmażyć)
+пекти (спекти)|piec (upiec)
+мішати (змішати)|mieszać (zmieszać)
+наливати (налити)|nalewać (nalać)
+їсти (поїсти)|jeść (zjeść)
+пити (випити)|pić (wypić)
+кусати (вкусити)|gryźć (ugryźć)
+жувати|żuć
+смакувати (скуштувати)|smakować (skosztować)
+нюхати (понюхати)|wąchać (powąchać)
+бачити (побачити)|widzieć (zobaczyć)
+дивитися (подивитися)|patrzeć (popatrzeć)
+слухати (послухати)|słuchać (posłuchać)
+чути (почути)|słyszeć (usłyszeć)
+відчувати (відчути)|czuć (poczuć)
+думати (подумати)|myśleć (pomyśleć)
+знати|wiedzieć
+розуміти (зрозуміти)|rozumieć (zrozumieć)
+пам’ятати|pamiętać
+забувати (забути)|zapominać (zapomnieć)
+вчити (навчити)|uczyć (nauczyć)
+вчитися (навчитися)|uczyć się (nauczyć się)
+читати (прочитати)|czytać (przeczytać)
+писати (написати)|pisać (napisać)
+малювати (намалювати)|rysować (narysować)
+рахувати (порахувати)|liczyć (policzyć)
+вирішувати (вирішити)|decydować (zdecydować)
+вибирати (вибрати)|wybierać (wybrać)
+шукати (пошукати)|szukać (poszukać)
+знаходити (знайти)|znajdować (znaleźć)
+губити (загубити)|gubić (zgubić)
+питати (запитати)|pytać (zapytać)
+відповідати (відповісти)|odpowiadać (odpowiedzieć)
+просити (попросити)|prosić (poprosić)
+дякувати (подякувати)|dziękować (podziękować)
+вибачати (вибачити)|wybaczać (wybaczyć)
+вітати (привітати)|witać (powitać)
+прощатися (попрощатися)|żegnać się (pożegnać się)
+називати (назвати)|nazywać (nazwać)
+розповідати (розповісти)|opowiadać (opowiedzieć)
+пояснювати (пояснити)|wyjaśniać (wyjaśnić)
+показувати (показати)|pokazywać (pokazać)
+радити (порадити)|radzić (poradzić)
+обіцяти (пообіцяти)|obiecywać (obiecać)
+погоджуватися (погодитися)|zgadzać się (zgodzić się)
+лаяти (вилаяти)|besztać (zbesztać)
+кричати (крикнути)|krzyczeć (krzyknąć)
+шепотіти (прошепотіти)|szeptać (szepnąć)
+співати (заспівати)|śpiewać (zaśpiewać)
+любити (покохати)|kochać (pokochać)
+ненавидіти|nienawidzieć
+радіти (зрадіти)|cieszyć się (ucieszyć się)
+плакати (заплакати)|płakać (zapłakać)
+сміятися (засміятися)|śmiać się (zaśmiać się)
+усміхатися (усміхнутися)|uśmiechać się (uśmiechnąć się)
+боятися|bać się
+дивуватися (здивуватися)|dziwić się (zdziwić się)
+гніватися (розгніватися)|gniewać się (rozgniewać się)
+заздрити (позаздрити)|zazdrościć (pozazdrościć)
+жаліти (пожаліти)|żałować (pożałować)
+сподіватися|mieć nadzieję
+вірити (повірити)|wierzyć (uwierzyć)
+довіряти (довірити)|ufać (zaufać)
+мріяти|marzyć
+хотіти (захотіти)|chcieć (zechcieć)
+бажати|pragnąć
+подобатися (сподобатися)|podobać się (spodobać się)
+цінувати|cenić
+поважати|szanować
+спати (поспати)|spać (pospać)
+прокидатися (прокинутися)|budzić się (obudzić się)
+вставати (встати)|wstawać (wstać)
+лягати (лягти)|kłaść się (położyć się)
+сідати (сісти)|siadać (usiąść)
+стояти|stać
+сидіти|siedzieć
+лежати|leżeć
+одягатися (одягнутися)|ubierać się (ubrać się)
+вмиватися (умитися)|myć się (umyć się)
+причісуватися (причесатися)|czesać się (uczesać się)
+голитися (поголитися)|golić się (ogolić się)
+купатися (скупатися)|kąpać się (wykąpać się)
+снідати (поснідати)|jeść śniadanie (zjeść śniadanie)
+обідати (пообідати)|jeść obiad (zjeść obiad)
+вечеряти (повечеряти)|jeść kolację (zjeść kolację)
+готуватися (підготуватися)|przygotowywać się (przygotować się)
+жити|żyć
+мешкати|mieszkać
+народжуватися (народитися)|rodzić się (urodzić się)
+помирати (померти)|umierać (umrzeć)
+одружуватися (одружитися)|żenić się (ożenić się)
+розлучатися (розлучитися)|rozwodzić się (rozwieść się)
+старіти (постаріти)|starzeć się (zestarzeć się)
+рости (вирости)|rosnąć (urosnąć)
+хворіти (захворіти)|chorować (zachorować)
+лікувати (вилікувати)|leczyć (wyleczyć)
+одужувати (одужати)|zdrowieć (wyzdrowieć)
+боліти|boleć
+кашляти|kaszleć
+чхати (чхнути)|kichać (kichnąć)
+працювати (попрацювати)|pracować (popracować)
+здавати (здати)|zdawać (zdać)
+готувати (приготувати)|przygotowywać (przygotować)
+будувати (побудувати)|budować (zbudować)
+ремонтувати (відремонтувати)|remontować (wyremontować)
+лагодити (полагодити)|naprawiać (naprawić)
+виробляти (виробити)|produkować (wyprodukować)
+створювати (створити)|tworzyć (stworzyć)
+винаходити (винайти)|wynajdować (wynaleźć)
+досліджувати (дослідити)|badać (zbadać)
+вимірювати (виміряти)|mierzyć (zmierzyć)
+зважувати (зважити)|ważyć (zważyć)
+планувати (запланувати)|planować (zaplanować)
+організовувати (організувати)|organizować (zorganizować)
+допомагати (допомогти)|pomagać (pomóc)
+заважати (завадити)|przeszkadzać (przeszkodzić)
+служити|służyć
+торгувати|handlować
+купувати (купити)|kupować (kupić)
+продавати (продати)|sprzedawać (sprzedać)
+платити (заплатити)|płacić (zapłacić)
+позичати (позичити)|pożyczać (pożyczyć)
+віддавати (віддати)|oddawać (oddać)
+коштувати|kosztować
+заробляти (заробити)|zarabiać (zarobić)
+витрачати (витратити)|wydawać (wydać)
+заощаджувати (заощадити)|oszczędzać (oszczędzić)
+замовляти (замовити)|zamawiać (zamówić)
+доставляти (доставити)|dostarczać (dostarczyć)
+відправляти (відправити)|wysyłać (wysłać)
+отримувати (отримати)|otrzymywać (otrzymać)
+приймати (прийняти)|przyjmować (przyjąć)
+відмовляти (відмовити)|odmawiać (odmówić)
+дозволяти (дозволити)|pozwalać (pozwolić)
+забороняти (заборонити)|zabraniać (zabronić)
+змушувати (змусити)|zmuszać (zmusić)
+намагатися (спробувати)|próbować (spróbować)
+вдаватися (вдатися)|udawać się (udać się)
+починати (почати)|zaczynać (zacząć)
+закінчувати (закінчити)|kończyć (skończyć)
+продовжувати (продовжити)|kontynuować
+змінювати (змінити)|zmieniać (zmienić)
+залишати (залишити)|zostawiać (zostawić)
+залишатися (залишитися)|zostawać (zostać)
+відбуватися (відбутися)|odbywać się (odbyć się)
+траплятися (трапитися)|zdarzać się (zdarzyć się)
+ставати (стати)|stawać się (stać się)
+здаватися (здатися)|wydawać się (wydać się)
+виглядати|wyglądać
+залежати|zależeć
+належати|należeć
+містити|zawierać
+складатися|składać się
+існувати|istnieć
+зникати (зникнути)|znikać (zniknąć)
+збільшувати (збільшити)|zwiększać (zwiększyć)
+зменшувати (зменшити)|zmniejszać (zmniejszyć)
+зростати (зрости)|wzrastać (wzrosnąć)
+знижуватися (знизитися)|obniżać się (obniżyć się)
+підвищувати (підвищити)|podwyższać (podwyższyć)
+прискорювати (прискорити)|przyspieszać (przyspieszyć)
+уповільнювати (уповільнити)|zwalniać (zwolnić)
+світити|świecić
+горіти (згоріти)|palić się (spalić się)
+палити (спалити)|palić (spalić)
+гасити (погасити)|gasić (zgasić)
+топити (розтопити)|topić (stopić)
+замерзати (замерзнути)|zamarzać (zamarznąć)
+танути (розтанути)|topnieć (stopnieć)
+кипіти (закипіти)|wrzeć (zawrzeć)
+текти|cieknąć
+лити|lać
+капати|kapać
+дути|dmuchać
+віяти|wiać
+зустрічати (зустріти)|spotykać (spotkać)
+знайомитися (познайомитися)|poznawać się (poznać się)
+запрошувати (запросити)|zapraszać (zaprosić)
+гостювати|gościć
+святкувати (відсвяткувати)|świętować (uczcić)
+дарувати (подарувати)|darować (podarować)
+співчувати|współczuć
+підтримувати (підтримати)|wspierać (wesprzeć)
+захищати (захистити)|bronić (obronić)
+рятувати (врятувати)|ratować (uratować)
+турбуватися (потурбуватися)|troszczyć się (zatroszczyć się)
+піклуватися|opiekować się
+виховувати (виховати)|wychowywać (wychować)
+годувати (нагодувати)|karmić (nakarmić)
+ховати (сховати)|chować (schować)
+переслідувати|ścigać
+наздоганяти (наздогнати)|doganiać (dogonić)
+тікати (втекти)|uciekać (uciec)
+ховатися (сховатися)|chować się (schować się)
+бити (вдарити)|bić (uderzyć)
+вбивати (вбити)|zabijać (zabić)
+красти (вкрасти)|kraść (ukraść)
+грабувати (пограбувати)|rabować (obrabować)
+карати (покарати)|karać (ukarać)
+звинувачувати (звинуватити)|oskarżać (oskarżyć)
+судити (засудити)|sądzić (skazać)
+арештовувати|aresztować
+захоплювати (захопити)|zdobywać (zdobyć)
+воювати|walczyć
+перемагати (перемогти)|zwyciężać (zwyciężyć)
+програвати (програти)|przegrywać (przegrać)
+вигравати (виграти)|wygrywać (wygrać)
+атакувати|atakować
+стріляти (вистрілити)|strzelać (wystrzelić)
+танцювати (затанцювати)|tańczyć (zatańczyć)
+відпочивати (відпочити)|odpoczywać (odpocząć)
+подорожувати|podróżować
+гуляти (погуляти)|spacerować (pospacerować)
+мандрувати|wędrować
+фотографувати (сфотографувати)|fotografować (sfotografować)
+колекціонувати|kolekcjonować
+полювати|polować
+друкувати (надрукувати)|drukować (wydrukować)
+копіювати (скопіювати)|kopiować (skopiować)
+видаляти (видалити)|usuwać (usunąć)
+завантажувати (завантажити)|pobierać (pobrać)
+встановлювати (встановити)|instalować (zainstalować)
+реєструвати (зареєструвати)|rejestrować (zarejestrować)
+телефонувати (зателефонувати)|dzwonić (zadzwonić)
+натискати (натиснути)|naciskać (nacisnąć)
+порівнювати (порівняти)|porównywać (porównać)
+відрізняти (відрізнити)|odróżniać (odróżnić)
+здогадуватися (здогадатися)|domyślać się (domyślić się)
+припускати (припустити)|przypuszczać (przypuścić)
+вважати|uważać
+помічати (помітити)|zauważać (zauważyć)
+звертати увагу|zwracać uwagę
+замислюватися (замислитися)|zamyślać się (zamyślić się)
+потребувати|potrzebować
+бракувати|brakować
+використовувати (використати)|używać (użyć)
+застосовувати (застосувати)|stosować (zastosować)
+приносити (принести)|przynosić (przynieść)
+виносити (винести)|wynosić (wynieść)
+відносити (віднести)|odnosić (odnieść)
+вести (повести)|prowadzić (poprowadzić)
+возити|wozić
+везти (повезти)|wieźć (powieźć)
+вішати (повісити)|wieszać (powiesić)
+знімати (зняти)|zdejmować (zdjąć)
+надягати (надіти)|zakładać (założyć)
+прив’язувати (прив’язати)|przywiązywać (przywiązać)
+відв’язувати (відв’язати)|odwiązywać (odwiązać)
+клеїти (приклеїти)|kleić (przykleić)
+фарбувати (пофарбувати)|malować (pomalować)
+заповнювати (заповнити)|wypełniać (wypełnić)
+наповнювати (наповнити)|napełniać (napełnić)
+змащувати (змастити)|smarować (posmarować)
+пахнути|pachnieć
+смердіти|śmierdzieć
+блищати (заблищати)|błyszczeć (zabłysnąć)
+гриміти (прогриміти)|grzmieć (zagrzmieć)
+шуміти|szumieć
+гудіти|brzęczeć
+шелестіти|szeleścić
+свистіти (свиснути)|gwizdać (gwizdnąć)
+реготати|rechotać
+вміти (зуміти)|umieć (potrafić)
+могти (змогти)|móc (zdołać)
+мусити|musieć
+дозрівати (дозріти)|dojrzewać (dojrzeć)
+в’янути (зів’янути)|więdnąć (zwiędnąć)
+цвісти (зацвісти)|kwitnąć (zakwitnąć)
+ростити (виростити)|hodować (wyhodować)
+поливати (полити)|podlewać (podlać)
+стригти (підстригти)|strzyc (ostrzyc)
+доїти|doić
+пасти|paść
+лазити (залізти)|wspinać się (wspiąć się)
+сповзати (сповзти)|zsuwać się (zsunąć się)
+крутити (закрутити)|kręcić (zakręcić)
+обертатися (обернутися)|obracać się (obrócić się)
+нахилятися (нахилитися)|pochylać się (pochylić się)
+випрямлятися (випрямитися)|prostować się (wyprostować się)
+згинати (зігнути)|zginać (zgiąć)
+розтягувати (розтягти)|rozciągać (rozciągnąć)
+стискати (стиснути)|ściskać (ścisnąć)
+обіймати (обійняти)|przytulać (przytulić)
+цілувати (поцілувати)|całować (pocałować)
+гладити (погладити)|głaskać (pogłaskać)
+чухати (почухати)|drapać (podrapać)
+дряпати (подряпати)|zadrapywać (zadrapać)
+плювати (плюнути)|pluć (splunąć)
+облизувати (облизати)|oblizywać (oblizać)
+моргати (моргнути)|mrugać (mrugnąć)
+позіхати (позіхнути)|ziewać (ziewnąć)
+хропіти|chrapać
+снитися (наснитися)|śnić się (przyśnić się)
+блукати|błąkać się
+губитися (загубитися)|gubić się (zgubić się)
+знаходитися|znajdować się
+розташовуватися (розташуватися)|rozlokowywać się (rozlokować się)
+оселятися (оселитися)|osiedlać się (osiedlić się)
+переїжджати (переїхати)|przeprowadzać się (przeprowadzić się)
+винаймати (винайняти)|wynajmować (wynająć)
+орендувати|dzierżawić
+споживати (спожити)|spożywać (spożyć)
+оцінювати (оцінити)|oceniać (ocenić)
+критикувати (розкритикувати)|krytykować (skrytykować)
+хвалити (похвалити)|chwalić (pochwalić)
+лестити|pochlebiać
+глузувати|szydzić
+жартувати (пожартувати)|żartować (zażartować)
+розважати (розважити)|zabawiać (zabawić)
+нудьгувати|nudzić się
+стежити (простежити)|śledzić (prześledzić)
+спостерігати (поспостерігати)|obserwować (zaobserwować)
+вдивлятися (вдивитися)|wpatrywać się (wpatrzyć się)
+підглядати|podglądać
+підслуховувати (підслухати)|podsłuchiwać (podsłuchać)
+обговорювати (обговорити)|omawiać (omówić)
+переконувати (переконати)|przekonywać (przekonać)
+вимагати|żądać
+пропонувати (запропонувати)|proponować (zaproponować)
+радитися (порадитися)|naradzać się (naradzić się)
+домовлятися (домовитися)|umawiać się (umówić się)
+зустрічатися (зустрітися)|spotykać się (spotkać się)
+розходитися (розійтися)|rozchodzić się (rozejść się)
+сходитися (зійтися)|schodzić się (zejść się)
+об’єднувати (об’єднати)|jednoczyć (zjednoczyć)
+розділяти (розділити)|dzielić (podzielić)
+ділитися (поділитися)|dzielić się (podzielić się)
+множити (помножити)|mnożyć (pomnożyć)
+додавати (додати)|dodawać (dodać)
+віднімати (відняти)|odejmować (odjąć)
