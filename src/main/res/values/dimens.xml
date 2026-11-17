@@ -25,6 +25,10 @@
 
     <dimen name="detail_layout_padding">40dp</dimen>
 
+    <dimen name="settings_title_text_size">20sp</dimen>
+    <dimen name="settings_description_text_size">16sp</dimen>
+    <dimen name="settings_description_margin_top">4dp</dimen>
+
     <dimen name="about_layout_padding">20dp</dimen>
     <dimen name="about_items_padding">15dp</dimen>
     <dimen name="about_items_padding_left">16dp</dimen>

@@ -52,7 +52,7 @@
         errorLine2="                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/dmax/plua/ui/cards/CardsFragment.java"
-            line="167"
+            line="172"
             column="37"/>
     </issue>
 
@@ -95,14 +95,14 @@
     </issue>
 
     <issue
-        id="UnusedResources"
-        message="The resource `R.color.separator` appears to be unused"
-        errorLine1="    &lt;color name=&quot;separator&quot;>#22000000&lt;/color>"
-        errorLine2="           ~~~~~~~~~~~~~~~~">
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `?android:attr/colorBackground` with a theme that also paints a background (inferred theme is `@android:style/Theme.Holo`)"
+        errorLine1="    android:background=&quot;?android:attr/colorBackground&quot;>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
-            file="src/main/res/values/colors.xml"
+            file="src/main/res/layout/f_settings.xml"
             line="9"
-            column="12"/>
+            column="5"/>
     </issue>
 
     <issue
@@ -112,7 +112,7 @@
         errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/res/values/dimens.xml"
-            line="23"
+            line="24"
             column="12"/>
     </issue>
 
@@ -192,7 +192,7 @@
         errorLine2="                   ~~~~~~~">
         <location
             file="src/main/java/dmax/plua/ui/cards/CardInteractionListener.java"
-            line="24"
+            line="34"
             column="20"/>
     </issue>
 
@@ -203,7 +203,7 @@
         errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
         <location
             file="src/main/java/dmax/plua/ui/cards/CardsPagerAdapter.java"
-            line="70"
+            line="80"
             column="9"/>
     </issue>
 
