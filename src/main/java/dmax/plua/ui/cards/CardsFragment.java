@@ -32,11 +32,11 @@ import dmax.plua.domain.Language;
 import dmax.plua.domain.Link;
 import dmax.plua.domain.Word;
 import dmax.plua.importer.Importer;
+import dmax.plua.ui.MainActivity;
 import dmax.plua.ui.Util;
 import dmax.plua.ui.about.AboutFragment;
-import dmax.plua.ui.detail.LinkDetailFragment;
-import dmax.plua.ui.MainActivity;
 import dmax.plua.ui.cards.CardsPagerAdapter.CardViewHolder;
+import dmax.plua.ui.detail.LinkDetailFragment;
 
 /**
  * Fragment with cards. Main user UI component.
@@ -111,19 +111,21 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.delete:
-                removeCurrentCard();
-                return true;
-            case R.id.edit:
-                editCurrentCard();
-                return true;
-            case R.id.reload:
-                reload();
-                return true;
-            case R.id.about:
-                showAboutFragment();
-                return true;
+        if (item.getItemId() == R.id.delete) {
+            removeCurrentCard();
+            return true;
+        }
+        if (item.getItemId() == R.id.edit) {
+            editCurrentCard();
+            return true;
+        }
+        if (item.getItemId() == R.id.reload) {
+            reload();
+            return true;
+        }
+        if (item.getItemId() == R.id.about) {
+            showAboutFragment();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -403,7 +405,7 @@ public class CardsFragment extends Fragment implements View.OnClickListener, Imp
         }
     }
 
-    private class RemoveTransaction {
+    private static class RemoveTransaction {
         Link link;
         Word originalWord;
         Word translationWord;

@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
-import dmax.plua.BuildConfig;
 import dmax.plua.ui.Util;
 import dmax.plua.ui.cards.CardsPagerAdapter.CardViewHolder;
 

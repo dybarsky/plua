@@ -1,11 +1,11 @@
 package dmax.plua.ui.about;
 
-import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -71,23 +71,17 @@ public class AboutFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.help: {
-                showHelp();
-                break;
-            }
-            case R.id.rate: {
-                openPlayStore();
-                break;
-            }
-            case R.id.feedback: {
-                sendFeedback();
-                break;
-            }
-            case R.id.about: {
-                openAbout();
-                break;
-            }
+        if (v.getId() == R.id.help) {
+            showHelp();
+        }
+        if (v.getId() == R.id.rate) {
+            openPlayStore();
+        }
+        if (v.getId() == R.id.feedback) {
+            sendFeedback();
+        }
+        if (v.getId() == R.id.about) {
+            openAbout();
         }
     }
 

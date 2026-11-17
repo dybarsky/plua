@@ -116,18 +116,15 @@ public class LinkDetailFragment extends Fragment implements View.OnClickListener
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home: {
-                closeSelf();
-                return true;
-            }
-            case R.id.save: {
-                save();
-                return true;
-            }
-            default:
-                return super.onOptionsItemSelected(item);
+        if (item.getItemId() == android.R.id.home) {
+            closeSelf();
+            return true;
         }
+        if (item.getItemId() == R.id.save) {
+            save();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
