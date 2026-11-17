@@ -1,16 +1,16 @@
 ext {
-    VERSION_NAME = "0.6"
-    VERSION_CODE = 7
+    VERSION_NAME = "0.7"
+    VERSION_CODE = 8
 }
 
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.4'
+        classpath 'com.android.tools.build:gradle:8.8.0-beta01'
     }
 }
 
@@ -18,41 +18,43 @@ apply plugin: 'com.android.application'
 
 repositories {
     google()
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:28.0.0'
-    compile 'com.android.support:appcompat-v7:28.0.0'
-    compile 'com.android.support:cardview-v7:28.0.0'
-    compile 'com.android.support:design:28.0.0'
-    compile 'com.github.d-max:spots-dialog:1.1'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.android.support:design:28.0.0'
 
     // dagger2 dependencies
-    compile 'com.google.dagger:dagger:2.15'
-    provided 'javax.inject:javax.inject:1'
-    provided 'javax.annotation:jsr250-api:1.0'
+    implementation 'com.google.dagger:dagger:2.15'
+    implementation 'javax.inject:javax.inject:1'
+    implementation 'javax.annotation:jsr250-api:1.0'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
 
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
 
 android {
-    compileSdkVersion 28
+
+    namespace = "dmax.plua"
+
+    compileSdkVersion 34
 
     defaultConfig {
         versionCode VERSION_CODE
         versionName VERSION_NAME
         minSdkVersion 15
-        targetSdkVersion 28
+        targetSdkVersion 34
     }
 
     signingConfigs {
         release {
             storeFile file(System.getProperty("user.home") + "/.android/dmax.keystore")
-            storePassword keystorePassword
+            storePassword "keystorePassword"
             keyAlias "dmax"
-            keyPassword keystorePassword
+            keyPassword "keystorePassword"
         }
     }
 
